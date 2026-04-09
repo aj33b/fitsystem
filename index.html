@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FitSystem">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="application-name" content="FitSystem">
+<meta name="msapplication-TileColor" content="#ff3b30">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<title>FitSystem — Complete Fitness Transformation</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e8e8f0;
+    --text2: #8888a0;
+    --accent: #ff3b30;
+    --accent2: #ff6b5b;
+    --green: #34c759;
+    --blue: #5ac8fa;
+    --yellow: #ffd60a;
+    --purple: #bf5af2;
+    --orange: #ff9f0a;
+    --chest: #ff3b30;
+    --shoulder: #ff9f0a;
+    --tricep: #ffd60a;
+    --back: #5ac8fa;
+    --bicep: #34c759;
+    --reardelt: #64d2ff;
+    --quad: #bf5af2;
+    --hamstring: #ff6ec7;
+    --glute: #ff375f;
+    --calf: #ac8ef7;
+    --core: #30d158;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* INSTALL BANNER */
+  .install-banner {
+    position: fixed; bottom: 70px; left: 12px; right: 12px; z-index: 9999;
+    background: linear-gradient(135deg, #1a1a26 0%, #12121a 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: none; animation: slideUp 0.4s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  }
+  .install-banner.show { display: block; }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .install-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .install-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .install-text { flex: 1; }
+  .install-text strong { color: #fff; font-size: 14px; display: block; }
+  .install-text span { color: var(--text2); font-size: 11px; }
+  .install-btn {
+    padding: 10px 18px; background: var(--accent); color: #fff; border: none;
+    border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px;
+    font-weight: 700; cursor: pointer; white-space: nowrap;
+  }
+  .install-close {
+    background: none; border: none; color: var(--text2); font-size: 20px;
+    cursor: pointer; padding: 4px; line-height: 1;
+  }
+
+  .noise {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 16px 100px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  .hero {
+    padding: 48px 0 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 72px);
+    line-height: 0.95; letter-spacing: 2px; color: #fff;
+  }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 32px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; }
+  .hero-stat .lbl { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* DAY NAV — fixed bottom bar for app feel */
+  .day-nav {
+    display: flex; gap: 3px; padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--surface); z-index: 100;
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+  }
+  .day-btn {
+    flex: 1; padding: 10px 4px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--surface); color: var(--text2); font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 700; cursor: pointer; text-align: center;
+    transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .day-btn:hover { border-color: var(--accent); color: var(--text); }
+  .day-btn.active {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  .day-btn .day-name { display: block; font-size: 13px; }
+  .day-btn .day-type { display: block; font-size: 9px; margin-top: 2px; opacity: 0.7; }
+
+  /* SECTION TABS */
+  .section-tabs {
+    display: flex; gap: 0; margin-top: 12px; border-bottom: 2px solid var(--border);
+    position: sticky; top: 0; background: var(--bg); z-index: 50; padding-top: 8px;
+  }
+  .sec-tab {
+    padding: 12px 20px; background: none; border: none; color: var(--text2);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .sec-tab:hover { color: var(--text); }
+  .sec-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* DAY CONTENT */
+  .day-content { display: none; animation: fadeIn 0.3s ease; }
+  .day-content.visible { display: block; }
+  .section-content { display: none; }
+  .section-content.visible { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* DAY OVERVIEW */
+  .day-overview {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px; margin-top: 20px;
+  }
+  .ov-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px; text-align: center;
+  }
+  .ov-card .ov-val { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: #fff; }
+  .ov-card .ov-lbl { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+  /* BODY PART GROUP */
+  .bp-group { margin-top: 28px; }
+  .bp-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .bp-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .bp-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #fff; }
+
+  /* EXERCISE CARD */
+  .ex-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 8px; overflow: hidden; transition: all 0.2s;
+  }
+  .ex-card:hover { border-color: #3a3a4a; }
+  .ex-head {
+    padding: 14px 16px; cursor: pointer; display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  .ex-num {
+    width: 30px; height: 30px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 12px;
+    font-weight: 700; color: #fff; flex-shrink: 0; margin-right: 12px;
+  }
+  .ex-info { flex: 1; }
+  .ex-name { font-weight: 700; font-size: 14px; color: #fff; }
+  .ex-meta { font-size: 12px; color: var(--text2); margin-top: 3px; }
+  .ex-arrow { font-size: 16px; color: var(--text2); transition: transform 0.2s; }
+  .ex-card.open .ex-arrow { transform: rotate(180deg); }
+
+  .ex-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
+  .ex-card.open .ex-body { display: block; }
+
+  .ex-cue {
+    background: var(--surface2); padding: 10px 12px; border-radius: 8px;
+    margin: 12px 0; font-size: 13px; line-height: 1.6; border-left: 3px solid var(--accent);
+  }
+  .ex-cue strong { color: var(--accent); }
+
+  /* VARIATIONS TABLE */
+  .var-title {
+    font-size: 11px; font-weight: 700; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 1px; margin: 16px 0 8px;
+  }
+  .var-grid { display: flex; flex-direction: column; gap: 6px; }
+  .var-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface2); padding: 10px 12px; border-radius: 8px;
+    font-size: 13px; gap: 8px;
+  }
+  .var-item .var-name { flex: 1; font-weight: 600; color: #fff; }
+  .var-item .var-type {
+    font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+  }
+  .var-type.barbell { background: #ff3b3020; color: #ff6b5b; }
+  .var-type.dumbbell { background: #5ac8fa20; color: #5ac8fa; }
+  .var-type.machine { background: #34c75920; color: #34c759; }
+  .var-type.cable { background: #ffd60a20; color: #ffd60a; }
+  .var-type.bodyweight { background: #bf5af220; color: #bf5af2; }
+
+  .yt-btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+    background: #ff0000; color: #fff; border-radius: 6px; text-decoration: none;
+    font-size: 12px; font-weight: 700; margin-top: 12px; transition: opacity 0.2s;
+  }
+  .yt-btn:hover { opacity: 0.85; }
+  .yt-btn svg { width: 14px; height: 14px; }
+
+  /* MEAL CARDS */
+  .meal-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    margin-top: 12px; overflow: hidden;
+  }
+  .meal-head {
+    padding: 14px 16px; cursor: pointer; display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  .meal-time {
+    font-size: 10px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .meal-name { font-weight: 700; font-size: 15px; color: #fff; margin-top: 3px; }
+  .meal-cals { font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .meal-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
+  .meal-card.open .meal-body { display: block; }
+  .meal-card.open .meal-arrow { transform: rotate(180deg); }
+  .meal-arrow { font-size: 16px; color: var(--text2); transition: transform 0.2s; }
+
+  .ing-list { list-style: none; padding: 0; margin: 12px 0; }
+  .ing-list li {
+    padding: 6px 0; font-size: 13px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+  .ing-list li:last-child { border-bottom: none; }
+  .ing-qty { color: var(--accent2); font-weight: 600; white-space: nowrap; margin-left: 12px; }
+
+  .steps-list { padding-left: 20px; margin: 12px 0; }
+  .steps-list li { padding: 6px 0; font-size: 13px; line-height: 1.7; color: var(--text); }
+
+  .tip-box {
+    background: #ff3b3010; border-left: 3px solid var(--accent);
+    padding: 10px 12px; border-radius: 0 8px 8px 0; margin-top: 12px;
+    font-size: 12px; line-height: 1.6; color: var(--text2);
+  }
+  .tip-box strong { color: var(--accent); }
+
+  .macro-bar {
+    display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap;
+  }
+  .macro-pill {
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  }
+
+  /* REST DAY */
+  .rest-hero {
+    text-align: center; padding: 60px 20px;
+  }
+  .rest-hero h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #fff; }
+  .rest-hero p { color: var(--text2); font-size: 14px; margin-top: 8px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .rest-list { margin-top: 24px; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .rest-list li { padding: 8px 0; font-size: 14px; color: var(--text); border-bottom: 1px solid var(--border); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center; padding: 32px 0; margin-top: 40px;
+    border-top: 1px solid var(--border); font-size: 11px; color: var(--text2);
+  }
+
+  @media (max-width: 600px) {
+    .day-btn .day-type { display: none; }
+    .day-btn { padding: 8px 2px; font-size: 10px; }
+    .hero h1 { font-size: 36px; }
+    .hero-stats { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">6-Day Transformation System</div>
+    <h1>BUILD YOUR<br>BEST BODY</h1>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">65→70</div><div class="lbl">KG Target</div></div>
+      <div class="hero-stat"><div class="val">2,750</div><div class="lbl">Daily Kcal</div></div>
+      <div class="hero-stat"><div class="val">130G</div><div class="lbl">Protein</div></div>
+      <div class="hero-stat"><div class="val">6:00AM</div><div class="lbl">Gym Time</div></div>
+    </div>
+  </div>
+
+  <!-- DAY NAV -->
+  <div class="day-nav" id="dayNav">
+    <button class="day-btn active" data-day="sun"><span class="day-name">Sun</span><span class="day-type">Push</span></button>
+    <button class="day-btn" data-day="mon"><span class="day-name">Mon</span><span class="day-type">Pull</span></button>
+    <button class="day-btn" data-day="tue"><span class="day-name">Tue</span><span class="day-type">Legs</span></button>
+    <button class="day-btn" data-day="wed"><span class="day-name">Wed</span><span class="day-type">Push</span></button>
+    <button class="day-btn" data-day="thu"><span class="day-name">Thu</span><span class="day-type">Pull</span></button>
+    <button class="day-btn" data-day="fri"><span class="day-name">Fri</span><span class="day-type">Legs</span></button>
+    <button class="day-btn" data-day="sat"><span class="day-name">Sat</span><span class="day-type">Rest</span></button>
+  </div>
+
+  <!-- =============================== SUNDAY — PUSH A =============================== -->
+  <div class="day-content visible" id="day-sun">
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="workout" data-parent="sun">Workout</button>
+      <button class="sec-tab" data-section="meals" data-parent="sun">Meals & Recipes</button>
+    </div>
+
+    <!-- WORKOUT -->
+    <div class="section-content visible" id="sun-workout">
+      <div class="day-overview">
+        <div class="ov-card"><div class="ov-val">PUSH A</div><div class="ov-lbl">Session Type</div></div>
+        <div class="ov-card"><div class="ov-val">STRENGTH</div><div class="ov-lbl">Focus</div></div>
+        <div class="ov-card"><div class="ov-val">6</div><div class="ov-lbl">Exercises</div></div>
+        <div class="ov-card"><div class="ov-val">~65 MIN</div><div class="ov-lbl">Duration</div></div>
+      </div>
+
+      <!-- CHEST -->
+      <div class="bp-group">
+        <div class="bp-header">
+          <div class="bp-dot" style="background:var(--chest)"></div>
+          <div class="bp-title">CHEST</div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--chest)">1</div>
+              <div class="ex-info">
+                <div class="ex-name">Flat Bench Press</div>
+                <div class="ex-meta">4 × 5 reps · Rest 3 min · Primary: mid chest</div>
+              </div>
+            </div>
+            <span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Retract shoulder blades, arch upper back slightly, plant feet flat. Lower bar to mid-nipple line with a 2–3 second descent. Drive up explosively.</div>
+            <div class="var-title">6 Variations — Pick Any Based on Equipment</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Barbell Flat Bench Press</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Dumbbell Flat Bench Press</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Smith Machine Bench Press</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Machine Chest Press (Seated)</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Floor Press (Barbell or DB)</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Push-Ups (Weighted if possible)</span><span class="var-type bodyweight">Bodyweight</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=barbell+flat+bench+press+proper+form+tutorial" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube
+            </a>
+          </div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--chest)">2</div>
+              <div class="ex-info">
+                <div class="ex-name">Incline Press</div>
+                <div class="ex-meta">3 × 8 reps · Rest 2 min · Primary: upper chest</div>
+              </div>
+            </div>
+            <span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Set bench to 30–45°. Lower weights to upper chest / collarbone area. Press slightly back over your face, not straight up.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Incline Barbell Bench Press</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Incline Dumbbell Press</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Incline Smith Machine Press</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Low-to-High Cable Fly</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Incline Machine Press (Hammer Strength)</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Decline Push-Up (feet elevated)</span><span class="var-type bodyweight">Bodyweight</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=incline+dumbbell+press+upper+chest+form+tutorial" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOULDERS -->
+      <div class="bp-group">
+        <div class="bp-header">
+          <div class="bp-dot" style="background:var(--shoulder)"></div>
+          <div class="bp-title">SHOULDERS</div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--shoulder)">3</div>
+              <div class="ex-info">
+                <div class="ex-name">Overhead Press</div>
+                <div class="ex-meta">4 × 5 reps · Rest 3 min · Primary: front & side delts</div>
+              </div>
+            </div>
+            <span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Brace core, squeeze glutes. Press bar straight up, moving your head out of the path. Lock out at the top.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Standing Barbell OHP</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Seated Dumbbell Shoulder Press</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Arnold Press</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Smith Machine Shoulder Press</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Machine Shoulder Press</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Landmine Press</span><span class="var-type barbell">Barbell</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=standing+overhead+press+proper+form" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube
+            </a>
+          </div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--shoulder)">4</div>
+              <div class="ex-info">
+                <div class="ex-name">Lateral Raise</div>
+                <div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: side delts</div>
+              </div>
+            </div>
+            <span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Lead with elbows, not hands. Raise to shoulder height — no higher. Slight lean forward. Control the negative for 2 sec.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Dumbbell Lateral Raise</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Cable Lateral Raise</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Machine Lateral Raise</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Leaning Dumbbell Lateral Raise</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Behind-the-Back Cable Lateral Raise</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Plate Front-to-Lateral Raise</span><span class="var-type bodyweight">Plate</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=dumbbell+lateral+raise+side+delt+form+tutorial" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRICEPS -->
+      <div class="bp-group">
+        <div class="bp-header">
+          <div class="bp-dot" style="background:var(--tricep)"></div>
+          <div class="bp-title">TRICEPS</div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--tricep);color:#000">5</div>
+              <div class="ex-info">
+                <div class="ex-name">Tricep Dips</div>
+                <div class="ex-meta">3 × 8 reps · Rest 2 min · Primary: all 3 tricep heads</div>
+              </div>
+            </div>
+            <span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Stay upright to target triceps (lean forward for chest). Full range — go down until upper arms are parallel, press up to lockout.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Weighted Dips (parallel bars)</span><span class="var-type bodyweight">Bodyweight</span></div>
+              <div class="var-item"><span class="var-name">Close-Grip Barbell Bench Press</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Dip Machine (Assisted or Weighted)</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">JM Press (Barbell)</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Bench Dips (feet elevated)</span><span class="var-type bodyweight">Bodyweight</span></div>
+              <div class="var-item"><span class="var-name">Dumbbell Close-Grip Press</span><span class="var-type dumbbell">Dumbbell</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=tricep+dips+proper+form+tutorial" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube
+            </a>
+          </div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--tricep);color:#000">6</div>
+              <div class="ex-info">
+                <div class="ex-name">Overhead Tricep Extension</div>
+                <div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: long head tricep</div>
+              </div>
+            </div>
+            <span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Keep elbows pinned by ears. Full stretch at bottom, full lockout at top. The long head only gets fully stretched overhead.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Overhead Cable Rope Extension</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Dumbbell Skull Crushers</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">EZ-Bar Skull Crushers</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Overhead Dumbbell Extension (two-hand)</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Cable Pushdown (Rope)</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Machine Tricep Extension</span><span class="var-type machine">Machine</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=overhead+tricep+extension+long+head+form" target="_blank">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEALS (Sunday same for all training days) -->
+    <div class="section-content" id="sun-meals">
+      <div id="meals-nepali-template"></div>
+    </div>
+  </div>
+
+  <!-- =============================== MONDAY — PULL A =============================== -->
+  <div class="day-content" id="day-mon">
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="workout" data-parent="mon">Workout</button>
+      <button class="sec-tab" data-section="meals" data-parent="mon">Meals & Recipes</button>
+    </div>
+    <div class="section-content visible" id="mon-workout">
+      <div class="day-overview">
+        <div class="ov-card"><div class="ov-val">PULL A</div><div class="ov-lbl">Session Type</div></div>
+        <div class="ov-card"><div class="ov-val">STRENGTH</div><div class="ov-lbl">Focus</div></div>
+        <div class="ov-card"><div class="ov-val">6</div><div class="ov-lbl">Exercises</div></div>
+        <div class="ov-card"><div class="ov-val">~65 MIN</div><div class="ov-lbl">Duration</div></div>
+      </div>
+
+      <!-- BACK -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--back)"></div><div class="bp-title">BACK</div></div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--back)">1</div>
+              <div class="ex-info"><div class="ex-name">Deadlift</div><div class="ex-meta">4 × 5 reps · Rest 3 min · Primary: entire posterior chain</div></div>
+            </div><span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Brace core hard before every rep. Push the floor away — don't pull. Bar stays against shins. Neutral spine always.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Conventional Barbell Deadlift</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Trap Bar / Hex Bar Deadlift</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Sumo Deadlift</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Dumbbell Romanian Deadlift</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Rack Pull (above knee)</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Cable Pull-Through</span><span class="var-type cable">Cable</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=conventional+deadlift+proper+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube</a>
+          </div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--back)">2</div>
+              <div class="ex-info"><div class="ex-name">Pull-Ups / Lat Pulldown</div><div class="ex-meta">4 × 6 reps · Rest 3 min · Primary: lats, teres major</div></div>
+            </div><span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Dead hang at bottom. Drive elbows down and back. Full stretch, full contraction. Think "pull with your elbows."</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Weighted Pull-Ups</span><span class="var-type bodyweight">Bodyweight</span></div>
+              <div class="var-item"><span class="var-name">Wide-Grip Lat Pulldown</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Close-Grip Lat Pulldown</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Chin-Ups (underhand grip)</span><span class="var-type bodyweight">Bodyweight</span></div>
+              <div class="var-item"><span class="var-name">Assisted Pull-Up Machine</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Single-Arm Lat Pulldown</span><span class="var-type cable">Cable</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=weighted+pull+ups+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube</a>
+          </div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--back)">3</div>
+              <div class="ex-info"><div class="ex-name">Bent-Over Row</div><div class="ex-meta">3 × 8 reps · Rest 2 min · Primary: mid-back, rhomboids</div></div>
+            </div><span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Hinge at hips ~45°. Pull to lower chest. Squeeze shoulder blades at top. Don't use momentum.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Barbell Bent-Over Row (overhand)</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Single-Arm Dumbbell Row</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">T-Bar Row</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Seated Cable Row</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Chest-Supported Machine Row</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Pendlay Row (from floor)</span><span class="var-type barbell">Barbell</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=barbell+bent+over+row+proper+form" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube</a>
+          </div>
+        </div>
+
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--back)">4</div>
+              <div class="ex-info"><div class="ex-name">Seated Cable Row</div><div class="ex-meta">3 × 10 reps · Rest 2 min · Primary: mid-back, lats</div></div>
+            </div><span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Sit tall, pull to navel. Let shoulders protract forward for a full stretch. Squeeze at the back.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Seated Cable Row (V-handle)</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Seated Cable Row (wide grip bar)</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Chest-Supported DB Row</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Machine Seated Row</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Single-Arm Cable Row</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Inverted Row (bodyweight)</span><span class="var-type bodyweight">Bodyweight</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=seated+cable+row+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- REAR DELTS -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--reardelt)"></div><div class="bp-title">REAR DELTS</div></div>
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--reardelt);color:#000">5</div>
+              <div class="ex-info"><div class="ex-name">Face Pulls</div><div class="ex-meta">3 × 15 reps · Rest 90 sec · Primary: rear delts, rotator cuff</div></div>
+            </div><span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Pull to forehead level. Externally rotate hands at the end so thumbs point back. Keep elbows high.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Cable Face Pull (rope)</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Band Pull-Aparts</span><span class="var-type bodyweight">Band</span></div>
+              <div class="var-item"><span class="var-name">Reverse Pec Deck</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Dumbbell Reverse Fly (bent over)</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Cable Reverse Fly</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Prone Y-Raise on Incline Bench</span><span class="var-type dumbbell">Dumbbell</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=face+pulls+cable+rope+form+rear+delt" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BICEPS -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--bicep)"></div><div class="bp-title">BICEPS</div></div>
+        <div class="ex-card">
+          <div class="ex-head" onclick="toggleCard(this)">
+            <div style="display:flex;align-items:center">
+              <div class="ex-num" style="background:var(--bicep);color:#000">6</div>
+              <div class="ex-info"><div class="ex-name">Barbell / EZ-Bar Curl</div><div class="ex-meta">3 × 10 reps · Rest 90 sec · Primary: bicep short & long head</div></div>
+            </div><span class="ex-arrow">▾</span>
+          </div>
+          <div class="ex-body">
+            <div class="ex-cue"><strong>Form cue:</strong> Pin elbows to sides. No swinging. Control the negative for 2 seconds. Squeeze hard at the top.</div>
+            <div class="var-title">6 Variations</div>
+            <div class="var-grid">
+              <div class="var-item"><span class="var-name">Straight Barbell Curl</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">EZ-Bar Curl</span><span class="var-type barbell">Barbell</span></div>
+              <div class="var-item"><span class="var-name">Dumbbell Alternating Curl</span><span class="var-type dumbbell">Dumbbell</span></div>
+              <div class="var-item"><span class="var-name">Cable Curl (straight bar)</span><span class="var-type cable">Cable</span></div>
+              <div class="var-item"><span class="var-name">Machine Preacher Curl</span><span class="var-type machine">Machine</span></div>
+              <div class="var-item"><span class="var-name">Hammer Curls (Dumbbell)</span><span class="var-type dumbbell">Dumbbell</span></div>
+            </div>
+            <a class="yt-btn" href="https://www.youtube.com/results?search_query=barbell+curl+proper+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos on YouTube</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section-content" id="mon-meals"></div>
+  </div>
+
+  <!-- =============================== TUESDAY — LEGS A =============================== -->
+  <div class="day-content" id="day-tue">
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="workout" data-parent="tue">Workout</button>
+      <button class="sec-tab" data-section="meals" data-parent="tue">Meals & Recipes</button>
+    </div>
+    <div class="section-content visible" id="tue-workout">
+      <div class="day-overview">
+        <div class="ov-card"><div class="ov-val">LEGS A</div><div class="ov-lbl">Session Type</div></div>
+        <div class="ov-card"><div class="ov-val">STRENGTH</div><div class="ov-lbl">Focus</div></div>
+        <div class="ov-card"><div class="ov-val">6</div><div class="ov-lbl">Exercises</div></div>
+        <div class="ov-card"><div class="ov-val">~70 MIN</div><div class="ov-lbl">Duration</div></div>
+      </div>
+
+      <!-- QUADS -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--quad)"></div><div class="bp-title">QUADRICEPS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--quad)">1</div><div class="ex-info"><div class="ex-name">Barbell Back Squat</div><div class="ex-meta">4 × 5 reps · Rest 3 min · Primary: quads, glutes</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Brace hard. Break at hips and knees together. Go to at least parallel. Chest up, knees track over toes.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Barbell Back Squat (high bar)</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Front Squat</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Goblet Squat</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Smith Machine Squat</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Hack Squat Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Belt Squat Machine</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=barbell+back+squat+proper+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--quad)">2</div><div class="ex-info"><div class="ex-name">Leg Press</div><div class="ex-meta">3 × 10 reps · Rest 2 min · Primary: quads</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Feet shoulder-width, mid-platform. Don't lock knees at top. Don't let lower back round at the bottom. Full ROM.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">45° Leg Press Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Hack Squat Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Barbell Walking Lunges</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Dumbbell Walking Lunges</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Single-Leg Press</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">V-Squat Machine</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=leg+press+proper+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+
+      <!-- HAMSTRINGS -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--hamstring)"></div><div class="bp-title">HAMSTRINGS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--hamstring)">3</div><div class="ex-info"><div class="ex-name">Romanian Deadlift (RDL)</div><div class="ex-meta">4 × 8 reps · Rest 2 min · Primary: hamstrings, glutes</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Soft knees, hinge at hips. Feel the hamstring stretch. Bar stays close to legs. Squeeze glutes at the top.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Barbell Romanian Deadlift</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Dumbbell Romanian Deadlift</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Single-Leg DB Romanian Deadlift</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Pull-Through</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Smith Machine RDL</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Kettlebell Swing</span><span class="var-type dumbbell">Kettlebell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=romanian+deadlift+rdl+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--hamstring)">4</div><div class="ex-info"><div class="ex-name">Lying Leg Curl</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: hamstrings</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Don't lift hips off the pad. Squeeze hard at peak contraction. Slow 3-second negative on every rep.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Lying Leg Curl Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Seated Leg Curl Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Nordic Hamstring Curl</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Swiss Ball Hamstring Curl</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Dumbbell Leg Curl (prone on bench)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Leg Curl (ankle strap)</span><span class="var-type cable">Cable</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=lying+leg+curl+machine+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+
+      <!-- GLUTES -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--glute)"></div><div class="bp-title">GLUTES</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--glute)">5</div><div class="ex-info"><div class="ex-name">Bulgarian Split Squat</div><div class="ex-meta">3 × 10 each leg · Rest 2 min · Primary: glutes, quads</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Rear foot on bench, laces down. Drop straight down. Front shin stays nearly vertical. Lean torso slightly forward for more glute.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Dumbbell Bulgarian Split Squat</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Barbell Bulgarian Split Squat</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Smith Machine Split Squat</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Dumbbell Reverse Lunges</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Barbell Hip Thrust</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Cable Kickback (glute)</span><span class="var-type cable">Cable</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=bulgarian+split+squat+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+
+      <!-- CALVES -->
+      <div class="bp-group">
+        <div class="bp-header"><div class="bp-dot" style="background:var(--calf)"></div><div class="bp-title">CALVES</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--calf)">6</div><div class="ex-info"><div class="ex-name">Standing Calf Raise</div><div class="ex-meta">4 × 15 reps · Rest 60 sec · Primary: gastrocnemius</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Full stretch at bottom (2 sec hold), explosive push up, 2 sec squeeze at top. Calves need volume and full ROM to grow.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Smith Machine Standing Calf Raise</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Standing Calf Raise Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Seated Calf Raise Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Leg Press Calf Raise</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Dumbbell Single-Leg Calf Raise</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Donkey Calf Raise</span><span class="var-type bodyweight">Bodyweight</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=standing+calf+raise+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+    </div>
+    <div class="section-content" id="tue-meals"></div>
+  </div>
+
+  <!-- =============================== WEDNESDAY — PUSH B =============================== -->
+  <div class="day-content" id="day-wed">
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="workout" data-parent="wed">Workout</button>
+      <button class="sec-tab" data-section="meals" data-parent="wed">Meals & Recipes</button>
+    </div>
+    <div class="section-content visible" id="wed-workout">
+      <div class="day-overview">
+        <div class="ov-card"><div class="ov-val">PUSH B</div><div class="ov-lbl">Session Type</div></div>
+        <div class="ov-card"><div class="ov-val">HYPERTROPHY</div><div class="ov-lbl">Focus</div></div>
+        <div class="ov-card"><div class="ov-val">6</div><div class="ov-lbl">Exercises</div></div>
+        <div class="ov-card"><div class="ov-val">~60 MIN</div><div class="ov-lbl">Duration</div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--chest)"></div><div class="bp-title">CHEST</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--chest)">1</div><div class="ex-info"><div class="ex-name">Dumbbell Bench Press</div><div class="ex-meta">4 × 10 reps · Rest 2 min · Primary: mid chest</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Deeper stretch than barbell — bring DBs low and wide. Press in slight arc. Squeeze chest hard at top.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Dumbbell Flat Press</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Machine Chest Press</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Barbell Bench Press (moderate weight)</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Cable Chest Press</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Svend Press (plate squeeze press)</span><span class="var-type bodyweight">Plate</span></div><div class="var-item"><span class="var-name">Smith Machine Bench Press</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=dumbbell+flat+bench+press+form+hypertrophy" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--chest)">2</div><div class="ex-info"><div class="ex-name">Cable Crossover / Chest Fly</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: inner chest</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Slight forward lean. Bring hands together, cross slightly for peak contraction. Slow stretch on the way back.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Cable Crossover (high to low)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Cable Crossover (low to high)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Dumbbell Fly (flat bench)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Pec Deck Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Incline Dumbbell Fly</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Machine Fly (Seated)</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=cable+crossover+chest+fly+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--shoulder)"></div><div class="bp-title">SHOULDERS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--shoulder)">3</div><div class="ex-info"><div class="ex-name">Seated Dumbbell Shoulder Press</div><div class="ex-meta">4 × 10 reps · Rest 2 min · Primary: front & side delts</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Start at ear level. Press to just short of lockout to maintain tension. Don't arch your back excessively.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Seated DB Shoulder Press</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Arnold Press</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Machine Shoulder Press</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Smith Machine Shoulder Press</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Barbell Push Press</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Landmine Press (Single Arm)</span><span class="var-type barbell">Barbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=seated+dumbbell+shoulder+press+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--shoulder)">4</div><div class="ex-info"><div class="ex-name">Lateral Raise (High Volume)</div><div class="ex-meta">4 × 15 reps · Rest 60 sec · Primary: side delts</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Use lighter weight than you think. Perfect form with 15 reps beats cheating heavy weight. Thumbs slightly down, elbows lead.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Dumbbell Lateral Raise</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Lateral Raise</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Machine Lateral Raise</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Behind-the-Back Cable Lateral</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Lu Raises (DB front-to-lateral)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Plate Lateral Raise</span><span class="var-type bodyweight">Plate</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=lateral+raise+high+rep+hypertrophy+form" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--tricep)"></div><div class="bp-title">TRICEPS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--tricep);color:#000">5</div><div class="ex-info"><div class="ex-name">Cable Pushdown</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: lateral + medial head</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Split the rope at the bottom and squeeze. Keep elbows pinned. Don't use body momentum.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Cable Rope Pushdown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">V-Bar Pushdown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Straight Bar Pushdown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Machine Tricep Extension</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Single-Arm Cable Pushdown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Dumbbell Kickback</span><span class="var-type dumbbell">Dumbbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=tricep+rope+pushdown+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--tricep);color:#000">6</div><div class="ex-info"><div class="ex-name">Overhead Extension</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: long head</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Full stretch behind the head. Elbows point at ceiling. This is the only position that fully stretches the long head.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Overhead Cable Extension (rope)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Overhead DB Extension (two-hand)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">EZ-Bar Skull Crusher</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Dumbbell Skull Crusher</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Single-Arm Overhead Cable Extension</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Incline DB Tricep Extension</span><span class="var-type dumbbell">Dumbbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=overhead+tricep+extension+long+head+form" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+    </div>
+    <div class="section-content" id="wed-meals"></div>
+  </div>
+
+  <!-- =============================== THURSDAY — PULL B =============================== -->
+  <div class="day-content" id="day-thu">
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="workout" data-parent="thu">Workout</button>
+      <button class="sec-tab" data-section="meals" data-parent="thu">Meals & Recipes</button>
+    </div>
+    <div class="section-content visible" id="thu-workout">
+      <div class="day-overview">
+        <div class="ov-card"><div class="ov-val">PULL B</div><div class="ov-lbl">Session Type</div></div>
+        <div class="ov-card"><div class="ov-val">HYPERTROPHY</div><div class="ov-lbl">Focus</div></div>
+        <div class="ov-card"><div class="ov-val">6</div><div class="ov-lbl">Exercises</div></div>
+        <div class="ov-card"><div class="ov-val">~60 MIN</div><div class="ov-lbl">Duration</div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--back)"></div><div class="bp-title">BACK (LATS)</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--back)">1</div><div class="ex-info"><div class="ex-name">Lat Pulldown (Wide Grip)</div><div class="ex-meta">4 × 10 reps · Rest 2 min · Primary: lats</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Lean back slightly, pull to upper chest. Squeeze lats at the bottom. Let bar come up fully for a complete stretch.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Wide-Grip Lat Pulldown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Close-Grip Lat Pulldown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Single-Arm Lat Pulldown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Chin-Ups (bodyweight)</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Neutral Grip Pulldown</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Machine Pulldown</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=wide+grip+lat+pulldown+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--back)">2</div><div class="ex-info"><div class="ex-name">Chest-Supported Row</div><div class="ex-meta">4 × 10 reps · Rest 2 min · Primary: mid-back, rhomboids</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Chest on incline bench removes all cheating. Pull to hip level. Squeeze back hard. This is the best back isolation row.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Chest-Supported DB Row</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Chest-Supported Machine Row</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">T-Bar Row (chest pad)</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Seal Row (flat bench, barbell)</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Single-Arm Cable Row</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Meadows Row (landmine)</span><span class="var-type barbell">Barbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=chest+supported+dumbbell+row+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--back)">3</div><div class="ex-info"><div class="ex-name">Single-Arm Row</div><div class="ex-meta">3 × 12 each arm · Rest 90 sec · Primary: lats, teres major</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Rotate torso slightly for full range. Drive elbow past your body. Control every inch of the movement.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Single-Arm DB Row (knee on bench)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Single-Arm Cable Row</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Meadows Row (landmine)</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Single-Arm Machine Row</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Kroc Row (heavy DB row)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Single-Arm Lat Pulldown</span><span class="var-type cable">Cable</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=single+arm+dumbbell+row+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--reardelt)"></div><div class="bp-title">REAR DELTS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--reardelt);color:#000">4</div><div class="ex-info"><div class="ex-name">Reverse Pec Deck / Face Pull</div><div class="ex-meta">3 × 15 reps · Rest 90 sec · Primary: rear delts</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Arms slightly bent, squeeze rear delts hard. Don't use body momentum. Slow negative for more time under tension.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Reverse Pec Deck Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Cable Face Pull (rope)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">DB Reverse Fly (bent over)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Reverse Fly</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Band Pull-Aparts</span><span class="var-type bodyweight">Band</span></div><div class="var-item"><span class="var-name">Prone Y-Raise (incline bench)</span><span class="var-type dumbbell">Dumbbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=reverse+pec+deck+rear+delt+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--bicep)"></div><div class="bp-title">BICEPS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--bicep);color:#000">5</div><div class="ex-info"><div class="ex-name">Incline Dumbbell Curl</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: bicep long head</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Let arms hang fully behind your torso. The stretch at bottom is the magic of this exercise. Don't swing.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Incline DB Curl</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Preacher Curl (EZ-Bar)</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Machine Preacher Curl</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Spider Curl (over incline bench)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Curl (low pulley)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Concentration Curl</span><span class="var-type dumbbell">Dumbbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=incline+dumbbell+curl+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--bicep);color:#000">6</div><div class="ex-info"><div class="ex-name">Hammer Curl</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: brachialis, brachioradialis</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Neutral grip (palms facing each other). Targets the brachialis which pushes the bicep peak up and adds arm thickness.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">DB Hammer Curl</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cross-Body Hammer Curl</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Rope Curl (hammer grip)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Reverse Barbell Curl</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Zottman Curl</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Machine Curl (neutral handle)</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=hammer+curl+form+brachialis+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+    </div>
+    <div class="section-content" id="thu-meals"></div>
+  </div>
+
+  <!-- =============================== FRIDAY — LEGS B =============================== -->
+  <div class="day-content" id="day-fri">
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="workout" data-parent="fri">Workout</button>
+      <button class="sec-tab" data-section="meals" data-parent="fri">Meals & Recipes</button>
+    </div>
+    <div class="section-content visible" id="fri-workout">
+      <div class="day-overview">
+        <div class="ov-card"><div class="ov-val">LEGS B</div><div class="ov-lbl">Session Type</div></div>
+        <div class="ov-card"><div class="ov-val">HYPERTROPHY</div><div class="ov-lbl">Focus</div></div>
+        <div class="ov-card"><div class="ov-val">6</div><div class="ov-lbl">Exercises</div></div>
+        <div class="ov-card"><div class="ov-val">~65 MIN</div><div class="ov-lbl">Duration</div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--quad)"></div><div class="bp-title">QUADRICEPS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--quad)">1</div><div class="ex-info"><div class="ex-name">Goblet Squat / Front Squat</div><div class="ex-meta">4 × 12 reps · Rest 2 min · Primary: quads, core</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Hold DB at chest level. Sit deep between your legs — great for mobility and quad activation. Heels stay planted.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Goblet Squat (Dumbbell)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Barbell Front Squat</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Smith Machine Squat</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Hack Squat Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Kettlebell Goblet Squat</span><span class="var-type dumbbell">Kettlebell</span></div><div class="var-item"><span class="var-name">Pendulum Squat Machine</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=goblet+squat+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--quad)">2</div><div class="ex-info"><div class="ex-name">Leg Extension</div><div class="ex-meta">3 × 15 reps · Rest 90 sec · Primary: quads (isolation)</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Pause 1 second at the top. Slow 3-second negative. This is pure quad isolation — make every rep count. Burns = growth.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Leg Extension Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Single-Leg Extension</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Sissy Squat</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Reverse Nordic Curl</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">DB Leg Extension (seated on bench)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Leg Extension (ankle strap)</span><span class="var-type cable">Cable</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=leg+extension+machine+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--hamstring)"></div><div class="bp-title">HAMSTRINGS</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--hamstring)">3</div><div class="ex-info"><div class="ex-name">Stiff-Leg Deadlift</div><div class="ex-meta">3 × 12 reps · Rest 2 min · Primary: hamstrings</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Straighter legs than RDL. Hinge deep, feel the stretch. Weight travels further down (mid-shin). This targets hamstrings more than glutes.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Barbell Stiff-Leg Deadlift</span><span class="var-type barbell">Barbell</span></div><div class="var-item"><span class="var-name">Dumbbell Stiff-Leg Deadlift</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Cable Pull-Through</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Smith Machine Stiff-Leg DL</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Single-Leg DB RDL</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Good Mornings (Barbell)</span><span class="var-type barbell">Barbell</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=stiff+leg+deadlift+dumbbell+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--hamstring)">4</div><div class="ex-info"><div class="ex-name">Seated Leg Curl</div><div class="ex-meta">3 × 12 reps · Rest 90 sec · Primary: hamstrings</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Curl all the way in. Squeeze at peak contraction. Slow negative. Don't let the weight stack slam.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Seated Leg Curl Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Lying Leg Curl Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Nordic Hamstring Curl</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Swiss Ball Hamstring Curl</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Slider Leg Curl</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Cable Leg Curl (ankle strap)</span><span class="var-type cable">Cable</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=seated+leg+curl+machine+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--calf)"></div><div class="bp-title">CALVES</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--calf)">5</div><div class="ex-info"><div class="ex-name">Seated Calf Raise</div><div class="ex-meta">4 × 20 reps · Rest 60 sec · Primary: soleus</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Seated position targets the soleus (deeper calf muscle). Full ROM — deep stretch, hard squeeze at top. High reps needed.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Seated Calf Raise Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Smith Machine Seated Calf Raise</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">DB on Knees Calf Raise (seated)</span><span class="var-type dumbbell">Dumbbell</span></div><div class="var-item"><span class="var-name">Standing Calf Raise Machine</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Leg Press Calf Raise</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Single-Leg Calf Raise (bodyweight)</span><span class="var-type bodyweight">Bodyweight</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=seated+calf+raise+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+      <div class="bp-group"><div class="bp-header"><div class="bp-dot" style="background:var(--core)"></div><div class="bp-title">CORE</div></div>
+        <div class="ex-card"><div class="ex-head" onclick="toggleCard(this)"><div style="display:flex;align-items:center"><div class="ex-num" style="background:var(--core);color:#000">6</div><div class="ex-info"><div class="ex-name">Hanging Leg Raise</div><div class="ex-meta">3 × 15 reps · Rest 60 sec · Primary: lower abs, hip flexors</div></div></div><span class="ex-arrow">▾</span></div>
+          <div class="ex-body"><div class="ex-cue"><strong>Form cue:</strong> Curl your pelvis UP — don't just swing legs. Control the descent completely. The abs only work when the pelvis curls.</div><div class="var-title">6 Variations</div><div class="var-grid"><div class="var-item"><span class="var-name">Hanging Leg Raise (bar)</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Captain's Chair Leg Raise</span><span class="var-type machine">Machine</span></div><div class="var-item"><span class="var-name">Cable Crunch (kneeling)</span><span class="var-type cable">Cable</span></div><div class="var-item"><span class="var-name">Ab Wheel Rollout</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Decline Sit-Up (weighted)</span><span class="var-type bodyweight">Bodyweight</span></div><div class="var-item"><span class="var-name">Machine Crunch</span><span class="var-type machine">Machine</span></div></div><a class="yt-btn" href="https://www.youtube.com/results?search_query=hanging+leg+raise+form+tutorial" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Form Videos</a></div></div>
+      </div>
+    </div>
+    <div class="section-content" id="fri-meals"></div>
+  </div>
+
+  <!-- =============================== SATURDAY — REST =============================== -->
+  <div class="day-content" id="day-sat">
+    <div class="rest-hero">
+      <h2>REST &amp; RECOVER</h2>
+      <p>Muscles don't grow in the gym — they grow while you rest. Today is not optional. It's when your body repairs the damage from 6 hard training days and comes back stronger.</p>
+      <div class="rest-list">
+        <ul style="list-style:none;padding:0">
+          <li>&#10003; &nbsp;Sleep 8–9 hours if possible</li>
+          <li>&#10003; &nbsp;Light walk for 20–30 minutes (active recovery)</li>
+          <li>&#10003; &nbsp;Stretching or yoga (15–20 min)</li>
+          <li>&#10003; &nbsp;Foam rolling any sore muscles</li>
+          <li>&#10003; &nbsp;Eat at maintenance (~2,450 kcal) — reduce carbs by 25%, keep protein at 130g</li>
+          <li>&#10003; &nbsp;Drink 3+ litres water</li>
+          <li>&#10003; &nbsp;Take weekly progress photo (front, side, back — same lighting)</li>
+          <li>&#10003; &nbsp;Meal prep for the coming week</li>
+          <li>&#10003; &nbsp;Review your workout log — did you progress this week?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Target: 2,750 kcal/day &middot; 130g protein &middot; 360g carbs &middot; 80g fat &middot; 6:00 AM training &middot; 65 → 70 kg in 5–7 months
+  </div>
+</div>
+
+<!-- INSTALL BANNER -->
+<div class="install-banner" id="installBanner">
+  <div class="install-inner">
+    <div class="install-icon">💪</div>
+    <div class="install-text">
+      <strong>Add to Home Screen</strong>
+      <span>Open as an app — works offline!</span>
+    </div>
+    <button class="install-btn" id="installBtn">Install</button>
+    <button class="install-close" id="installClose">&times;</button>
+  </div>
+</div>
+
+<!-- HOW TO INSTALL (shown if PWA prompt not available) -->
+<div id="installInstructions" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;background:rgba(0,0,0,0.85);padding:20px;overflow-y:auto">
+  <div style="max-width:400px;margin:60px auto;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px">
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-size:48px;margin-bottom:8px">💪</div>
+      <h2 style="font-family:Bebas Neue,sans-serif;font-size:24px;color:#fff">Install FitSystem</h2>
+    </div>
+    <div id="iosInstructions" style="display:none">
+      <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px"><strong style="color:var(--accent)">iPhone / iPad (Safari):</strong></p>
+      <ol style="font-size:13px;color:var(--text);line-height:2;padding-left:20px">
+        <li>Tap the <strong>Share button</strong> <span style="display:inline-block;border:1px solid var(--text2);border-radius:4px;padding:1px 6px;font-size:11px">⬆</span> at the bottom of Safari</li>
+        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+        <li>Tap <strong>"Add"</strong> in the top right</li>
+        <li>Open the app from your home screen — it runs like a native app!</li>
+      </ol>
+    </div>
+    <div id="androidInstructions" style="display:none">
+      <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px"><strong style="color:var(--accent)">Android (Chrome):</strong></p>
+      <ol style="font-size:13px;color:var(--text);line-height:2;padding-left:20px">
+        <li>Tap the <strong>three-dot menu</strong> <span style="display:inline-block;border:1px solid var(--text2);border-radius:4px;padding:1px 6px;font-size:11px">⋮</span> at the top right</li>
+        <li>Tap <strong>"Add to Home Screen"</strong> or <strong>"Install App"</strong></li>
+        <li>Tap <strong>"Install"</strong> or <strong>"Add"</strong></li>
+        <li>Open the app from your home screen!</li>
+      </ol>
+    </div>
+    <div id="desktopInstructions" style="display:none">
+      <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px"><strong style="color:var(--accent)">Desktop Chrome:</strong></p>
+      <ol style="font-size:13px;color:var(--text);line-height:2;padding-left:20px">
+        <li>Click the <strong>install icon</strong> in the address bar (right side)</li>
+        <li>Click <strong>"Install"</strong></li>
+      </ol>
+    </div>
+    <button onclick="document.getElementById('installInstructions').style.display='none'" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:DM Sans,sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:16px">Got it!</button>
+  </div>
+</div>
+
+<script>
+// ===== PWA SERVICE WORKER =====
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+
+// ===== INSTALL PROMPT =====
+let deferredPrompt = null;
+const banner = document.getElementById('installBanner');
+const instrEl = document.getElementById('installInstructions');
+
+// Check if already installed as PWA
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+
+if (!isStandalone && !sessionStorage.getItem('installDismissed')) {
+  // Show banner after 3 seconds
+  setTimeout(() => { banner.classList.add('show'); }, 3000);
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!isStandalone) banner.classList.add('show');
+});
+
+document.getElementById('installBtn').addEventListener('click', () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(result => {
+      deferredPrompt = null;
+      banner.classList.remove('show');
+    });
+  } else {
+    // Show manual instructions based on device
+    instrEl.style.display = 'block';
+    const ua = navigator.userAgent;
+    if (/iPhone|iPad|iPod/.test(ua)) {
+      document.getElementById('iosInstructions').style.display = 'block';
+    } else if (/Android/.test(ua)) {
+      document.getElementById('androidInstructions').style.display = 'block';
+    } else {
+      document.getElementById('desktopInstructions').style.display = 'block';
+    }
+    banner.classList.remove('show');
+  }
+});
+
+document.getElementById('installClose').addEventListener('click', () => {
+  banner.classList.remove('show');
+  sessionStorage.setItem('installDismissed', '1');
+});
+
+window.addEventListener('appinstalled', () => {
+  banner.classList.remove('show');
+});
+</script>
+<script>
+const MEALS = [
+  { time:"5:15 AM", label:"Pre-Workout", name:"Banana + Almonds + Chiya", nameW:"Banana + Half Whey + Coffee", cals:"~250 kcal",
+    ingredients:["1 large banana","5 soaked almonds","1 tbsp honey","1 cup chiya (black tea + splash milk + ginger)"],
+    ingredientsW:["1 large banana","½ scoop whey protein in 200ml water","1 cup black coffee"],
+    steps:["Night before: put 5 almonds in water to soak. Lay banana on bedside table.","Wake 5:00 AM. Boil water → add crushed ginger + tea leaves → simmer 2 min → add splash of milk → strain.","Eat banana with honey, almonds, sip chiya. Drink 500ml water. Out the door by 5:40."],
+    stepsW:["Shake ½ scoop whey in 200ml cold water.","Eat banana, drink shake, sip coffee.","Out the door in 5 min. Coffee peaks in 15–20 min."],
+    tip:"Takes under 5 min. Everything prepped the night before."
+  },
+  { time:"7:30 AM", label:"Post-Workout Breakfast", name:"Chiura + 4-Egg Omelette + Milk", nameW:"Protein Oats + Banana + PB", cals:"~600 kcal",
+    ingredients:["80g chiura (beaten rice), rinsed","4 large eggs","1 onion (chopped), 1 green chilli, coriander","½ tsp turmeric, ½ tsp salt, 1 tbsp mustard oil","250ml full-cream milk","1 seasonal fruit (papaya/guava)"],
+    ingredientsW:["80g rolled oats","1 scoop whey protein (chocolate/vanilla)","250ml water or milk","1 banana (sliced)","1 tbsp peanut butter","Pinch of cinnamon"],
+    steps:["Rinse chiura 30 sec, drain. Set aside.","Beat 4 eggs with turmeric, salt, chilli, coriander.","Heat mustard oil → sauté onion 1 min → pour eggs → fold gently → cook until just set (keep fluffy).","Plate omelette + chiura. Glass of milk. Fruit on side.","Eat within 30–45 min of finishing workout. This is your most important meal."],
+    stepsW:["Cook oats in water/milk for 4–5 min until thick.","Remove from heat, cool 1 min. Stir in whey protein.","Top with sliced banana, peanut butter, cinnamon.","Overnight version: mix oats + whey + milk in jar night before. Refrigerate. Zero cooking."],
+    tip:"Boil eggs the night before (keep 6 in fridge at all times) for a zero-cook option."
+  },
+  { time:"10:30 AM", label:"Mid-Morning Snack", name:"Sattu Drink + Nuts + Fruit", nameW:"Greek Yogurt Parfait", cals:"~350 kcal",
+    ingredients:["40g sattu (roasted soybean flour)","300ml cold water, pinch of salt, squeeze of lemon","30g mixed nuts (peanuts, cashews, almonds)","1 medium apple"],
+    ingredientsW:["200g Greek yogurt","40g granola/muesli","Handful of berries (blueberries/strawberries)","1 tsp honey (optional)"],
+    steps:["Add 40g sattu to glass → pour cold water → add salt + lemon → stir vigorously.","Drink immediately (sattu settles fast).","Eat nuts and fruit alongside."],
+    stepsW:["Spoon Greek yogurt into bowl or jar.","Top with granola and berries. Drizzle honey.","Done. 3 minutes."],
+    tip:"Pre-measure sattu in zip-locks for the week. Toss one in your bag daily."
+  },
+  { time:"1:00 PM", label:"Lunch", name:"Dal Bhat + Chicken Curry + Tarkari", nameW:"Grilled Chicken + Rice + Vegetables", cals:"~750 kcal",
+    ingredients:["250g cooked rice","1.5 bowls dal (masoor/mung) with tempering","150g chicken curry (kukhura ko masu)","1 bowl seasonal tarkari","2 tbsp achar"],
+    ingredientsW:["180g grilled chicken breast","200g cooked rice","1 cup mixed vegetables (broccoli, capsicum, beans)","1 tbsp olive oil","Side salad with lemon"],
+    steps:["DAL: Wash dal → boil with turmeric + salt 20 min. Temper: ghee + cumin + garlic + onion + tomato → pour into dal.","CHICKEN: Brown onions 10 min → ginger-garlic paste → spices (turmeric, cumin, coriander, chilli) → tomato puree → cook until oil separates → add chicken + ½ cup water → simmer 25 min → finish with garam masala.","TARKARI: Oil + cumin + chilli → add veggies + turmeric → splash water → cover 10 min.","Assemble: rice + dal + chicken + tarkari + achar."],
+    stepsW:["Season chicken: salt, pepper, paprika, garlic powder. Grill 5–6 min per side.","Rest 3 min before slicing (keeps it juicy).","Cook rice: rinse 2×, 1:1.5 water ratio, boil → lowest heat 15 min → rest 5 min.","Sauté vegetables in olive oil 4–5 min. Plate everything."],
+    tip:"Batch cook! Make 2–3 days of chicken + dal at once. Refrigerate in portions. Saves 45 min on busy days."
+  },
+  { time:"4:30 PM", label:"Afternoon Snack", name:"Roti + Peanut Butter + Dahi", nameW:"Tuna Sandwich + Apple", cals:"~250 kcal",
+    ingredients:["1 whole wheat roti","1 tbsp peanut butter","100g curd (dahi)"],
+    ingredientsW:["2 slices whole wheat bread","1 can tuna (80g drained) in water","1 tsp mustard, lemon, salt, pepper","1 apple"],
+    steps:["Spread peanut butter on warm roti. Fold in half.","Eat with dahi on the side."],
+    stepsW:["Drain tuna → mix with mustard, lemon, salt, pepper.","Spread on bread, add lettuce if available. Eat with apple."],
+    tip:"Make 6–8 rotis on Sunday, store in fridge wrapped in cloth. Reheat 30 sec on tawa."
+  },
+  { time:"7:30 PM", label:"Dinner", name:"Rice + Fish Curry + Saag + Light Dal", nameW:"Baked Salmon + Sweet Potato + Broccoli", cals:"~550 kcal",
+    ingredients:["200g cooked rice or 2 rotis","150g fish curry (macha) or buff curry","1 bowl saag (spinach/mustard greens)","1 small bowl light mung dal","150g dahi"],
+    ingredientsW:["150g salmon or tilapia fillet","200g sweet potato (cubed, roasted)","1 cup broccoli florets","1 tbsp olive oil","Salt, pepper, lemon, herbs"],
+    steps:["FISH: Rub fish with turmeric + salt 10 min. Fry lightly 1 min/side → remove. Same oil: onion till golden → ginger-garlic → spices → tomato → ½ cup water → simmer → add fish back → 8–10 min.","SAAG: Oil + garlic + dried chilli → add greens + salt → cover 5–7 min → mash lightly.","LIGHT DAL: Mung dal + water + turmeric → boil 15 min → temper with garlic + cumin in ghee.","Plate rice + fish + saag + dal + dahi."],
+    stepsW:["Preheat oven 200°C. Toss sweet potato in oil + salt → roast 15 min.","Season salmon with salt, pepper, lemon. Add to tray with broccoli.","Roast everything together 12–15 min.","Plate. Extra lemon on top."],
+    tip:"Swap fish for 3-egg curry if needed. Buff curry = same as chicken recipe, just cook 10 min longer."
+  },
+  { time:"9:30 PM", label:"Before Bed", name:"Haldi Dudh + Soaked Almonds", nameW:"Cottage Cheese + Walnuts", cals:"~200 kcal",
+    ingredients:["250ml full-cream milk","½ tsp turmeric (besaar)","Pinch of black pepper","½ tsp honey (optional)","6–8 soaked almonds"],
+    ingredientsW:["150g cottage cheese (paneer/ricotta)","15g walnuts (~5–6 halves)"],
+    steps:["Warm milk gently (don't boil). Add turmeric + black pepper. Stir.","Pour into cup. Add honey if desired. Eat almonds alongside.","Get into bed within 15 minutes."],
+    stepsW:["Scoop cottage cheese into bowl. Top with walnuts.","Eat. Go to sleep."],
+    tip:"Casein in milk digests over 6–7 hrs, feeding muscles overnight. Black pepper increases turmeric absorption 2000%."
+  }
+];
+
+function generateMealHTML(day) {
+  let html = '<div style="margin-top:20px">';
+  html += '<div style="display:flex;gap:8px;margin-bottom:16px"><button class="diet-toggle active" data-diet="nepali" data-day="'+day+'" style="flex:1;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--accent);color:#fff;font-family:DM Sans,sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px">Nepali Diet</button><button class="diet-toggle" data-diet="western" data-day="'+day+'" style="flex:1;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text2);font-family:DM Sans,sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px">Western Diet</button></div>';
+
+  MEALS.forEach((m,i) => {
+    // Nepali
+    html += '<div class="meal-card diet-card-nepali-'+day+'">';
+    html += '<div class="meal-head" onclick="toggleMeal(this)"><div><div class="meal-time">'+m.time+' — '+m.label+'</div><div class="meal-name">'+m.name+'</div><div class="meal-cals">'+m.cals+'</div></div><span class="meal-arrow">▾</span></div>';
+    html += '<div class="meal-body">';
+    html += '<div class="var-title">Ingredients</div><ul class="ing-list">';
+    m.ingredients.forEach(ing => { html += '<li>'+ing+'</li>'; });
+    html += '</ul><div class="var-title">Steps</div><ol class="steps-list">';
+    m.steps.forEach(s => { html += '<li>'+s+'</li>'; });
+    html += '</ol>';
+    html += '<div class="tip-box"><strong>Tip: </strong>'+m.tip+'</div>';
+    html += '<a class="yt-btn" href="https://www.youtube.com/results?search_query='+encodeURIComponent(m.name+' recipe nepali')+'" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Recipe Video</a>';
+    html += '</div></div>';
+
+    // Western
+    html += '<div class="meal-card diet-card-western-'+day+'" style="display:none">';
+    html += '<div class="meal-head" onclick="toggleMeal(this)"><div><div class="meal-time">'+m.time+' — '+m.label+'</div><div class="meal-name">'+m.nameW+'</div><div class="meal-cals">'+m.cals+'</div></div><span class="meal-arrow">▾</span></div>';
+    html += '<div class="meal-body">';
+    html += '<div class="var-title">Ingredients</div><ul class="ing-list">';
+    m.ingredientsW.forEach(ing => { html += '<li>'+ing+'</li>'; });
+    html += '</ul><div class="var-title">Steps</div><ol class="steps-list">';
+    m.stepsW.forEach(s => { html += '<li>'+s+'</li>'; });
+    html += '</ol>';
+    html += '<div class="tip-box"><strong>Tip: </strong>'+m.tip+'</div>';
+    html += '<a class="yt-btn" href="https://www.youtube.com/results?search_query='+encodeURIComponent(m.nameW+' recipe healthy')+'" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Watch Recipe Video</a>';
+    html += '</div></div>';
+  });
+
+  html += '<div style="margin-top:20px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:10px"><div style="font-family:Bebas Neue,sans-serif;font-size:18px;color:#fff;margin-bottom:8px">DAILY TOTALS</div><div style="display:flex;gap:12px;flex-wrap:wrap"><span style="padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#ff3b3020;color:#ff6b5b">Protein 130g</span><span style="padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#5ac8fa20;color:#5ac8fa">Carbs 360g</span><span style="padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#ffd60a20;color:#ffd60a">Fat 80g</span><span style="padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#34c75920;color:#34c759">~2,750 kcal</span></div></div>';
+  html += '</div>';
+  return html;
+}
+
+// Populate meal sections
+['sun','mon','tue','wed','thu','fri'].forEach(day => {
+  const el = document.getElementById(day+'-meals');
+  if(el) el.innerHTML = generateMealHTML(day);
+});
+
+// Day navigation
+document.querySelectorAll('.day-btn').forEach(btn => {
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelectorAll('.day-content').forEach(d => d.classList.remove('visible'));
+    document.getElementById('day-'+this.dataset.day).classList.add('visible');
+  });
+});
+
+// Section tabs
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('sec-tab')){
+    const parent = e.target.dataset.parent;
+    const section = e.target.dataset.section;
+    e.target.parentElement.querySelectorAll('.sec-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    const dayEl = document.getElementById('day-'+parent);
+    dayEl.querySelectorAll('.section-content').forEach(s => s.classList.remove('visible'));
+    document.getElementById(parent+'-'+section).classList.add('visible');
+  }
+});
+
+// Diet toggle
+document.addEventListener('click', function(e){
+  if(e.target.classList.contains('diet-toggle')){
+    const diet = e.target.dataset.diet;
+    const day = e.target.dataset.day;
+    e.target.parentElement.querySelectorAll('.diet-toggle').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = 'var(--surface)';
+      b.style.color = 'var(--text2)';
+    });
+    e.target.classList.add('active');
+    e.target.style.background = 'var(--accent)';
+    e.target.style.color = '#fff';
+    document.querySelectorAll('.diet-card-nepali-'+day).forEach(c => c.style.display = diet==='nepali'?'block':'none');
+    document.querySelectorAll('.diet-card-western-'+day).forEach(c => c.style.display = diet==='western'?'block':'none');
+  }
+});
+
+function toggleCard(el){ el.parentElement.classList.toggle('open'); }
+function toggleMeal(el){ el.parentElement.classList.toggle('open'); }
+</script>
+</body>
+</html>
