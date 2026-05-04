@@ -16,6 +16,8 @@
 :root { --accent: #e865a0; --accent2: #f59bc4; }
 :root { --accent: #e865a0; --accent2: #f59bc4; }
 :root { --accent: #e865a0; --accent2: #f59bc4; }
+:root { --accent: #e865a0; --accent2: #f59bc4; }
+:root { --accent: #e865a0; --accent2: #f59bc4; }
 :root {
   --accent: #e865a0;
   --accent2: #f59bc4;
@@ -1750,9 +1752,100 @@ function init(){
   renderProfileView();
   attachEvents();
   
+  // Set up history-based navigation
+  setupHistory();
+  
   if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(()=>{});
   }
+}
+
+// ===== HISTORY NAVIGATION =====
+let _suppressHistory = false;
+
+function captureNav(){
+  return {
+    currentTab: state.currentTab,
+    workoutMode: state.workoutMode,
+    workoutDay: state.workoutDay,
+    workoutFilter: state.workoutFilter,
+    nutritionMode: state.nutritionMode,
+    nutritionDay: state.nutritionDay,
+    nutritionDiet: state.nutritionDiet,
+    nutritionFilter: state.nutritionFilter,
+    _modal: !!state._modalOpen
+  };
+}
+
+function pushNav(){
+  if (_suppressHistory) return;
+  try { history.pushState(captureNav(), ''); } catch(e) {}
+}
+
+function setupHistory(){
+  // Replace initial entry with current navigation state
+  try { history.replaceState(captureNav(), ''); } catch(e) {}
+  
+  window.addEventListener('popstate', (e) => {
+    _suppressHistory = true;
+    
+    const newState = e.state || { currentTab: 'home', _modal: false };
+    
+    // Modal close: if currently open but new state says no modal, close it
+    const modalEl = document.getElementById('modal');
+    if (state._modalOpen && !newState._modal) {
+      state._modalOpen = false;
+      if (modalEl) modalEl.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    
+    // Capture old state values for change detection
+    const oldTab = state.currentTab;
+    const oldWorkoutMode = state.workoutMode;
+    const oldWorkoutDay = state.workoutDay;
+    const oldWorkoutFilter = state.workoutFilter;
+    const oldNutritionMode = state.nutritionMode;
+    const oldNutritionDay = state.nutritionDay;
+    const oldNutritionFilter = state.nutritionFilter;
+    
+    // Apply new state values (only the ones we capture)
+    if (newState.currentTab !== undefined) state.currentTab = newState.currentTab;
+    if (newState.workoutMode !== undefined) state.workoutMode = newState.workoutMode;
+    if (newState.workoutDay !== undefined) state.workoutDay = newState.workoutDay;
+    if (newState.workoutFilter !== undefined) state.workoutFilter = newState.workoutFilter;
+    if (newState.nutritionMode !== undefined) state.nutritionMode = newState.nutritionMode;
+    if (newState.nutritionDay !== undefined) state.nutritionDay = newState.nutritionDay;
+    if (newState.nutritionDiet !== undefined) state.nutritionDiet = newState.nutritionDiet;
+    if (newState.nutritionFilter !== undefined) state.nutritionFilter = newState.nutritionFilter;
+    
+    // Update tab UI if tab changed
+    if (state.currentTab !== oldTab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === state.currentTab));
+      document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-'+state.currentTab));
+    }
+    
+    // Re-render the relevant view
+    if (state.currentTab === 'home') {
+      renderHomeView();
+    } else if (state.currentTab === 'workouts') {
+      if (state.workoutMode !== oldWorkoutMode || state.workoutDay !== oldWorkoutDay || state.workoutFilter !== oldWorkoutFilter || state.currentTab !== oldTab) {
+        // Update mode toggle UI
+        document.querySelectorAll('#view-workouts .mode-tab').forEach(t => 
+          t.classList.toggle('active', t.dataset.mode === state.workoutMode));
+        renderWorkoutsView();
+      }
+    } else if (state.currentTab === 'nutrition') {
+      if (state.nutritionMode !== oldNutritionMode || state.nutritionDay !== oldNutritionDay || state.nutritionFilter !== oldNutritionFilter || state.currentTab !== oldTab) {
+        document.querySelectorAll('#view-nutrition .mode-tab').forEach(t => 
+          t.classList.toggle('active', t.dataset.mode === state.nutritionMode));
+        renderNutritionView();
+      }
+    } else if (state.currentTab === 'profile') {
+      renderProfileView();
+    }
+    
+    _suppressHistory = false;
+  });
 }
 
 // ===== TAB BAR =====
@@ -2582,11 +2675,21 @@ function showModal(html){
   modal.querySelector('.modal-sheet').innerHTML = html;
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
+  
+  // Only push history on first open, not when swapping content within open modal
+  if (!state._modalOpen) {
+    state._modalOpen = true;
+    pushNav();
+  }
 }
 
 function closeModal(){
-  document.getElementById('modal').classList.remove('show');
-  document.body.style.overflow = '';
+  if (state._modalOpen) {
+    history.back();  // Triggers popstate which handles cleanup
+  } else {
+    document.getElementById('modal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
 }
 
 // ===== EVENT DELEGATION =====
@@ -2594,7 +2697,12 @@ function attachEvents(){
   document.addEventListener('click', (e) => {
     // Tab switcher
     const tab = e.target.closest('.tab[data-tab]');
-    if (tab) { switchTab(tab.dataset.tab); return; }
+    if (tab) { 
+      const oldTab = state.currentTab;
+      switchTab(tab.dataset.tab);
+      if (oldTab !== state.currentTab) pushNav();
+      return; 
+    }
     
     // Close modal on backdrop click
     if (e.target.id === 'modal') { closeModal(); return; }
@@ -2612,12 +2720,12 @@ function attachEvents(){
       if (day) {
         state.workoutMode = 'today';
         state.workoutDay = action.dataset.day;
-        // Also sync nutrition view to that day so nutrition tab shows the same day
         state.nutritionMode = 'today';
         state.nutritionDay = action.dataset.day;
         switchTab('workouts');
         renderWorkoutsView();
         renderNutritionView();
+        pushNav();
       }
       return;
     }
@@ -2627,6 +2735,7 @@ function attachEvents(){
       state.workoutDay = getTrainingDayId();
       switchTab('workouts');
       renderWorkoutsView();
+      pushNav();
       return;
     }
     
@@ -2635,6 +2744,7 @@ function attachEvents(){
       state.workoutDay = getTodayId();
       switchTab('workouts');
       renderWorkoutsView();
+      pushNav();
       return;
     }
     
@@ -2642,6 +2752,7 @@ function attachEvents(){
       state.workoutMode = 'browse';
       switchTab('workouts');
       renderWorkoutsView();
+      pushNav();
       return;
     }
     
@@ -2649,18 +2760,20 @@ function attachEvents(){
       state.nutritionMode = 'browse';
       switchTab('nutrition');
       renderNutritionView();
+      pushNav();
       return;
     }
     
     if (a === 'set-workout-mode') {
+      const oldMode = state.workoutMode;
       state.workoutMode = action.dataset.mode;
-      // Today mode ALWAYS shows today's plan, never a browse-filtered day
       if (state.workoutMode === 'today') {
         state.workoutDay = getTrainingDayId();
       }
       document.querySelectorAll('#view-workouts .mode-tab').forEach(t => 
         t.classList.toggle('active', t.dataset.mode === state.workoutMode));
       renderWorkoutContent();
+      if (oldMode !== state.workoutMode) pushNav();
       return;
     }
     
@@ -2690,14 +2803,15 @@ function attachEvents(){
     }
     
     if (a === 'set-nutrition-mode') {
+      const oldMode = state.nutritionMode;
       state.nutritionMode = action.dataset.mode;
-      // Today mode ALWAYS shows today's plan, never a browse-filtered day
       if (state.nutritionMode === 'today') {
         state.nutritionDay = getTrainingDayId();
       }
       document.querySelectorAll('#view-nutrition .mode-tab').forEach(t => 
         t.classList.toggle('active', t.dataset.mode === state.nutritionMode));
       renderNutritionContent();
+      if (oldMode !== state.nutritionMode) pushNav();
       return;
     }
     

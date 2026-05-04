@@ -1,4 +1,4 @@
-const CACHE = 'fitsystem-v13';
+const CACHE = 'fitsystem-v14';
 const ASSETS = [
   './',
   './index.html',
