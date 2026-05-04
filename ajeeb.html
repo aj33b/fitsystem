@@ -1,0 +1,2902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ajeeb">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Ajeeb's Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+:root { --accent: #ff3b30; --accent2: #ff6b5b; }
+:root { --accent: #e865a0; --accent2: #f59bc4; }
+:root {
+  --accent: #e865a0;
+  --accent2: #f59bc4;
+}
+:root {
+  --accent: #e865a0;
+  --accent2: #f59bc4;
+}
+:root {
+  --accent: #ff3b30;
+  --accent2: #ff6b5b;
+}
+:root {
+  --accent: #ff3b30;
+  --accent2: #ff6b5b;
+}
+:root {
+  --accent: #ff3b30;
+  --accent2: #ff6b5b;
+}
+/* ============================================
+   FITSYSTEM v3 - Industry Standard Mobile UI
+   Inspired by best-in-class fitness apps
+   ============================================ */
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{
+  background:#000;
+  color:#fff;
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:'cv02','cv03','cv04','cv11';
+  overflow-x:hidden;
+}
+body{
+  padding-top:env(safe-area-inset-top);
+  min-height:100vh;
+  position:relative;
+}
+
+/* ============== APP SHELL ============== */
+.app{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+  position:relative;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom));
+}
+
+/* ============== TOP BAR ============== */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(10,10,14,0.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.topbar-back{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;text-decoration:none;font-size:18px;font-weight:300;
+  transition:background 0.2s;
+}
+.topbar-back:active{background:rgba(255,255,255,0.15)}
+.topbar-title{font-size:16px;font-weight:600;letter-spacing:-0.2px}
+.topbar-spacer{width:36px}
+
+/* ============== HERO ============== */
+.hero{padding:24px 20px 16px}
+.hero-greeting{font-size:14px;color:#888;margin-bottom:6px;font-weight:500}
+.hero-name{font-size:28px;font-weight:800;letter-spacing:-0.8px;line-height:1.1;margin-bottom:20px}
+.hero-name em{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;color:var(--accent)}
+
+/* ============== STAT GRID ============== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  padding:0 20px;
+  margin-bottom:24px;
+}
+.stat{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:14px;
+  position:relative;
+  overflow:hidden;
+}
+.stat-label{font-size:11px;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.stat-value{font-size:22px;font-weight:800;letter-spacing:-0.5px;line-height:1}
+.stat-unit{font-size:12px;color:#666;font-weight:500;margin-left:2px}
+.stat-progress{margin-top:8px;height:3px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
+.stat-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.3s}
+
+/* ============== SECTION HEADER ============== */
+.section{padding:0 20px;margin-bottom:24px}
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+.section-title{font-size:18px;font-weight:700;letter-spacing:-0.3px}
+.section-action{font-size:13px;color:var(--accent);font-weight:600;text-decoration:none}
+
+/* ============== TODAY CARD (HERO WORKOUT) ============== */
+.today-card{
+  background:linear-gradient(135deg,rgba(255,59,48,0.15),rgba(232,101,160,0.05));
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+}
+.today-card.female{
+  background:linear-gradient(135deg,rgba(232,101,160,0.15),rgba(179,136,245,0.05));
+}
+.today-card-bg{
+  position:absolute;
+  top:-40px;right:-40px;
+  width:160px;height:160px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--accent) 0%,transparent 70%);
+  opacity:0.3;
+  pointer-events:none;
+}
+.today-label{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;position:relative}
+.today-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;position:relative}
+.today-meta{font-size:13px;color:#aaa;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:relative;margin-bottom:16px}
+.today-meta span{display:inline-flex;align-items:center;gap:5px}
+.today-cta{
+  background:#fff;color:#000;
+  border:none;
+  padding:11px 20px;
+  border-radius:12px;
+  font-weight:700;font-size:14px;
+  letter-spacing:-0.2px;
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+  position:relative;
+  font-family:inherit;
+}
+.today-cta:active{transform:scale(0.97)}
+
+/* ============== WEEK PROGRESS ============== */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day-pill{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:10px 4px;
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.2s;
+  position:relative;
+}
+.day-pill:active{transform:scale(0.95)}
+.day-pill.today{
+  background:rgba(255,59,48,0.15);
+  border-color:var(--accent);
+}
+.day-pill.female.today{background:rgba(232,101,160,0.15)}
+.day-pill.rest{opacity:0.5}
+.day-pill .dp-name{font-size:10px;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.day-pill.today .dp-name{color:var(--accent)}
+.day-pill .dp-num{font-size:16px;font-weight:700;color:#fff}
+.day-pill .dp-dot{width:4px;height:4px;background:var(--accent);border-radius:50%;margin:4px auto 0;opacity:0}
+.day-pill.today .dp-dot{opacity:1}
+
+/* ============== DAY DETAIL VIEW ============== */
+.view{display:none;animation:slideUp 0.3s cubic-bezier(0.4,0,0.2,1)}
+.view.active{display:block}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============== EXERCISE LIST ============== */
+.body-group{margin-bottom:24px}
+.body-group-head{
+  display:flex;align-items:center;gap:10px;
+  padding:0 20px;margin-bottom:12px;
+}
+.body-group-icon{
+  width:32px;height:32px;
+  border-radius:10px;
+  background:var(--bp-color);
+  opacity:0.2;
+  position:relative;
+}
+.body-group-icon::after{
+  content:'';position:absolute;inset:0;
+  background:var(--bp-color);
+  border-radius:10px;
+  opacity:0.5;
+  filter:blur(8px);
+}
+.body-group-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff}
+.body-group-count{font-size:11px;color:#666;font-weight:500;margin-left:auto;padding-right:20px}
+
+.exercise-list{padding:0 20px;display:flex;flex-direction:column;gap:8px}
+.exercise-card{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:all 0.2s;
+  display:flex;align-items:center;gap:12px;
+}
+.exercise-card:active{transform:scale(0.98);background:rgba(30,30,36,0.7)}
+.exercise-num{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#888;flex-shrink:0;
+}
+.exercise-info{flex:1;min-width:0}
+.exercise-name{font-size:14px;font-weight:600;letter-spacing:-0.2px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exercise-meta{font-size:11px;color:#666;display:flex;gap:10px;align-items:center}
+.exercise-meta span{display:inline-flex;align-items:center;gap:3px}
+.exercise-arrow{color:#444;font-size:18px;font-weight:300}
+
+/* ============== EXERCISE DETAIL MODAL ============== */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:none;
+  animation:fadeIn 0.25s ease;
+}
+.modal.show{display:block}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-sheet{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  background:#0f0f14;
+  border-radius:24px 24px 0 0;
+  max-height:90vh;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:env(safe-area-inset-bottom);
+  animation:sheetUp 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{
+  width:36px;height:4px;
+  background:rgba(255,255,255,0.2);
+  border-radius:2px;
+  margin:10px auto 0;
+}
+.modal-head{padding:16px 20px 12px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;background:#0f0f14;z-index:10}
+.modal-close{
+  position:absolute;top:12px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  border:none;color:#fff;font-size:14px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.modal-title{font-size:18px;font-weight:700;letter-spacing:-0.3px;padding-right:36px}
+.modal-subtitle{font-size:12px;color:#888;margin-top:2px}
+.modal-body{padding:16px 20px 24px}
+
+.detail-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.detail-stat{background:rgba(255,255,255,0.04);border-radius:12px;padding:12px;text-align:center}
+.detail-stat-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:4px}
+.detail-stat-value{font-size:16px;font-weight:700;letter-spacing:-0.3px}
+
+.detail-section{margin-bottom:24px}
+.detail-section-title{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.detail-section-title::before{content:'';width:3px;height:12px;background:var(--accent);border-radius:1px}
+.detail-form{
+  background:rgba(255,255,255,0.04);
+  border-radius:14px;
+  padding:14px 16px;
+  font-size:13px;line-height:1.7;color:#ccc;
+}
+
+/* Variations grid */
+.variations{display:flex;flex-direction:column;gap:8px}
+.variation{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  overflow:hidden;
+}
+.variation-head{
+  padding:12px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;
+  gap:8px;
+}
+.variation-name{font-size:13px;font-weight:600;flex:1}
+.variation-tag{
+  font-size:9px;font-weight:700;
+  padding:3px 8px;border-radius:6px;
+  text-transform:uppercase;letter-spacing:0.5px;
+  flex-shrink:0;
+}
+.variation-tag.bb{background:rgba(255,59,48,0.15);color:#ff6b5b}
+.variation-tag.db{background:rgba(90,200,250,0.15);color:#5ac8fa}
+.variation-tag.mc{background:rgba(52,199,89,0.15);color:#34c759}
+.variation-tag.cb{background:rgba(255,214,10,0.15);color:#ffd60a}
+.variation-tag.bw{background:rgba(191,90,242,0.15);color:#bf5af2}
+.variation-tag.bd{background:rgba(255,159,10,0.15);color:#ff9f0a}
+.variation-arrow{color:#444;font-size:12px;transition:transform 0.2s}
+.variation.open .variation-arrow{transform:rotate(180deg)}
+.variation-body{display:none;padding:0 14px 14px}
+.variation.open .variation-body{display:block}
+.variation-tip{font-size:12px;line-height:1.6;color:#aaa;margin-bottom:10px}
+.yt-link{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#ff0000;color:#fff;
+  padding:7px 12px;border-radius:8px;
+  text-decoration:none;font-size:11px;font-weight:600;
+}
+.yt-link:active{transform:scale(0.96)}
+.yt-link svg{width:12px;height:12px}
+
+/* ============== NUTRITION VIEW ============== */
+.diet-toggle{
+  display:flex;
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:3px;
+  margin:0 20px 16px;
+  position:relative;
+}
+.diet-tab{
+  flex:1;padding:10px;
+  background:none;border:none;
+  color:#888;font-size:13px;font-weight:600;
+  cursor:pointer;border-radius:9px;
+  transition:all 0.25s;
+  font-family:inherit;
+}
+.diet-tab.active{background:#fff;color:#000;font-weight:700}
+
+.meals-list{padding:0 20px;display:flex;flex-direction:column;gap:10px}
+.meal-card{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px;
+  padding:14px 16px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:12px;
+  transition:all 0.2s;
+}
+.meal-card:active{transform:scale(0.98)}
+.meal-time-badge{
+  background:rgba(255,255,255,0.06);
+  border-radius:10px;
+  padding:8px 10px;
+  text-align:center;
+  flex-shrink:0;
+  min-width:62px;
+}
+.meal-time-badge .time{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:0.3px}
+.meal-time-badge .label{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;font-weight:600}
+.meal-info{flex:1;min-width:0}
+.meal-name{font-size:14px;font-weight:600;letter-spacing:-0.2px;margin-bottom:3px;line-height:1.3}
+.meal-macros{font-size:11px;color:#888;display:flex;gap:8px}
+.meal-macros span{display:inline-flex;align-items:center;gap:3px}
+.meal-arrow{color:#444;font-size:18px;font-weight:300}
+
+/* Daily macros card */
+.macros-card{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;
+  padding:16px;
+  margin:0 20px 20px;
+}
+.macros-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.macros-title{font-size:13px;font-weight:700;letter-spacing:-0.2px}
+.macros-cal{font-size:11px;color:#666;font-weight:600}
+.macros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.macro{text-align:center}
+.macro-value{font-size:18px;font-weight:800;letter-spacing:-0.5px;margin-bottom:2px}
+.macro-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+.macro.protein .macro-value{color:#ff6b5b}
+.macro.carbs .macro-value{color:#5ac8fa}
+.macro.fat .macro-value{color:#ffd60a}
+
+/* ============== RECIPE MODAL ============== */
+.recipe-section{margin-bottom:20px}
+.recipe-section-title{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.recipe-section-title::before{content:'';width:3px;height:12px;background:var(--accent);border-radius:1px}
+.recipe-ingredients{
+  background:rgba(255,255,255,0.04);
+  border-radius:12px;
+  padding:12px 14px;
+  list-style:none;
+}
+.recipe-ingredients li{
+  font-size:13px;line-height:1.7;
+  padding:5px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  color:#ccc;
+}
+.recipe-ingredients li:last-child{border:none}
+.recipe-steps{padding-left:0;list-style:none;counter-reset:step}
+.recipe-steps li{
+  position:relative;padding:10px 0 10px 36px;
+  font-size:13px;line-height:1.7;color:#ccc;
+  counter-increment:step;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.recipe-steps li:last-child{border:none}
+.recipe-steps li::before{
+  content:counter(step);
+  position:absolute;left:0;top:8px;
+  width:24px;height:24px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;
+}
+.recipe-tip{
+  background:rgba(255,59,48,0.08);
+  border-left:3px solid var(--accent);
+  padding:12px 14px;
+  border-radius:0 10px 10px 0;
+  font-size:12px;line-height:1.7;color:#ddd;
+  margin-top:12px;
+}
+.recipe-tip strong{color:var(--accent);font-weight:700}
+
+/* ============== BOTTOM TAB BAR ============== */
+.tabbar{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:100;
+  background:rgba(10,10,14,0.92);
+  backdrop-filter:saturate(180%) blur(24px);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+  display:flex;
+  justify-content:space-around;
+  align-items:stretch;
+  max-width:480px;
+  margin:0 auto;
+}
+.tab{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;
+  padding:6px 4px;
+  background:none;border:none;
+  cursor:pointer;
+  color:#666;
+  transition:color 0.2s;
+  font-family:inherit;
+  text-decoration:none;
+}
+.tab.active{color:var(--accent)}
+.tab:active{transform:scale(0.95)}
+.tab svg{width:22px;height:22px;stroke-width:2}
+.tab-label{font-size:10px;font-weight:600;letter-spacing:0.2px}
+
+/* ============== UTILITIES ============== */
+.empty-state{text-align:center;padding:60px 20px;color:#666}
+.empty-state h3{font-size:18px;color:#fff;margin-bottom:6px;font-weight:700}
+.empty-state p{font-size:13px;line-height:1.6}
+
+/* Rest day */
+.rest-view{padding:40px 20px;text-align:center}
+.rest-icon{
+  width:80px;height:80px;
+  margin:0 auto 20px;
+  border-radius:24px;
+  background:linear-gradient(135deg,rgba(52,199,89,0.2),rgba(52,199,89,0.05));
+  display:flex;align-items:center;justify-content:center;
+  font-size:40px;
+}
+.rest-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px}
+.rest-subtitle{font-size:14px;color:#888;line-height:1.6;max-width:300px;margin:0 auto 24px}
+.rest-checklist{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px;
+  padding:16px;
+  text-align:left;
+  list-style:none;
+}
+.rest-checklist li{
+  font-size:13px;line-height:1.6;
+  padding:10px 0 10px 28px;
+  position:relative;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  color:#ccc;
+}
+.rest-checklist li:last-child{border:none}
+.rest-checklist li::before{
+  content:'';position:absolute;left:0;top:14px;
+  width:18px;height:18px;
+  background:rgba(52,199,89,0.2);
+  border:1.5px solid #34c759;
+  border-radius:50%;
+}
+.rest-checklist li::after{
+  content:'';position:absolute;left:5px;top:18px;
+  width:8px;height:5px;
+  border-left:2px solid #34c759;
+  border-bottom:2px solid #34c759;
+  transform:rotate(-45deg);
+}
+
+/* ============== V4 ADDITIONS ============== */
+/* Mode toggle (Today / Browse) */
+.mode-toggle{
+  display:flex;
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:3px;
+  margin:14px 20px 0;
+}
+.mode-tab{
+  flex:1;padding:10px;
+  background:none;border:none;
+  color:#888;font-size:13px;font-weight:600;
+  cursor:pointer;border-radius:9px;
+  transition:all 0.2s;
+  font-family:inherit;
+}
+.mode-tab.active{background:#fff;color:#000;font-weight:700}
+.mode-tab:active{transform:scale(0.97)}
+
+/* Search bar */
+.search-bar{
+  display:flex;align-items:center;gap:10px;
+  margin:14px 20px;
+  padding:10px 14px;
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+}
+.search-bar svg{width:16px;height:16px;color:#666;flex-shrink:0}
+.search-bar input{
+  flex:1;background:none;border:none;outline:none;
+  color:#fff;font-size:14px;font-family:inherit;
+  -webkit-appearance:none;
+}
+.search-bar input::placeholder{color:#666}
+.search-bar input::-webkit-search-cancel-button{display:none}
+
+/* Filter sections */
+.filter-section{margin:14px 0 0}
+.filter-label{
+  font-size:10px;color:#666;font-weight:700;
+  text-transform:uppercase;letter-spacing:1px;
+  padding:0 20px;margin-bottom:8px;
+}
+.chips-scroll{
+  display:flex;gap:6px;
+  padding:0 20px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.chips-scroll::-webkit-scrollbar{display:none}
+.chip{
+  padding:7px 12px;
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  color:#888;font-size:12px;font-weight:600;
+  cursor:pointer;font-family:inherit;
+  flex-shrink:0;letter-spacing:0.3px;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip:active{transform:scale(0.95)}
+
+/* Empty state */
+.empty-state{
+  text-align:center;
+  padding:60px 20px 80px;
+  color:#666;
+}
+.empty-state h3{
+  font-size:18px;color:#fff;
+  margin-bottom:6px;font-weight:700;
+}
+.empty-state p{font-size:13px;line-height:1.6}
+.empty-state-mini{
+  font-size:12px;color:#666;
+  text-align:center;padding:20px;
+  background:rgba(20,20,24,0.5);
+  border-radius:12px;
+  font-style:italic;
+}
+
+/* Quick meal preview cards (home) */
+.quick-meals{
+  display:flex;flex-direction:column;gap:8px;
+}
+.meal-card-mini{
+  background:rgba(20,20,24,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:12px;
+  padding:11px 14px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:12px;
+  transition:transform 0.15s;
+}
+.meal-card-mini:active{transform:scale(0.98)}
+.meal-mini-time{
+  font-size:10px;font-weight:700;
+  color:var(--accent);
+  letter-spacing:0.3px;
+  flex-shrink:0;
+  width:54px;
+}
+.meal-mini-info{flex:1;min-width:0}
+.meal-mini-name{
+  font-size:13px;font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:2px;
+}
+.meal-mini-macros{font-size:11px;color:#888}
+.meal-mini-arrow{color:#444;font-size:16px}
+
+/* ============== MEAL SLOTS (v6) ============== */
+.meal-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 0 12px;
+}
+.meal-slot {
+  display: flex;
+  flex-direction: column;
+}
+.meal-slot-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0 20px 8px;
+}
+.meal-slot-time {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+.meal-slot-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.meal-slot-count {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+  background: rgba(255,255,255,0.06);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+.meal-slot-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px;
+}
+
+/* Cheat meal styling */
+.meal-card.cheat {
+  background: linear-gradient(135deg, rgba(255,159,10,0.12), rgba(255,59,48,0.08));
+  border-color: rgba(255,159,10,0.4);
+  position: relative;
+  overflow: hidden;
+}
+.meal-card.cheat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff9f0a, #ff3b30);
+}
+.cheat-badge {
+  background: linear-gradient(135deg, #ff9f0a, #ff3b30);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  box-shadow: 0 2px 8px rgba(255,159,10,0.3);
+}
+
+/* Day section header in browse view */
+.day-section-head {
+  padding: 18px 20px 10px;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin-top: 6px;
+}
+.day-section-head:first-of-type {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 14px;
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="view-home" class="view active"></div>
+  <div id="view-workouts" class="view"></div>
+  <div id="view-nutrition" class="view"></div>
+  <div id="view-profile" class="view"></div>
+</div>
+<div class="tabbar" id="tabbar"></div>
+<div class="modal" id="modal"><div class="modal-sheet"></div></div>
+<script>
+const PROFILE = {
+  name: 'Ajeeb', initial: 'A', theme: 'male',
+  weight: 65, startWeight: 65, targetWeight: 70, height: 175,
+  goal: 'Lean Bulk', calories: 2750, protein: 130, carbs: 360, fat: 80,
+  tagline: 'Push/Pull/Legs - 6 days/week',
+  totalExercises: 36, totalMeals: 127
+};
+const COLORS={chest:'#ff3b30',shoulder:'#ff9f0a',tricep:'#ffd60a',back:'#5ac8fa',bicep:'#34c759',reardelt:'#64d2ff',quad:'#bf5af2',hamstring:'#ff6ec7',glute:'#ff375f',calf:'#ac8ef7',core:'#30d158'};
+const Y=(q)=>`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+
+function ex(name,sets,rest,target,form,vars){return{name,sets,rest,target,form,vars};}
+function v(n,tp,q,tip){return{n,tp,yt:Y(q),tip};}
+function ml(time,label,name,cal,pro,carb,fat,ing,steps,tip){return{time,label,name,cal,pro,carb,fat,ing,steps,tip};}
+
+const DAYS=[
+// =============== SUNDAY - PUSH A (STRENGTH) ===============
+{id:'sun',name:'Sunday',type:'Push A',focus:'Strength',dur:'~65 min',exCount:6,
+bodyParts:[
+{name:'Chest',color:COLORS.chest,exercises:[
+ex('Flat Bench Press','4 x 5','3 min','Mid chest, front delts, triceps',
+'Retract shoulder blades - squeeze them together like holding a pencil. Slight arch in upper back, feet flat. Lower bar to nipple line with 2-3 sec descent. Press up explosively. Do NOT bounce off chest.',
+[v('Barbell Flat Bench Press','bb','barbell flat bench press proper form tutorial','The gold standard. Start with just the bar (20kg). Grip 1.5x shoulder width. Touch chest every rep.'),
+v('Dumbbell Flat Press','db','dumbbell flat bench press form tutorial','Greater ROM than barbell - DBs go lower and wider for deeper stretch. Press in slight arc so DBs almost touch at top.'),
+v('Smith Machine Bench Press','mc','smith machine bench press form tutorial','Fixed bar path lets you focus purely on pressing. Good for beginners or safe failure training.'),
+v('Machine Chest Press','mc','seated machine chest press form tutorial','Handles at chest height, press forward. Excellent mind-muscle connection. Perfect for beginners.'),
+v('Floor Press','bb','barbell floor press form tutorial','Lie on floor, press from bottom. Elbows stop at floor. Builds lockout strength, protects shoulders.'),
+v('Weighted Push-Ups','bw','weighted push ups form progression','Plate on upper back or weighted vest. Chest to floor every rep. Can be done anywhere.')]),
+ex('Incline Press','3 x 8','2 min','Upper chest (clavicular head)',
+'Set bench 30-45 deg. Lower weight to upper chest/collarbone. Press up and slightly back. This builds the "shelf" across your upper chest.',
+[v('Incline Barbell Press','bb','incline barbell bench press upper chest form','Narrower grip than flat bench. Bar to collarbone. Start at 70-75% of flat bench weight.'),
+v('Incline Dumbbell Press','db','incline dumbbell press upper chest form tutorial','Greater stretch at bottom, more adduction at top. Rotate DBs slightly inward at top for peak contraction.'),
+v('Incline Smith Machine Press','mc','smith machine incline press upper chest form','Fixed path, safe to push to failure. Position bench so bar hits upper chest.'),
+v('Low-to-High Cable Fly','cb','low to high cable fly upper chest form tutorial','Pulleys at lowest position. Step forward, bring hands up to upper chest level. Constant tension.'),
+v('Hammer Strength Incline Press','mc','hammer strength incline press form tutorial','One of the best machines ever made. Each arm independent. Natural pressing arc.'),
+v('Decline Push-Up (Feet Elevated)','bw','decline push up feet elevated upper chest form','Feet on bench, hands on floor. The higher your feet, the harder it gets. Add weighted vest.')])
+]},
+{name:'Shoulders',color:COLORS.shoulder,exercises:[
+ex('Overhead Press','4 x 5','3 min','Front delts, side delts, triceps, core',
+'Standing preferred. Grip just outside shoulder width. Bar at collarbone. Brace core, squeeze glutes. Press straight up, move head back to clear bar path. Lock out with bar over mid-foot.',
+[v('Standing Barbell OHP','bb','standing barbell overhead press strict form tutorial','The ultimate shoulder builder. Don\'t lean back - that turns it into an incline press. Push head through the "window" once bar clears.'),
+v('Seated Dumbbell Shoulder Press','db','seated dumbbell shoulder press form tutorial','Seated removes core component. Start DBs at ear level. Press to just short of lockout for constant tension.'),
+v('Arnold Press','db','arnold press shoulder form tutorial','Start palms facing you, rotate outward as you press. Hits all three delt heads. Invented by Arnold himself.'),
+v('Smith Machine Shoulder Press','mc','smith machine shoulder press form tutorial','Bar travels in front of face (not behind neck). Safe for pushing to failure.'),
+v('Machine Shoulder Press','mc','machine shoulder press form tutorial','Handles at ear level. Press up. Perfect for beginners learning the pressing pattern.'),
+v('Landmine Press','bb','landmine press shoulder form tutorial','Barbell wedged in corner. Press one end at an angle. Incredibly shoulder-friendly natural arc.')]),
+ex('Lateral Raise','3 x 12','90 sec','Side delts - creates shoulder width',
+'Stand with DBs at sides, slight elbow bend. Lead with elbows, not hands. Raise to shoulder height, NO HIGHER. Slight forward lean. Control the negative 2 sec. Light weight, perfect form.',
+[v('Dumbbell Lateral Raise','db','dumbbell lateral raise proper form side delts','The classic. Thumbs slightly down (pouring water). Don\'t swing - if you need momentum, it\'s too heavy.'),
+v('Cable Lateral Raise','cb','cable lateral raise form tutorial side delt','Constant tension throughout entire range - superior to DBs. Cross cable behind body for better tension.'),
+v('Machine Lateral Raise','mc','machine lateral raise form tutorial','Pads on elbows/forearms. Raise to shoulder height. Guided path. Perfect for high-rep burnouts.'),
+v('Leaning Dumbbell Lateral Raise','db','leaning away dumbbell lateral raise form','Hold a pole, lean away 15-20 deg. Increases ROM at bottom where DBs normally have no tension. Hardest variation.'),
+v('Behind-the-Back Cable Lateral','cb','behind the back cable lateral raise form','Stand sideways, reach behind to grab handle. Unique resistance angle that hammers side delt.'),
+v('Plate Front-to-Lateral Raise','bw','plate front raise lateral raise combo','Hold plate, raise front, sweep to sides, lower. One rep hits both front and side delts.')])
+]},
+{name:'Triceps',color:COLORS.tricep,exercises:[
+ex('Tricep Dips','3 x 8','2 min','All 3 tricep heads, chest, front delts',
+'Grip parallel bars, stay UPRIGHT for tricep focus. Lower until upper arms parallel. Press to full lockout - tricep fully contracts only at lockout. Add weight via dip belt when ready.',
+[v('Weighted Parallel Bar Dips','bw','weighted tricep dips parallel bars form','Add weight via dip belt. Stay upright. This is a compound - you\'ll move serious weight once strong.'),
+v('Close-Grip Barbell Bench','bb','close grip barbell bench press tricep form','Shoulder-width grip (not touching). Lower to lower chest. The heaviest tricep exercise you can do.'),
+v('Assisted Dip Machine','mc','assisted dip machine tricep form tutorial','Counterweight assists you. Use until you can do 8+ bodyweight dips. Gradually reduce assistance.'),
+v('JM Press','bb','jm press tricep barbell form tutorial','Hybrid of close-grip bench and skull crushers. Named after powerlifter JM Blakley. Very effective.'),
+v('Bench Dips (Feet Elevated)','bw','bench dips feet elevated tricep form','Hands behind on bench, feet on another bench. Lower by bending elbows to 90 deg. Add plate on lap.'),
+v('Dumbbell Close-Grip Press','db','dumbbell close grip press tricep form','Press two DBs together palms facing. Press while keeping squeezed together. Fries the triceps.')]),
+ex('Overhead Tricep Extension','3 x 12','90 sec','Long head of tricep (biggest head)',
+'The long head ONLY fully stretches overhead. Elbows pinned by ears. Full stretch at bottom, full lockout at top. Don\'t flare elbows. Control the weight.',
+[v('Overhead Cable Rope Extension','cb','overhead cable rope tricep extension form','Face away from low pulley. Constant tension throughout. Split rope at top and squeeze. Best cable tricep exercise.'),
+v('Dumbbell Skull Crushers','db','dumbbell skull crushers tricep form tutorial','Lie on bench, DBs overhead. Lower toward forehead. Don\'t flare elbows. Classic mass builder.'),
+v('EZ-Bar Skull Crushers','bb','ez bar skull crushers tricep form tutorial','Angled grip easier on wrists. Lower to forehead or behind head for bigger stretch.'),
+v('Overhead DB Extension (Two-Hand)','db','overhead two hand dumbbell tricep extension form','One heavy DB, both hands behind head. Elbows point ceiling. Simple and effective.'),
+v('Cable Pushdown (Rope)','cb','cable tricep pushdown rope form tutorial','Elbows pinned to sides. Split rope at bottom, squeeze. Targets lateral and medial heads.'),
+v('Machine Tricep Extension','mc','machine tricep extension form tutorial','Sit, extend arms against resistance. Safe to push to failure. No balance needed.')])
+]}],
+meals:{
+nepali:[
+ml('5:15 AM','Pre-Workout','Banana, Honey & Kalo Chiya','~250 kcal','4g','55g','5g',
+['1 large ripe banana','1 tbsp maha (honey)','5 soaked badaam (almonds)','1 cup kalo chiya - water + CTC tea leaves + crushed aduwa (ginger) + splash milk'],
+['Night before: soak 5 almonds in water, leave on bedside table.','5:00 AM: boil water, add tea leaves + crushed ginger. Simmer 2 min. Add splash milk, strain.','Peel banana, drizzle honey. Eat with almonds, sip chiya. Drink 500ml water.','Out the door by 5:40 AM.'],
+'Takes under 5 min. Banana = quick glycogen, honey = instant energy, almonds = fat buffer.'),
+ml('7:30 AM','Post-Workout','Chiura, 4-Egg Masala Omelette & Dudh','~600 kcal','35g','72g','20g',
+['80g chiura (beaten rice)','4 large eggs','1 onion finely chopped, 1 green chilli, fresh dhaniya','1/2 tsp besaar, 1/2 tsp nun, 1 tbsp tori ko tel','250ml full-cream dudh','1 seasonal fruit (papaya/guava/suntala)'],
+['Rinse chiura 30 sec under cold water. Drain, set aside.','Beat eggs with turmeric, salt, chilli, half the coriander.','Heat mustard oil until it just smokes, reduce to medium.','Saute onion 1-2 min. Pour in egg mixture. Let bottom set 30 sec, fold gently. Keep soft and fluffy inside.','Plate omelette + chiura. Glass of milk. Fruit on side.'],
+'Most important meal - eat within 30-45 min post-workout. Alt: scramble eggs bhurji-style with tomatoes.'),
+ml('10:30 AM','Mid-Morning','Sattu Protein Drink & Badam Mix','~350 kcal','26g','21g','19g',
+['40g sattu (roasted soybean flour)','300ml cold water, pinch nun, squeeze kagati (lemon)','30g mixed nuts: badaam, kaju, pista','1 apple or seasonal fruit'],
+['Add sattu to glass. Pour cold water + salt + lemon. Stir vigorously. Drink immediately.','Eat nuts and fruit alongside.'],
+'Pre-measure 40g portions into zip-locks on Sunday for the week. Nepal\'s original protein shake - 20g protein per 40g.'),
+ml('1:00 PM','Lunch','Dal Bhat, Kukhura ko Masu & Aloo Tarkari','~750 kcal','40g','85g','18g',
+['250g cooked rice (1 cup raw)','Masoor dal with ghee-jeera-lasun tempering','150g chicken curry: onion, tomato, ginger-garlic, turmeric, cumin, coriander, chilli, garam masala','Aloo tarkari: potatoes, cumin, methi, turmeric','2 tbsp golbheda ko achar'],
+['RICE: Wash 2-3 times. 1:1.5 water ratio. Cook 15 min, rest 5 min.','DAL: Boil dal with turmeric + salt 20 min. Temper: ghee -&gt; jeera -&gt; garlic -&gt; onion -&gt; tomato -&gt; chilli powder. Pour into dal.','CHICKEN: Brown onions 8-10 min -&gt; ginger-garlic 1 min -&gt; spices 30 sec -&gt; tomato puree till oil separates -&gt; chicken + water -&gt; simmer 25 min -&gt; garam masala.','ALOO: Oil -&gt; methi + jeera -&gt; potato + turmeric + salt -&gt; water -&gt; cover 15 min.'],
+'Makes 2 servings of chicken. Store second portion for tomorrow. Veg swap: rajma or paneer curry.'),
+ml('4:30 PM','Afternoon','Roti, Peanut Butter & Dahi','~250 kcal','13g','28g','12g',
+['1 whole wheat roti','1 tbsp badam makhan (peanut butter)','100g dahi with pinch nun and jeera powder'],
+['Spread PB on warm roti. Fold in half.','Dahi on the side with salt and roasted cumin.'],
+'Batch-prep 6-8 rotis on Sunday, stack with parchment, fridge. Reheat 30 sec on tawa.'),
+ml('7:30 PM','Dinner','Macha ko Tarkari (Fish Curry), Rice & Palungo Saag','~550 kcal','34g','62g','14g',
+['150g firm fish fillets (rohu/tilapia), onion, tomato, ginger-garlic, spices, tori ko tel','Palungo (spinach) saag: garlic, dried red chilli, mustard oil','Light mung dal','200g cooked rice, 150g dahi'],
+['FISH: Rub with turmeric + salt 10 min. Shallow fry 1 min/side. Remove. Same oil: onion -&gt; ginger-garlic -&gt; spices -&gt; tomato -&gt; water -&gt; add fish back -&gt; simmer 10 min.','SAAG: Oil + sliced garlic + dried chilli -&gt; add chopped spinach + salt -&gt; cover 5-7 min -&gt; mash lightly.','Light dal: mung dal + turmeric, boil soft, temper with garlic-cumin in ghee.'],
+'Swap fish for 3-egg curry or buff curry (same method, 10 min longer). Saag works with rayo saag too.'),
+ml('9:30 PM','Before Bed','Haldi Dudh & Soaked Badaam','~200 kcal','11g','15g','10g',
+['250ml full-cream dudh','1/2 tsp besaar (turmeric)','Pinch marich (black pepper)','1/2 tsp maha (honey)','6-8 soaked badaam'],
+['Warm milk gently (don\'t boil). Add turmeric + black pepper. Stir.','Pour into cup. Add honey. Eat almonds alongside.','Get into bed within 15 minutes.'],
+'Casein in milk feeds muscles 6-7 hrs while sleeping. Black pepper increases turmeric absorption 2000%.')
+],
+western:[
+ml('5:15 AM','Pre-Workout','Banana, Half Whey & Black Coffee','~250 kcal','14g','42g','2g',
+['1 large banana','1/2 scoop whey protein in 200ml cold water','1 cup black coffee'],
+['Shake whey + water. Eat banana. Sip coffee. Go.'],
+'Coffee peaks in 15-20 min. Half-scoop gives amino acids without sitting heavy.'),
+ml('7:30 AM','Post-Workout','Protein Oats with Banana & Peanut Butter','~600 kcal','38g','72g','15g',
+['80g rolled oats','1 scoop whey protein','250ml water or milk','1 banana sliced','1 tbsp peanut butter','Pinch cinnamon'],
+['Cook oats 4-5 min until thick. Remove from heat, cool 1 min.','Stir in whey (adding to boiling oats makes it gluey).','Top with banana, PB, cinnamon.'],
+'Overnight version: mix oats + whey + milk in jar night before. Fridge. Morning: add toppings. Zero cooking.'),
+ml('10:30 AM','Mid-Morning','Greek Yogurt Parfait','~300 kcal','22g','28g','10g',
+['200g Greek yogurt','40g granola/muesli','Handful berries','1 tsp honey optional'],
+['Yogurt in bowl. Top with granola and berries. Drizzle honey.'],
+'Buy Greek yogurt in bulk tubs - much cheaper. Strain regular yogurt through cloth for 2 hrs if unavailable.'),
+ml('1:00 PM','Lunch','Herb-Grilled Chicken, Rice & Roasted Vegetables','~700 kcal','45g','68g','18g',
+['180g chicken breast','200g cooked rice','1 cup mixed vegetables (broccoli, capsicum, beans)','1 tbsp olive oil','Seasoning: salt, pepper, paprika, garlic powder, oregano, lemon','Side salad with lemon-olive oil dressing'],
+['Pat chicken dry. Season generously both sides. Rest 5 min.','Hot grill pan + oil. Cook 5-6 min per side without moving. Juices run clear = done.','REST chicken 3 min before slicing (keeps it juicy).','Saute or roast vegetables in olive oil 5 min - keep slight crunch.'],
+'Meal prep 3 days worth on Sunday + Wednesday. Rotate seasonings weekly to avoid fatigue.'),
+ml('4:30 PM','Afternoon','Tuna Sandwich & Apple','~300 kcal','24g','35g','5g',
+['2 slices whole wheat bread','1 can tuna (80g drained) in water','1 tsp mustard/light mayo, lemon, salt, pepper','Lettuce, cucumber optional','1 apple'],
+['Drain tuna. Mix with mustard, lemon, salt, pepper.','Spread on bread. Add lettuce. Top with second slice. Eat with apple.'],
+'Buy canned tuna in bulk - cheap, shelf-stable, 18g protein per can. Keep at desk for emergencies.'),
+ml('7:30 PM','Dinner','Baked Salmon, Sweet Potato & Broccoli','~550 kcal','36g','46g','18g',
+['150g salmon fillet','200g sweet potato cubed','1 cup broccoli florets','1 tbsp olive oil','Salt, pepper, lemon, optional herbs'],
+['Preheat oven 200 degC. Toss sweet potato in oil + salt. Roast 15 min.','Season salmon. Add to tray with broccoli after 15 min.','Roast together 12-15 min. Squeeze lemon on salmon.'],
+'Swap salmon for tilapia, cod, or chicken thighs if expensive. Frozen fish works perfectly.'),
+ml('9:30 PM','Before Bed','Cottage Cheese & Walnuts','~200 kcal','18g','7g','13g',
+['150g cottage cheese','15g walnuts','Pinch cinnamon optional'],
+['Cottage cheese in bowl. Top with walnuts. Eat. Sleep.'],
+'Cottage cheese = highest casein whole food. Walnuts = omega-3 for recovery. Simplest meal by design.')
+]
+}},
+
+// =============== MONDAY - PULL A (STRENGTH) ===============
+{id:'mon',name:'Monday',type:'Pull A',focus:'Strength',dur:'~65 min',exCount:6,
+bodyParts:[
+{name:'Back (Vertical)',color:COLORS.back,exercises:[
+ex('Deadlift','4 x 5','3 min','Entire posterior chain - erectors, glutes, hamstrings, lats, traps, forearms',
+'Feet hip-width, shins touching bar. Grip just outside legs. Huge breath into belly, brace core. PUSH THE FLOOR AWAY - don\'t pull the bar up. Bar drags against shins/thighs. Lock out by squeezing glutes. Reset every rep.',
+[v('Conventional Barbell Deadlift','bb','conventional barbell deadlift proper form step by step','The standard. Most weight you can lift on any exercise. Perfect form before adding weight.'),
+v('Trap Bar / Hex Bar Deadlift','bb','trap bar hex bar deadlift form tutorial','Stand inside bar. More quad-dominant, much easier on lower back. Many coaches consider this safer for beginners.'),
+v('Sumo Deadlift','bb','sumo deadlift proper form wide stance tutorial','Wide stance, hands inside legs. Shorter bar travel. Try both conventional and sumo - some people are built for one over the other.'),
+v('Dumbbell Romanian Deadlift','db','dumbbell romanian deadlift RDL form tutorial','Hold DBs, push hips back, feel hamstring stretch. Excellent for learning the hinge pattern before barbell.'),
+v('Rack Pull (Above Knee)','bb','barbell rack pull above knee form tutorial','Safety pins at knee height. Deadlift from raised position. Heavier weight for lockout strength. Builds trap thickness.'),
+v('Cable Pull-Through','cb','cable pull through glute hinge form tutorial','Face away from low cable, pull rope through legs. Teaches hip hinge perfectly with minimal injury risk.')]),
+ex('Pull-Up / Lat Pulldown','4 x 6','3 min','Lats, teres major, biceps',
+'Dead hang at bottom - full stretch. Drive elbows DOWN and BACK. Pull until chin clears bar or handle reaches upper chest. Squeeze shoulder blades. 2-3 sec negative. No kipping.',
+[v('Weighted Pull-Ups','bw','weighted pull ups strict form tutorial','Add weight via dip belt. Wide grip = more lat, underhand = more bicep. Best bodyweight back exercise.'),
+v('Wide-Grip Lat Pulldown','cb','wide grip lat pulldown form tutorial','Lean back 15-20 deg, pull to upper chest. Wider grip emphasises outer lats for V-taper.'),
+v('Close-Grip Lat Pulldown','cb','close grip v handle lat pulldown form tutorial','V-handle, pull to sternum. More lower lat and mid-back. Can use more weight.'),
+v('Chin-Ups (Underhand)','bw','chin ups underhand grip form tutorial biceps back','Palms face you. More bicep recruitment. Most people find these easier than pull-ups - start here.'),
+v('Assisted Pull-Up Machine','mc','assisted pull up machine form tutorial beginner','Counterweight assists. Reduce assistance gradually until you can do unassisted pull-ups.'),
+v('Single-Arm Lat Pulldown','cb','single arm lat pulldown D handle form tutorial','D-handle, one arm. Best for mind-muscle connection with each lat individually.')])
+]},
+{name:'Back (Horizontal)',color:COLORS.back,exercises:[
+ex('Bent-Over Row','3 x 8','2 min','Mid-back, rhomboids, rear delts',
+'Hinge 45 deg. Flat back, core braced. Pull bar to lower chest. Squeeze shoulder blades - pinch a pencil between them. Don\'t jerk or use momentum.',
+[v('Barbell Bent-Over Row','bb','barbell bent over row overhand proper form','Grip wider than shoulder width, palms down. Upper back and rear delt emphasis. Keep torso angle consistent.'),
+v('Single-Arm Dumbbell Row','db','single arm dumbbell row form tutorial','One knee on bench. Row DB to hip. Safest row, excellent for beginners.'),
+v('T-Bar Row','bb','t bar row form tutorial back thickness','Straddle bar, V-handle. Gold for back thickness. Chest pad version removes lower back.'),
+v('Seated Cable Row','cb','seated cable row form tutorial mid back','Sit tall, pull to navel. Let shoulders protract for full stretch. Constant cable tension.'),
+v('Chest-Supported Machine Row','mc','chest supported machine row form tutorial','Chest on pad eliminates cheating. If you can\'t feel your back in rows, use this.'),
+v('Pendlay Row','bb','pendlay row from floor strict form tutorial','Bar starts on floor every rep. Torso parallel. Explosive pull to lower chest. Builds back power.')]),
+ex('Face Pull','3 x 15','90 sec','Rear delts, external rotators - shoulder health & posture',
+'Cable at face height, rope attachment. Pull toward face, then EXTERNALLY ROTATE - finish thumbs pointing behind you. Elbows HIGH. The single most important exercise for shoulder health.',
+[v('Cable Face Pull (Rope)','cb','cable face pull rope external rotation form tutorial','The gold standard. Pull to forehead, externally rotate. 15-20 reps light-moderate. Do this every pull day forever.'),
+v('Band Pull-Apart','bd','band pull apart rear delt form tutorial','Hold band arm\'s length, pull apart to chest. 50-100 reps as warm-up. Incredible for posture.'),
+v('Reverse Pec Deck','mc','reverse pec deck rear delt form tutorial','Sit facing pad, arms wide. Squeeze handles back. Guided path, no momentum.'),
+v('Dumbbell Reverse Fly','db','dumbbell reverse fly bent over rear delt form','Hinge forward, light DBs. Raise to sides. Light weight, squeeze at top.'),
+v('Cable Reverse Fly','cb','cable reverse fly cross rear delt form','Cross cables. Pull outward. Constant tension makes this very effective.'),
+v('Prone Y-Raise','db','prone incline bench Y raise rear delt form','Face-down on 30 deg bench. Light DBs in Y-shape above head. Lower traps + rear delts. Excellent posture exercise.')])
+]},
+{name:'Biceps',color:COLORS.bicep,exercises:[
+ex('Barbell / EZ-Bar Curl','3 x 10','90 sec','Bicep short head & long head',
+'Pin elbows to sides - they don\'t move forward or back. Curl by flexing biceps. Squeeze 1 sec at top. 2-sec negative. No swinging, no back involvement. If you need to cheat, it\'s too heavy.',
+[v('Straight Barbell Curl','bb','straight barbell curl proper form tutorial','Classic mass builder. Full supination maximally targets bicep short head.'),
+v('EZ-Bar Curl','bb','ez bar curl bicep form tutorial','Angled grip reduces wrist strain. Most people prefer this. Use inner angled grips.'),
+v('Dumbbell Alternating Curl','db','dumbbell alternating bicep curl form tutorial','One arm at a time. Rotate from neutral to supinated as you curl.'),
+v('Cable Curl (Straight Bar)','cb','cable curl straight bar bicep form tutorial','Constant tension throughout - even at top where DBs lose tension.'),
+v('Machine Preacher Curl','mc','machine preacher curl bicep form tutorial','Arms on pad, no cheating. Pure isolation. Excellent for beginners.'),
+v('Hammer Curl','db','hammer curl dumbbell brachialis form tutorial','Palms face each other. Targets brachialis - pushes bicep UP. Also builds forearm thickness.')])
+]}],
+meals:{
+nepali:[
+ml('5:15 AM','Pre-Workout','Dates, Almonds & Adrak Chiya','~260 kcal','5g','48g','7g',
+['3 medjool dates or 5 small kharik','6 soaked almonds','1 cup strong adrak (ginger) chiya'],
+['Soak almonds night before. Boil water + ginger + tea leaves 3 min. Add milk splash. Strain.','Eat dates and almonds. Sip chiya.'],
+'Dates are nature\'s energy gel - packed with quick-digesting fructose and glucose.'),
+ml('7:30 AM','Post-Workout','Aloo Paratha with Anda & Dahi','~620 kcal','28g','75g','22g',
+['2 aloo paratha (whole wheat stuffed with spiced mashed potato)','2 boiled eggs or anda bhurji','150g dahi','Green chutney'],
+['Boil 2 potatoes, mash with salt, chilli, cumin, coriander. Make dough, stuff with potato, roll flat, cook on tawa with ghee until golden.','Boil eggs 8 min or scramble with onion, tomato, chilli.'],
+'Make 6 parathas Sunday, stack between parchment, freeze. Reheat from frozen 2 min/side on tawa.'),
+ml('10:30 AM','Mid-Morning','Bhuteko Chana & Fruit','~320 kcal','15g','38g','12g',
+['50g bhuteko chana (roasted chickpeas)','1 banana','10g mixed nuts','Lemon, salt, chaat masala'],
+['Toss roasted chana with lemon, salt, chaat masala. Eat with fruit and nuts.'],
+'Available at every pasal. Cheap, high protein/fiber, keeps for weeks.'),
+ml('1:00 PM','Lunch','Dal Bhat, Buff Curry & Kauli Tarkari','~750 kcal','42g','82g','20g',
+['250g rice','Chana dal with tempering','150g buff (buffalo) curry - same as chicken method but 30-35 min simmer','Kauli (cauliflower) + aloo tarkari','Tomato achar'],
+['Chana dal: soak 30 min, cook same method. Nuttier, thicker texture.','Buff: brown meat 3 min first, then same onion-tomato-spice base. Simmer 30-35 min covered.','Kauli: oil -&gt; jeera + dried chilli -&gt; cauliflower + potato + turmeric + salt -&gt; water -&gt; cover 15 min.'],
+'Buff is leaner than chicken, cheaper in Nepal, and the staple meat. Ask masu pasal for boneless pieces.'),
+ml('4:30 PM','Afternoon','Steamed Momo (6 pcs) & Jhol Achar','~280 kcal','16g','32g','9g',
+['6 steamed chicken or veg momo','Jhol achar: roasted tomato + timur + chilli + garlic + coriander blended with warm water'],
+['Filling: minced chicken + onion + garlic + ginger + coriander + oil + salt. Wrap in thin dough. Steam 12-15 min.','Or buy from local momo pasal - 6 pieces is snack portion.'],
+'Steamed momos are decent protein. Avoid fried - adds 150+ unnecessary calories.'),
+ml('7:30 PM','Dinner','Egg Curry, Roti & Saag','~520 kcal','30g','52g','18g',
+['3 hard-boiled eggs halved','Curry base: onion, tomato, ginger-garlic, spices','2 whole wheat rotis','1 bowl mixed saag'],
+['Make same gravy base. Gently place halved eggs cut-side up. Spoon gravy over. Simmer 5 min.','Saag: same method as Sunday.'],
+'One of the cheapest high-protein meals in Nepal. 3 eggs + dal curry = ~28g protein for under Rs 100.'),
+ml('9:30 PM','Before Bed','Warm Milk with Jaifal & Walnuts','~210 kcal','10g','14g','12g',
+['250ml warm milk','Tiny pinch jaifal (nutmeg)','5 walnut halves','1/2 tsp honey'],
+['Warm milk. Add nutmeg and honey. Eat walnuts.'],
+'Nutmeg has natural sedative properties. Use only a tiny pinch. Walnuts provide omega-3.')
+],
+western:[
+ml('5:15 AM','Pre-Workout','Rice Cake with Honey & Coffee','~240 kcal','3g','50g','2g',
+['2 rice cakes','1 tbsp honey','1 cup black coffee'],
+['Drizzle honey on rice cakes. Eat. Coffee. Go.'],
+'Fastest-digesting carbs - won\'t sit heavy.'),
+ml('7:30 AM','Post-Workout','Egg White Omelette & Avocado Toast','~580 kcal','35g','55g','22g',
+['4 egg whites + 2 whole eggs','Spinach, tomato, mushrooms','2 slices whole grain toast','1/2 avocado mashed','Orange or grapefruit'],
+['Whisk eggs. Saute veggies 1 min. Pour eggs, cook until set, fold.','Toast bread. Spread avocado.'],
+'Egg white + whole egg combo = high protein without excessive fat.'),
+ml('10:30 AM','Mid-Morning','Protein Smoothie Bowl','~320 kcal','28g','35g','8g',
+['1 scoop whey, 1 frozen banana, 100ml milk, 1/2 cup frozen berries','Toppings: granola, chia seeds, banana slices'],
+['Blend thick (less liquid = spoonable). Pour in bowl. Top.'],
+'Frozen banana = ice cream texture. Add ice cubes for extra thickness.'),
+ml('1:00 PM','Lunch','Beef Stir-Fry with Brown Rice','~720 kcal','42g','75g','20g',
+['170g lean beef strips','200g brown rice','Bok choy, snap peas, capsicum, mushrooms','Sauce: soy sauce, sesame oil, honey, garlic, ginger'],
+['Mix sauce. Screaming hot wok. Sear beef 60-90 sec. Remove.','Same pan: vegetables 2-3 min. Return beef + sauce. Toss 30 sec.','Serve over rice.'],
+'Cut beef against the grain for tenderness. Velvet technique: marinate in cornstarch + soy 15 min for silky texture.'),
+ml('4:30 PM','Afternoon','Turkey & Cheese Roll-Ups','~280 kcal','22g','15g','14g',
+['80g sliced turkey breast','30g cheese slices','Carrot sticks, cucumber, celery','1 tbsp hummus'],
+['Roll turkey around cheese. Eat with veggie sticks and hummus.'],
+'Zero cooking. High protein. Perfect desk snack.'),
+ml('7:30 PM','Dinner','Chicken Thigh with Quinoa & Roasted Veg','~580 kcal','40g','48g','20g',
+['180g boneless chicken thighs','150g cooked quinoa','Roasted: zucchini, eggplant, tomatoes, red onion','1 tbsp olive oil, herbs, lemon'],
+['Season thighs. Grill/pan-fry 6-7 min per side.','Roast vegetables at 200 degC 20 min. Cook quinoa.'],
+'Thighs are more flavourful and cheaper than breast. Extra fat helps hormone production.'),
+ml('9:30 PM','Before Bed','Casein Shake with Almond Butter','~220 kcal','28g','10g','8g',
+['1 scoop casein protein','250ml water or milk','1 tsp almond butter'],
+['Blend/shake. Drink. Sleep.'],
+'Casein forms a gel in your stomach, releasing amino acids over 6-7 hours. The nighttime protein.')
+]
+}},
+
+// =============== TUESDAY - LEGS A (STRENGTH) ===============
+{id:'tue',name:'Tuesday',type:'Legs A',focus:'Strength',dur:'~70 min',exCount:6,
+bodyParts:[
+{name:'Quadriceps',color:COLORS.quad,exercises:[
+ex('Barbell Back Squat','4 x 5','3 min','Quads, glutes, hamstrings, core',
+'Bar on upper traps. Unrack, 2-3 steps back. Feet shoulder-width+, toes out 15-30 deg. Huge breath, brace core. Break at hips AND knees together. Descend to parallel or deeper. Chest up, knees track toes, weight mid-foot. Drive up by pushing floor away.',
+[v('Back Squat (High Bar)','bb','barbell back squat high bar proper form tutorial','Standard bodybuilding squat. Go to at least parallel - partial squats build partial legs.'),
+v('Front Squat','bb','barbell front squat clean grip form tutorial','Bar on front shoulders. Very upright, quad-dominant. Harder to go heavy but superior quad activation.'),
+v('Goblet Squat','db','goblet squat dumbbell form tutorial beginner','DB at chest. Best beginner squat - front load forces perfect posture. Learn this first.'),
+v('Smith Machine Squat','mc','smith machine squat form tutorial quad','Fixed path removes balance. Feet slightly forward for quad emphasis. Great for high-rep sets.'),
+v('Hack Squat Machine','mc','hack squat machine form tutorial quad','Back against pad. Arguably best quad developer - no lower back strain.'),
+v('Belt Squat Machine','mc','belt squat machine form tutorial','Weight on belt, not back. Removes all spinal loading. Gold for back issues.')]),
+ex('Leg Press','3 x 10','2 min','Quads, glutes',
+'Feet shoulder-width, mid-platform. Lower sled until back stays flat on pad. Press to just short of lockout. Never bounce at bottom. 2-3 sec descent.',
+[v('45 deg Leg Press','mc','45 degree leg press proper form tutorial','Standard. Full depth with moderate weight > quarter reps with ego weight.'),
+v('Hack Squat','mc','hack squat machine full depth form','Reverse squat. Go deep. Narrow = outer quad, wide = inner.'),
+v('Dumbbell Walking Lunges','db','dumbbell walking lunges form tutorial','Hold DBs, long stride forward, back knee to floor. Alternating legs. Balance + unilateral strength.'),
+v('Barbell Walking Lunges','bb','barbell walking lunges form tutorial','Bar on back. More core demand. Long strides = glutes, short = quads.'),
+v('Single-Leg Press','mc','single leg press machine form tutorial','One leg. Fix imbalances. 40-50% of bilateral weight.'),
+v('V-Squat Machine','mc','v squat machine form tutorial quad','Different angle hack squat. Excellent quad isolation.')])
+]},
+{name:'Hamstrings',color:COLORS.hamstring,exercises:[
+ex('Romanian Deadlift','4 x 8','2 min','Hamstrings, glutes',
+'Soft knee bend. Push hips BACK. Feel deep hamstring stretch. Bar/DBs skim legs. Back stays flat. Squeeze glutes to stand. If back rounds, weight is too heavy.',
+[v('Barbell RDL','bb','barbell romanian deadlift proper form tutorial','Standard. Shoulder-width overhand grip. Start light - empty bar is enough if form is right.'),
+v('Dumbbell RDL','db','dumbbell romanian deadlift form tutorial','DBs beside legs. More natural for beginners. Easier to control.'),
+v('Single-Leg DB RDL','db','single leg dumbbell RDL form tutorial balance','One leg. Incredible for balance, flexibility, fixing imbalances. Lighter weight.'),
+v('Smith Machine RDL','mc','smith machine romanian deadlift form tutorial','Fixed path = focus on stretch. Good for learning or pushing to failure.'),
+v('Cable Pull-Through','cb','cable pull through hip hinge form tutorial','Face away from low cable. Constant tension on glutes and hamstrings.'),
+v('Kettlebell Swing','db','kettlebell swing proper form tutorial','Explosive hinge. Same pattern but adds power component. Great for conditioning too.')]),
+ex('Lying Leg Curl','3 x 12','90 sec','Hamstrings isolation',
+'Pad on Achilles tendon, NOT calves. Don\'t lift hips. Curl heels toward glutes. Squeeze 1 sec at peak. 3-sec negative. Slow negative = where growth happens.',
+[v('Lying Leg Curl Machine','mc','lying leg curl machine form hamstring tutorial','Standard. Point toes to reduce calf involvement. Don\'t let weight slam.'),
+v('Seated Leg Curl','mc','seated leg curl machine form tutorial','Hips flexed at 90 deg pre-stretches hamstrings. Some research shows superior to lying curls for growth.'),
+v('Nordic Hamstring Curl','bw','nordic hamstring curl form tutorial progression','Most difficult. Kneel, someone holds ankles. Slowly lower body forward. Start with slow negatives only.'),
+v('Swiss Ball Hamstring Curl','bw','swiss ball hamstring curl form tutorial','Heels on ball, bridge up, curl ball in. No equipment beyond a ball.'),
+v('DB Leg Curl (Prone on Bench)','db','dumbbell leg curl prone bench form','Face down, DB between feet. Curl up. Low-tech but effective.'),
+v('Cable Leg Curl (Ankle Strap)','cb','cable leg curl ankle strap standing form','Ankle strap on low cable. Standing single-leg curl.')])
+]},
+{name:'Glutes',color:COLORS.glute,exercises:[
+ex('Bulgarian Split Squat','3 x 10/leg','2 min','Glutes, quads, hip flexor stretch',
+'Stand 2 feet from bench. Rear foot on bench, laces down. Front shin stays nearly vertical. Drop straight DOWN. Back knee nearly touches floor. Drive through front heel. Lean torso forward for more glute.',
+[v('Dumbbell Bulgarian Split Squat','db','dumbbell bulgarian split squat form tutorial','Hold DBs at sides. Start bodyweight only until 10 reps per leg with good balance.'),
+v('Barbell Bulgarian Split Squat','bb','barbell bulgarian split squat form tutorial','Bar on back. More load but requires better balance. Master DB version first.'),
+v('Smith Machine Split Squat','mc','smith machine bulgarian split squat form','Fixed path removes balance challenge. Focus purely on loading the legs.'),
+v('DB Reverse Lunges','db','dumbbell reverse lunge form tutorial glute','Step backward. Less knee stress, more glute. Great alternative to Bulgarians.'),
+v('Barbell Hip Thrust','bb','barbell hip thrust glute form tutorial','Upper back on bench, bar across hips. THE #1 glute exercise. Squeeze hard at top.'),
+v('Cable Kickback','cb','cable glute kickback form tutorial','Ankle strap, kick back. Pure glute isolation. Great finisher.')])
+]},
+{name:'Calves',color:COLORS.calf,exercises:[
+ex('Standing Calf Raise','4 x 15','60 sec','Gastrocnemius',
+'Balls of feet on edge, heels hanging. Lower heels fully (2 sec stretch). Push up onto toes (2 sec squeeze at top). FULL ROM + TIME UNDER TENSION = calf growth.',
+[v('Standing Calf Raise Machine','mc','standing calf raise machine full ROM form','Shoulders under pads. Full stretch, full squeeze. Primary calf exercise.'),
+v('Smith Machine Calf Raise','mc','smith machine calf raise form tutorial','Step block under Smith bar. Same motion. Works if no dedicated machine.'),
+v('Seated Calf Raise','mc','seated calf raise form tutorial soleus','Pad on knees. Targets SOLEUS - different from standing. Need both for complete calves.'),
+v('Leg Press Calf Raise','mc','leg press calf raise form tutorial','Balls of feet at bottom of platform. Can go very heavy. Keep knees slightly bent.'),
+v('Single-Leg DB Calf Raise','db','single leg dumbbell calf raise form','One leg on step edge, DB in hand. Fixes imbalances.'),
+v('Donkey Calf Raise','bw','donkey calf raise form tutorial','Bend at hips 90 deg, weight on lower back. Stretched position hits gastrocnemius harder.')])
+]}],
+meals:{
+nepali:[
+ml('5:15 AM','Pre-Workout','Chana Sattu Ladoo & Ginger Tea','~270 kcal','8g','40g','9g',
+['2 sattu/besan ladoo (chickpea flour + ghee + jaggery + cardamom)','1 cup adrak chiya'],
+['Make ladoo batch Sunday: roast besan, mix with melted ghee + grated gur + cardamom, roll into balls. Stores 2 weeks.','Grab 2, make tea, eat and go.'],
+'Traditional Nepali energy food. Dense calories in a tiny package.'),
+ml('7:30 AM','Post-Workout','Chana Dal Chilla & Dahi','~580 kcal','32g','68g','16g',
+['1 cup besan, 1/2 cup water, onion, chilli, coriander, turmeric, cumin','1 tsp oil per pancake, 150g dahi, 1 banana'],
+['Mix besan + water to thin batter. Add onion, chilli, coriander, spices.','Hot non-stick tawa, 1 tsp oil, pour batter, spread thin. Cook 2 min, flip, 1 min. Make 3.','Serve with dahi and banana.'],
+'Chilla = Nepali protein pancake. Besan has 22g protein per 100g - higher than most grains.'),
+ml('10:30 AM','Mid-Morning','Bhatmas Sadeko (Spiced Soybean Salad)','~340 kcal','22g','20g','18g',
+['80g boiled bhatmas','Onion, tomato, green chilli, coriander, lemon, chilli flakes, salt, chat masala','1 apple'],
+['Boil soybeans 20 min (or pressure cook 3 whistles). Toss warm with all seasonings.'],
+'Nepali classic. Cheap and packed with plant protein. Batch-cook soybeans on Sunday.'),
+ml('1:00 PM','Lunch','Dal Bhat, Mutton Curry & Simi Tarkari','~780 kcal','45g','80g','22g',
+['250g rice','Masoor dal','150g mutton (khasi ko masu) bone-in','Simi (green beans) tarkari','Golbheda achar (charred tomato pickle)'],
+['Mutton: same base. Brown meat first. Pressure cook 4-5 whistles or simmer 40-45 min until fork-tender.','Simi: oil -&gt; cumin -&gt; green beans + turmeric + salt -&gt; water -&gt; cover 10 min.','Achar: grill tomatoes on flame till charred. Mash with garlic, chilli, salt, timur.'],
+'Mutton (goat) = premium, rich, flavourful. Bone-in adds collagen. Swap to buff if too expensive.'),
+ml('4:30 PM','Afternoon','Sel Roti & Warm Milk','~260 kcal','10g','38g','8g',
+['1 sel roti (traditional rice doughnut)','250ml warm milk'],
+['Buy from local shop or make: blend soaked rice + sugar + cardamom + ghee, deep fry in ring shape.'],
+'Friday treat. Rice-based carbs + fat from frying. Perfect legs day energy. Limit to one.'),
+ml('7:30 PM','Dinner','Chicken Sekuwa, Rice & Light Dal','~560 kcal','38g','58g','14g',
+['180g chicken, sekuwa marinade: yogurt + ginger-garlic + turmeric + cumin + chilli + mustard oil','200g rice, light mung dal, fresh salad'],
+['Marinate chicken 30+ min (overnight best). Grill/broil 4-5 min/side until charred.','Quick mung dal + garlic-cumin tempering.'],
+'Nepal\'s BBQ. Grilling = healthiest cooking (no extra oil). Yogurt marinade tenderises + adds protein.'),
+ml('9:30 PM','Before Bed','Haldi Dudh & Dry Fruit Mix','~220 kcal','10g','18g','12g',
+['250ml warm turmeric milk + black pepper','4 almonds, 3 cashews, 2 walnuts, 5 raisins'],
+['Warm milk, add turmeric + pepper. Eat dry fruit mix.'],
+'Varied nuts = varied micronutrients: almonds (vit E), cashews (zinc), walnuts (omega-3), raisins (iron).')
+],
+western:[
+ml('5:15 AM','Pre-Workout','Banana & Almond Butter + Espresso','~260 kcal','5g','35g','12g',
+['1 banana, 1 tbsp almond butter, espresso shot'],
+['Slice banana, spread almond butter. Eat. Espresso. Go.'],
+'Quick carbs + healthy fats + caffeine = ideal pre-workout stack.'),
+ml('7:30 AM','Post-Workout','Breakfast Burrito','~620 kcal','38g','60g','22g',
+['3 scrambled eggs, 60g black beans, 30g shredded cheese','1 large whole wheat tortilla, 2 tbsp salsa, baby spinach'],
+['Scramble eggs. Warm tortilla. Layer: spinach -&gt; beans -&gt; eggs -&gt; cheese -&gt; salsa. Roll.'],
+'Make 3 on Sunday, wrap in foil, freeze. Microwave 90 sec. Breakfast in 2 minutes.'),
+ml('10:30 AM','Mid-Morning','Trail Mix & Protein Bar','~340 kcal','22g','30g','14g',
+['1 protein bar (>20g protein)','20g trail mix: almonds, cashews, raisins, dark choc chips'],
+['Eat. Done.'],
+'Keep protein bars at desk. Look for whey/casein protein, not soy.'),
+ml('1:00 PM','Lunch','Mediterranean Chicken Bowl','~700 kcal','42g','70g','22g',
+['150g grilled chicken, 150g cooked brown rice, 3 falafel, 2 tbsp hummus','Salad: lettuce, cucumber, tomato, olives. Tahini-lemon dressing.'],
+['Grill chicken with Mediterranean spice (oregano, cumin, paprika, garlic, lemon).','Warm falafel in oven. Assemble bowl.'],
+'Hits every macro perfectly. Also delicious cold - make night before, eat from fridge.'),
+ml('4:30 PM','Afternoon','Protein Shake & Banana','~280 kcal','28g','32g','4g',
+['1 scoop whey, 250ml milk, 1 banana, ice'],
+['Blend. Drink.'],
+'Fastest 28g protein when in a rush.'),
+ml('7:30 PM','Dinner','Teriyaki Salmon Bowl','~600 kcal','38g','58g','20g',
+['150g salmon, 200g jasmine rice, 60g edamame','Sauce: soy sauce + honey + rice vinegar + garlic + ginger','Avocado, sesame seeds, green onion'],
+['Pan-sear salmon 3 min/side. Pour teriyaki in last minute.','Rice. Thaw edamame. Assemble bowl.'],
+'Homemade poke bowl. Salmon + edamame + rice + avocado = nutritionally near-perfect.'),
+ml('9:30 PM','Before Bed','Cottage Cheese & Berries','~190 kcal','20g','15g','5g',
+['150g cottage cheese, berries, 1 tsp honey, cinnamon'],
+['Cheese in bowl. Berries. Honey. Cinnamon.'],
+'Tastes like dessert, functions as pre-sleep protein.')
+]
+}},
+
+// =============== WEDNESDAY - PUSH B (HYPERTROPHY) ===============
+{id:'wed',name:'Wednesday',type:'Push B',focus:'Hypertrophy',dur:'~60 min',exCount:6,
+bodyParts:[
+{name:'Chest',color:COLORS.chest,exercises:[
+ex('Dumbbell Bench Press','4 x 10','2 min','Mid chest - deep stretch, hypertrophy',
+'Lower with 2-3 sec tempo, going DEEPER than barbell allows. Press in slight arc, DBs almost touch at top. Squeeze chest hard at top.',
+[v('Dumbbell Flat Press','db','dumbbell flat bench press hypertrophy form','Go deep. Deeper stretch recruits more fibers. Press in arc, not straight up.'),
+v('Machine Chest Press','mc','machine chest press form tutorial','Sit, handles at chest. Press without locking. Great mind-muscle connection.'),
+v('Barbell Bench (Moderate)','bb','barbell bench press moderate weight tempo','70% of Sunday weight. Slow 3 sec down, squeeze at top. Tension > weight.'),
+v('Cable Chest Press','cb','cable chest press standing form tutorial','Cables at chest height. Step forward, press together. Constant tension.'),
+v('Svend Press (Plate Squeeze)','bw','svend press plate squeeze chest form','Squeeze two plates together, press forward. Incredible chest contraction.'),
+v('Smith Machine Bench','mc','smith machine bench press form tutorial','High-rep failure sets. Fixed path = safe failure.')]),
+ex('Cable Crossover / Fly','3 x 12','90 sec','Inner chest, chest isolation',
+'High cables + DOWN = lower chest. Low cables + UP = upper chest. Slight forward lean, slight elbow bend. Bring hands together, cross slightly. 3-sec stretch back.',
+[v('Cable Crossover (High to Low)','cb','cable crossover high to low chest form','Targets lower chest. Creates defined lower chest line.'),
+v('Cable Crossover (Low to High)','cb','cable crossover low to high upper chest form','Targets upper chest. Best cable isolation for clavicular head.'),
+v('Dumbbell Fly (Flat)','db','dumbbell fly flat bench chest form tutorial','Arms wide, slight elbow bend. Deep stretch, bring together at top.'),
+v('Pec Deck Machine','mc','pec deck machine chest fly form tutorial','Machine guides perfect path. Focus on squeezing.'),
+v('Incline DB Fly','db','incline dumbbell fly upper chest form','30 deg incline. Light weight. Deep stretch for upper chest.'),
+v('Machine Fly (Seated)','mc','seated machine fly chest form tutorial','Similar to pec deck. Use whichever your gym has.')])
+]},
+{name:'Shoulders',color:COLORS.shoulder,exercises:[
+ex('Seated DB Shoulder Press','4 x 10','2 min','Front & side delts',
+'Bench at 85-90 deg. Start DBs at ear level. Press to just short of lockout for constant tension. Don\'t let DBs drift back.',
+[v('Seated DB Press','db','seated dumbbell shoulder press hypertrophy form','Standard for shoulder hypertrophy. Each arm independent.'),
+v('Arnold Press','db','arnold press dumbbell rotation shoulder form','Start palms in, rotate out as you press. Hits all three delt heads.'),
+v('Machine Shoulder Press','mc','machine shoulder press form tutorial','Guided path. Push to failure safely.'),
+v('Smith Machine Seated Press','mc','smith machine seated shoulder press form','Fixed path. Go heavier safely.'),
+v('Push Press','bb','barbell push press form tutorial','Slight leg drive to start, controlled negative. Handles heavier weight.'),
+v('Landmine Press','bb','single arm landmine press shoulder form','Shoulder-friendly angle. Great for impingement issues.')]),
+ex('Lateral Raise (High Volume)','4 x 15','60 sec','Side delts - pump work',
+'Same technique as Sunday, LIGHTER weight. Goal: accumulate volume and metabolic burn. Side delts respond to high reps (slow-twitch fibers). Burning by rep 10 = right weight.',
+[v('Dumbbell Lateral Raise','db','dumbbell lateral raise high rep light weight form','Light, strict, 15 reps. The burn IS the stimulus.'),
+v('Cable Lateral Raise','cb','cable lateral raise constant tension form','No rest point at bottom. 15 reps with cables is brutal.'),
+v('Machine Lateral Raise','mc','machine lateral raise high rep form','Sit and raise. Focus on contraction.'),
+v('Behind-the-Back Cable Lateral','cb','behind back cable lateral raise side delt form','Unique angle hammers side delt differently.'),
+v('Lu Raises','db','lu raises dumbbell front lateral combination','Front to side in one movement. Named after Olympic lifter Lu Xiaojun.'),
+v('Plate Lateral Raise','bw','plate lateral raise side delt form','Hold plate by edges. Grip challenge adds forearm component.')])
+]},
+{name:'Triceps',color:COLORS.tricep,exercises:[
+ex('Cable Pushdown','3 x 12','90 sec','Lateral + medial tricep heads',
+'Elbows pinned to sides. Push down, squeeze at full extension. Split rope apart at bottom. 2-sec return. Don\'t lean over the weight.',
+[v('Cable Rope Pushdown','cb','cable rope tricep pushdown form tutorial','Split at bottom for stronger contraction. Most versatile pushdown.'),
+v('V-Bar Pushdown','cb','v bar tricep pushdown form tutorial','Handle most weight of any pushdown. Elbows pinned.'),
+v('Straight Bar Pushdown','cb','straight bar cable pushdown tricep form','Different wrist angle. Some find this more comfortable.'),
+v('Machine Tricep Extension','mc','machine tricep extension pushdown form','Sit, push down. No setup needed. Perfect for burnouts.'),
+v('Single-Arm Cable Pushdown','cb','single arm cable tricep pushdown form','D-handle, one arm. Fix imbalances. Focused contraction.'),
+v('Dumbbell Kickback','db','dumbbell tricep kickback proper form tutorial','Hinge forward, arm parallel. Extend DB backward. Light weight, quality contraction.')]),
+ex('Overhead Extension','3 x 12','90 sec','Long head - full stretch',
+'Same as Sunday - overhead work is irreplaceable. Slightly lighter, deeper stretch, harder squeeze. 2-1-2 tempo.',
+[v('Overhead Cable Rope Extension','cb','overhead cable rope tricep extension form','Face away from low cable. Best overhead variation - constant tension.'),
+v('Overhead DB Extension','db','overhead dumbbell two hand tricep extension form','One heavy DB, both hands behind head. Simple, effective.'),
+v('EZ-Bar Skull Crusher','bb','ez bar skull crusher tricep form tutorial','Lie flat, lower to forehead. Go slightly behind head for bigger stretch.'),
+v('DB Skull Crusher','db','dumbbell skull crusher lying tricep form','Same but DBs. Each arm independent.'),
+v('Single-Arm Overhead Cable','cb','single arm overhead cable tricep extension form','One arm, face away from cable. Feel every fiber.'),
+v('Incline DB Tricep Extension','db','incline dumbbell tricep extension form','30 deg incline. Increases stretch on long head.')])
+]}],
+meals:{
+nepali:[
+ml('5:15 AM','Pre-Workout','Banana, PB Roti Bite & Green Tea','~260 kcal','8g','38g','10g',
+['1/2 roti with 1 tbsp peanut butter','1 banana','1 cup green tea'],
+['Spread PB on half a leftover roti. Eat with banana. Green tea.'],
+'Green tea = gentle caffeine (~30mg) without jitters.'),
+ml('7:30 AM','Post-Workout','Dhido, Gundruk Jhol & Eggs','~590 kcal','30g','80g','14g',
+['100g buckwheat/millet flour, 400ml boiling water','Gundruk (fermented greens) simmered with tomato, garlic, chilli','3 boiled eggs, 1 glass milk'],
+['DHIDO: Boil water, slowly add flour stirring vigorously 5-7 min until thick and pulls from pot.','GUNDRUK JHOL: Soak gundruk 10 min, saute garlic + chilli -&gt; add gundruk + water + turmeric -&gt; simmer 10 min.'],
+'Most traditionally Nepali meal. Buckwheat/millet = more nutritious than white rice. Gundruk = probiotic-rich.'),
+ml('10:30 AM','Mid-Morning','Sprout Salad (Mugko Kwati)','~320 kcal','18g','38g','8g',
+['1 cup mixed sprouted beans','Onion, tomato, chilli, coriander, lemon, chaat masala'],
+['Blanch sprouts 2 min. Toss with veggies and seasonings.'],
+'Sprouting multiplies nutrients 5-10x. Soak Sunday night -&gt; sprouts by Tuesday.'),
+ml('1:00 PM','Lunch','Dal Bhat, Chicken Curry & Mushroom Bhuteko','~740 kcal','42g','82g','18g',
+['250g rice, mung dal, 150g chicken curry','Mushroom (chyau) bhuteko: mushrooms, onion, garlic, chilli, soy sauce'],
+['MUSHROOM: Slice. Hot oil -&gt; garlic + chilli -&gt; mushrooms, DON\'T stir 2 min (let brown!) -&gt; soy sauce + salt -&gt; toss -&gt; coriander.'],
+'High-heat saute creates meaty, savoury mushroom flavour. Mushrooms also provide vitamin D.'),
+ml('4:30 PM','Afternoon','Chatamari (Newari Rice Crepe) with Egg','~270 kcal','14g','32g','10g',
+['Rice flour batter, 1 egg, onion, coriander, salt'],
+['Thin batter on hot tawa. Crack egg on top. Cover, cook 3-4 min until crispy bottom.'],
+'"Newari Pizza." Gluten-free, high-protein with egg. Popular Kathmandu street food.'),
+ml('7:30 PM','Dinner','Paneer Curry, Roti & Raita','~540 kcal','30g','48g','22g',
+['150g paneer cubed','Curry: onion, tomato, ginger-garlic, spices, 2 tbsp cream','2 rotis, raita: dahi + cucumber + cumin + mint'],
+['Brown onions -&gt; ginger-garlic -&gt; spices -&gt; tomato -&gt; cook till oil separates -&gt; paneer + water -&gt; simmer 10 min -&gt; cream + garam masala.'],
+'Paneer = 18g protein per 100g. Raita aids digestion. Great meat-free dinner.'),
+ml('9:30 PM','Before Bed','Haldi Dudh & Kaju-Kishmish','~200 kcal','9g','20g','9g',
+['Warm turmeric milk + pepper','8 cashews + 10 raisins'],
+['Warm milk. Add turmeric + pepper. Eat cashews and raisins.'],
+'Raisins = iron, cashews = zinc (supports testosterone).')
+],
+western:[
+ml('5:15 AM','Pre-Workout','Toast, Jam & Coffee','~230 kcal','5g','45g','3g',
+['1 white toast, 1 tbsp jam, black coffee'],
+['Toast. Jam. Eat. Coffee. Go.'],
+'White toast + jam = fastest-digesting carbs for fuel.'),
+ml('7:30 AM','Post-Workout','Blueberry Protein Pancakes','~600 kcal','38g','68g','16g',
+['1 cup pancake mix, 1 scoop vanilla whey, 1 egg, 150ml milk, blueberries','Maple syrup, peanut butter'],
+['Mix pancake mix + whey + egg + milk. Don\'t over-mix.','Heat pan. 1/4 cup batter per pancake, drop blueberries. Bubbles form = flip.','Stack. Syrup drizzle + PB spoon.'],
+'Don\'t overcook - whey makes them rubbery if overdone.'),
+ml('10:30 AM','Mid-Morning','Apple, PB & String Cheese','~300 kcal','16g','28g','14g',
+['1 apple sliced, 1.5 tbsp PB, 1 string cheese'],
+['Slice apple. Dip in PB. Eat cheese.'],
+'Fiber + fat + protein = satiated for hours.'),
+ml('1:00 PM','Lunch','Chipotle Chicken Bowl','~700 kcal','44g','72g','20g',
+['180g chipotle chicken, 200g cilantro-lime rice, 60g black beans','30g corn, salsa, guacamole, lettuce'],
+['Season chicken: cumin, chilli powder, lime. Grill 5-6 min/side.','Rice with cilantro + lime. Assemble bowl.'],
+'Homemade Chipotle for 1/4 the price. Rice + beans = complete amino acids.'),
+ml('4:30 PM','Afternoon','Beef Jerky & Mixed Nuts','~270 kcal','20g','12g','16g',
+['50g jerky, 20g mixed nuts'],
+['Open. Eat.'],
+'Pre-made high-protein snack. Look for low-sugar brands.'),
+ml('7:30 PM','Dinner','Pasta Bolognese & Side Salad','~600 kcal','38g','62g','18g',
+['80g whole wheat pasta, 150g lean ground beef','Sauce: crushed tomatoes, onion, garlic, grated carrot, Italian herbs','Balsamic salad, optional parmesan'],
+['Brown mince 5 min -&gt; onion + garlic 3 min -&gt; carrot 2 min -&gt; tomatoes + herbs -&gt; simmer 20 min.','Pasta al dente. Toss with bolognese. Salad on side.'],
+'Freezes beautifully. Make huge batch, freeze portions. Grated carrot adds sweetness.'),
+ml('9:30 PM','Before Bed','Greek Yogurt, Honey & Walnuts','~200 kcal','16g','18g','8g',
+['150g Greek yogurt, 1 tsp honey, walnuts, cinnamon'],
+['Yogurt. Honey. Walnuts. Cinnamon.'],
+'Casein-rich, tastes like dessert. Perfect end to the day.')
+]
+}},
+
+// =============== THURSDAY - PULL B (HYPERTROPHY) ===============
+{id:'thu',name:'Thursday',type:'Pull B',focus:'Hypertrophy',dur:'~60 min',exCount:6,
+bodyParts:[
+{name:'Back (Lats)',color:COLORS.back,exercises:[
+ex('Lat Pulldown (Wide)','4 x 10','2 min','Lats - width, hypertrophy',
+'Lean back 15-20 deg. Pull to upper chest. Full stretch at top. Squeeze lats 1 sec at bottom. 2-3 sec negative.',
+[v('Wide-Grip Lat Pulldown','cb','wide grip lat pulldown form hypertrophy','1.5x shoulder width. Outer lat emphasis for V-taper.'),
+v('Close-Grip Pulldown','cb','close grip v handle lat pulldown form','V-handle to sternum. Lower lat and mid-back. More weight.'),
+v('Single-Arm Lat Pulldown','cb','single arm lat pulldown form mind muscle','D-handle, one arm. Best for individual lat focus.'),
+v('Chin-Ups','bw','chin ups bodyweight form back biceps','Underhand. Do slow negatives if can\'t do full reps yet.'),
+v('Neutral Grip Pulldown','cb','neutral grip lat pulldown form tutorial','Parallel handle. Easy on shoulders, great contraction.'),
+v('Machine Pulldown','mc','machine lat pulldown form tutorial','Guided path. Focus on squeezing. Great for pushing to failure.')]),
+ex('Chest-Supported Row','4 x 10','2 min','Mid-back, rhomboids',
+'Incline bench 30-45 deg. Lie chest-down. Row DBs to hip. Chest support eliminates all momentum. If you can\'t feel rows in your back, use this.',
+[v('Chest-Supported DB Row','db','chest supported dumbbell row incline bench form','Best row for pure back isolation. No cheating possible.'),
+v('Chest-Supported Machine Row','mc','chest supported machine row form','Dedicated machine. Chest on pad, pull handles.'),
+v('T-Bar Row (Chest Pad)','bb','t bar row chest pad form tutorial','Heavy loading, zero lower back strain.'),
+v('Seal Row','bb','seal row flat bench barbell form tutorial','Lie flat on raised bench, barbell below. Pure back.'),
+v('Single-Arm Cable Row','cb','single arm cable row form back','Slight torso rotation for full lat engagement.'),
+v('Meadows Row','bb','meadows row landmine form tutorial','Landmine, staggered stance, one arm. Unique lat angle.')])
+]},
+{name:'Back (Single-Arm)',color:COLORS.back,exercises:[
+ex('Single-Arm Row','3 x 12/arm','90 sec','Lats, teres major',
+'One knee on bench. Flat back. Row DB to hip. Drive elbow past body. Squeeze shoulder blade. 2-sec negative.',
+[v('Single-Arm DB Row','db','one arm dumbbell row knee on bench form','Classic. Safest row, excellent for beginners.'),
+v('Single-Arm Cable Row','cb','single arm cable row standing form','Low cable. Constant tension, great stretch.'),
+v('Meadows Row','bb','meadows row landmine barbell form','Landmine, perpendicular. Brutal lat activation.'),
+v('Single-Arm Machine Row','mc','single arm machine row form','Guided path + isolation = pure back.'),
+v('Kroc Row','db','kroc row heavy dumbbell row form tutorial','Heavy DB, controlled cheat. 15-20 reps. Builds thick lats + grip.'),
+v('Single-Arm Lat Pulldown','cb','single arm lat pulldown D handle form','Pull down with one arm. Slight lean and rotation.')])
+]},
+{name:'Rear Delts',color:COLORS.reardelt,exercises:[
+ex('Reverse Fly / Face Pull','3 x 15','90 sec','Rear delts, rotator cuff',
+'15 slow, controlled reps. Hard squeeze at back. Don\'t swing. Small muscles need time under tension, not heavy weight.',
+[v('Reverse Pec Deck','mc','reverse pec deck rear delt form tutorial','Sit facing pad. Guided arc. Great isolation.'),
+v('Cable Face Pull','cb','cable face pull rope rear delt form','High cable, pull to face, externally rotate. #1 shoulder health exercise.'),
+v('DB Reverse Fly','db','dumbbell reverse fly bent over rear delt form','Hinge forward, light DBs, raise to sides. 2 sec pause at top.'),
+v('Cable Reverse Fly','cb','cable reverse fly standing cross form','Cross cables. Pull outward. Constant tension.'),
+v('Band Pull-Apart','bd','band pull apart rear delt posture form','Band arm\'s length, pull apart to chest. 20-30 reps anywhere.'),
+v('Prone Y-Raise','db','prone Y raise incline bench lower trap form','Face-down, DBs in Y-shape. Lower traps + rear delts.')])
+]},
+{name:'Biceps',color:COLORS.bicep,exercises:[
+ex('Incline Dumbbell Curl','3 x 12','90 sec','Bicep long head - stretched position',
+'Bench at 45 deg. Arms hang FULLY behind torso. Curl from stretched position. The stretch at the bottom is the magic.',
+[v('Incline DB Curl','db','incline dumbbell curl long head bicep stretch form','THE stretch-focused bicep exercise. Let arms hang fully behind you.'),
+v('Preacher Curl (EZ-Bar)','bb','preacher curl ez bar bicep short head form','Arms on pad. Pure isolation. Targets short head (inner peak).'),
+v('Machine Preacher Curl','mc','machine preacher curl bicep form','Guided path, safe to push to failure.'),
+v('Spider Curl','db','spider curl incline bench bicep form tutorial','Lean forward over incline. Arms down. Peak contraction is incredible.'),
+v('Cable Curl','cb','cable curl low pulley standing bicep form','Constant tension. 12-15 reps for massive pump.'),
+v('Concentration Curl','db','concentration curl dumbbell bicep peak form','Seated, elbow on inner thigh. No cheating. Arnold\'s favourite for bicep peak.')]),
+ex('Hammer Curl','3 x 12','90 sec','Brachialis - arm thickness',
+'Neutral grip (palms face each other). Don\'t rotate. Brachialis pushes bicep UP. Also builds forearm thickness.',
+[v('DB Hammer Curl','db','dumbbell hammer curl form brachialis forearm','Standard. Palms face each other. Alternating or simultaneous.'),
+v('Cross-Body Hammer Curl','db','cross body hammer curl dumbbell form','Curl across body toward opposite shoulder. More brachialis + long head.'),
+v('Cable Rope Curl','cb','cable rope hammer curl brachialis form','Low cable, rope, hammer grip. Cable makes top harder.'),
+v('Reverse Barbell Curl','bb','reverse barbell curl overhand grip forearm form','Palms DOWN. Shifts to brachioradialis and brachialis. Lighter weight. Forearm definition.'),
+v('Zottman Curl','db','zottman curl dumbbell form tutorial','Curl palms UP, rotate palms DOWN at top, lower palms down. Hits bicep AND forearm in one exercise.'),
+v('Machine Curl','mc','machine bicep curl neutral grip form','Neutral grip option. Guided path, no balance.')])
+]}],
+meals:{
+nepali:[
+ml('5:15 AM','Pre-Workout','Apple, Ghee-Roasted Badam & Chiya','~250 kcal','6g','32g','12g',
+['1 apple sliced','8 ghee-roasted almonds','1 cup chiya'],
+['Toss almonds in tiny ghee in hot pan 1 min. Slice apple. Chiya.'],
+'Ghee-roasted almonds = nutty, rich, caramelised. Make a batch on weekends.'),
+ml('7:30 AM','Post-Workout','French Toast (Nepali Style) & Banana','~600 kcal','28g','78g','18g',
+['3 slices white bread, 2 eggs + milk + sugar + cardamom','1 tbsp ghee, 1 banana, 250ml milk, honey'],
+['Beat eggs with milk, sugar, cardamom. Dip bread. Fry in ghee until golden.','Serve with banana, honey, glass of milk.'],
+'Comfort food meets fuel. Cardamom = distinctly Nepali touch. Eggs = protein.'),
+ml('10:30 AM','Mid-Morning','Masala Chiura & Hard Boiled Egg','~330 kcal','14g','42g','10g',
+['60g chiura, 1 boiled egg, onion, chilli, coriander, turmeric, mustard oil, lemon'],
+['Rinse chiura. Toss with onion, chilli, coriander, turmeric, mustard oil, salt, lemon. Top with egg.'],
+'Common Nepali trail snack. Add roasted peanuts for extra protein.'),
+ml('1:00 PM','Lunch','Dal Bhat, Fish Fry & Bodi Tarkari','~730 kcal','40g','78g','22g',
+['250g rice, mixed dal, 150g fish pan-fried','Bodi (long beans) tarkari'],
+['FISH FRY: Marinate in turmeric + salt + chilli + lemon 15 min. Shallow fry 2-3 min/side until crispy.','BODI: Oil -&gt; methi seeds -&gt; bodi + turmeric + salt -&gt; water -&gt; cover 10 min.'],
+'Crispy fish = incredibly satisfying. Key: hot oil, don\'t flip too early. Bodi = rich in iron.'),
+ml('4:30 PM','Afternoon','Chiura + Achar + Boiled Egg','~260 kcal','13g','34g','8g',
+['60g chiura, 2 tbsp achar, 1 boiled egg'],
+['Moisten chiura. Top with achar. Eat with egg.'],
+'Classic Nepali snack combo found at every tea shop.'),
+ml('7:30 PM','Dinner','Kwati (Nine-Bean Soup) with Rice','~530 kcal','28g','68g','12g',
+['200g rice','Kwati: 9 sprouted beans simmered with turmeric, garlic, ginger, cumin','Mixed vegetable tarkari, dahi'],
+['Soak beans overnight, sprout 24 hrs. Boil 20 min. Temper with oil + cumin + garlic + ginger + onion + tomato + chilli. Simmer 15 min.'],
+'Nepal\'s most nutritious traditional dish. 9 beans = complete amino acid profile. Nepali superfood soup.'),
+ml('9:30 PM','Before Bed','Kesar Dudh & Almonds','~210 kcal','10g','14g','11g',
+['250ml warm milk, 2-3 kesar (saffron) strands, 5 almonds, honey'],
+['Soak saffron in 1 tsp warm milk 5 min. Add to rest of warm milk + honey.'],
+'Saffron = Ayurvedic tradition for sleep + recovery. Crocin = potent antioxidant. Small packet lasts months.')
+],
+western:[
+ml('5:15 AM','Pre-Workout','Dates, Almonds & Espresso','~250 kcal','5g','40g','9g',
+['3 medjool dates, 6 almonds, espresso'],
+['Eat dates + almonds. Espresso. Go.'],
+'Dates = 18g fast sugar per date. Nature\'s energy gel.'),
+ml('7:30 AM','Post-Workout','Smoked Salmon Toast & Eggs','~580 kcal','36g','45g','24g',
+['2 whole grain toast, 60g smoked salmon, 2 tbsp cream cheese','2 boiled eggs, 1/4 avocado, capers, dill, lemon'],
+['Toast bread. Cream cheese. Layer salmon, eggs, avocado. Garnish.'],
+'Scandinavian-style. Omega-3 + healthy fats support hormone production.'),
+ml('10:30 AM','Mid-Morning','Protein Muffin & Banana','~310 kcal','22g','35g','10g',
+['1 homemade protein muffin (oat flour + whey + eggs + Greek yogurt, batch of 8)','1 banana'],
+['Grab pre-made muffin. Eat with banana.'],
+'Make 8 on Sunday. Fridge 1 week, freezer 2 months. 22g protein each.'),
+ml('1:00 PM','Lunch','Thai Basil Chicken with Rice','~700 kcal','42g','72g','20g',
+['180g chicken, 200g jasmine rice','Sauce: oyster sauce + soy + fish sauce + sugar + garlic','Thai basil, green beans, chilli, optional fried egg'],
+['Hot wok. Sear chicken 2-3 min. Garlic 30 sec. Beans 1 min. Sauce. Basil last.'],
+'Pad Krapao - most delicious high-protein meal in under 10 min. Secret: screaming hot wok.'),
+ml('4:30 PM','Afternoon','Hard Boiled Eggs & Hummus','~260 kcal','18g','14g','14g',
+['2 hard boiled eggs, 3 tbsp hummus, carrot + celery sticks'],
+['Peel eggs. Dip veggies in hummus.'],
+'Always keep boiled eggs in fridge - most versatile high-protein snack.'),
+ml('7:30 PM','Dinner','Herb-Crusted Cod, Mash & Green Beans','~560 kcal','38g','52g','16g',
+['150g cod, herb crust (breadcrumbs + parmesan + parsley + garlic + oil)','200g mashed potato, 150g green beans'],
+['Mash potatoes with butter + milk. Press herb crust on fish. Bake 200 degC 15 min. Blanch beans.'],
+'White fish = leanest protein (20g/100g, near-zero fat). Herb crust adds flavour without heavy calories.'),
+ml('9:30 PM','Before Bed','Warm Milk, Cinnamon & Dark Chocolate','~200 kcal','10g','18g','9g',
+['250ml warm milk, 1/2 tsp cinnamon, 2 squares (10g) dark chocolate 70%+, 5 almonds'],
+['Warm milk + cinnamon. Eat chocolate and almonds.'],
+'Dark chocolate has magnesium for muscle relaxation + sleep. Feels like dessert, is functional nutrition.')
+]
+}},
+
+// =============== FRIDAY - LEGS B (HYPERTROPHY) ===============
+{id:'fri',name:'Friday',type:'Legs B',focus:'Hypertrophy',dur:'~65 min',exCount:6,
+bodyParts:[
+{name:'Quadriceps',color:COLORS.quad,exercises:[
+ex('Goblet Squat / Front Squat','4 x 12','2 min','Quads, core - higher rep',
+'Hold DB at chest. Sit deep between legs. Best squat for mobility and quad activation. Heels planted, chest up, full depth.',
+[v('Goblet Squat (DB)','db','goblet squat dumbbell deep form tutorial','Best beginner squat. Front load forces great posture. Go deep.'),
+v('Front Squat','bb','barbell front squat clean grip form','Advanced. Very quad-dominant. Requires wrist/thoracic mobility.'),
+v('Smith Machine Squat','mc','smith machine squat quad form tutorial','Feet forward for quad emphasis. Push hard without balance concerns.'),
+v('Hack Squat Machine','mc','hack squat machine deep quad form','Go deep. Full range. Isolates quads better than any free-weight squat.'),
+v('Kettlebell Goblet Squat','db','kettlebell goblet squat form tutorial','KB horns = easier grip. Slightly different weight distribution.'),
+v('Pendulum Squat','mc','pendulum squat machine form tutorial','Rare but incredible. Arc motion eliminates knee stress while loading quads.')]),
+ex('Leg Extension','3 x 15','90 sec','Quads isolation - pure quad burn',
+'Sit back fully. Extend to full lockout, pause 1 sec. 3-sec negative. Pure quad isolation. Painful but effective.',
+[v('Leg Extension Machine','mc','leg extension machine full range form tutorial','Standard. Full extension, 1 sec pause, 3 sec negative. Burning = growing.'),
+v('Single-Leg Extension','mc','single leg extension machine form','One leg. Fix imbalances. 40-50% bilateral weight.'),
+v('Sissy Squat','bw','sissy squat bodyweight quad isolation form','Hold something, lean back, bend only at knees. Extreme quad isolation.'),
+v('Reverse Nordic Curl','bw','reverse nordic curl quad bodyweight form','Kneel, lean back with straight body. Brutal. Zero equipment.'),
+v('DB Leg Extension (Seated)','db','dumbbell leg extension seated bench form','Sit on bench edge, DB between feet. Extend legs. Low-tech alternative.'),
+v('Cable Leg Extension','cb','cable leg extension ankle strap form','Ankle strap on low cable. Sit facing away. One leg at a time.')])
+]},
+{name:'Hamstrings',color:COLORS.hamstring,exercises:[
+ex('Stiff-Leg Deadlift','3 x 12','2 min','Hamstrings - deep stretch',
+'Very slight knee bend only. Hinge forward, weight to mid-shin. Deeper hamstring stretch than RDL. Don\'t round back.',
+[v('Barbell Stiff-Leg DL','bb','barbell stiff leg deadlift hamstring form','Straighter legs, weight goes lower. Deeper stretch. Lighter than regular deadlifts.'),
+v('DB Stiff-Leg DL','db','dumbbell stiff leg deadlift form','DBs beside legs. More freedom of movement.'),
+v('Cable Pull-Through','cb','cable pull through hip hinge hamstring form','Constant tension from cable. Face away from low pulley.'),
+v('Smith Machine Stiff-Leg DL','mc','smith machine stiff leg deadlift form','Guided path = focus on stretch. Good for learning or failure.'),
+v('Single-Leg DB RDL','db','single leg dumbbell rdl balance hamstring form','One leg. Balance + flexibility + imbalance correction.'),
+v('Good Mornings','bb','barbell good mornings form hamstring','Bar on back, hinge forward. Requires excellent core bracing. Start light.')]),
+ex('Seated Leg Curl','3 x 12','90 sec','Hamstrings - stretched position',
+'Hips at 90 deg pre-stretches hamstrings = more tension at start. Full curl, squeeze, slow negative.',
+[v('Seated Leg Curl','mc','seated leg curl machine form hamstring','May build more hamstring than lying curls due to stretched position.'),
+v('Lying Leg Curl','mc','lying leg curl machine form tutorial','Different angle - provides variation from seated.'),
+v('Nordic Hamstring Curl','bw','nordic hamstring curl progression tutorial','Most effective for injury prevention. 3-5 slow negatives if can\'t do full reps.'),
+v('Swiss Ball Hamstring Curl','bw','swiss ball hamstring curl bridge form','Bridge up, heels on ball, curl in. No equipment beyond ball.'),
+v('Slider Leg Curl','bw','slider leg curl towel hamstring form','Heels on sliders/towel on smooth floor. Home-friendly.'),
+v('Cable Leg Curl','cb','cable leg curl standing ankle strap form','Standing, one leg. Ankle strap on low cable.')])
+]},
+{name:'Calves + Core',color:COLORS.calf,exercises:[
+ex('Seated Calf Raise','4 x 20','60 sec','Soleus - high rep',
+'Pad on knees. Full stretch, full squeeze. High reps - calves need volume. 20 reps minimum.',
+[v('Seated Calf Raise Machine','mc','seated calf raise machine form soleus','Targets soleus - deeper calf muscle. Needed for complete calves.'),
+v('Smith Machine Seated Calf','mc','smith machine seated calf raise form','Block under Smith bar. Bar on knees.'),
+v('DB on Knees Calf Raise','db','dumbbell seated calf raise form','Bench edge, DB on each knee. Raise heels on block. Low-tech.'),
+v('Standing Calf Raise','mc','standing calf raise machine full ROM form','Targets gastrocnemius. Full ROM: deep stretch, hard squeeze.'),
+v('Leg Press Calf Raise','mc','leg press calf raise form tutorial','Heavy option. Balls of feet on platform bottom.'),
+v('Single-Leg Calf Raise','bw','single leg calf raise bodyweight form','Wall for balance. One foot on step. Full ROM. Add DB for progression.')]),
+ex('Hanging Leg Raise','3 x 15','60 sec','Lower abs, hip flexors',
+'Hang from bar. Curl pelvis UP - don\'t just swing legs. Abs only work when pelvis curls. 2-sec descent.',
+[v('Hanging Leg Raise','bw','hanging leg raise proper form abs tutorial','King of ab exercises. Curl pelvis, not just legs.'),
+v("Captain's Chair","mc",'captain chair leg raise form abs','Forearms on pads. Easier - no grip requirement.'),
+v('Cable Crunch','cb','cable crunch kneeling abs form tutorial','Rope behind head. Crunch DOWN - ribcage to pelvis.'),
+v('Ab Wheel Rollout','bw','ab wheel rollout form tutorial progression','Most challenging core exercise. Start from knees.'),
+v('Decline Weighted Sit-Up','bw','decline weighted sit up abs form','Plate on chest. Decline increases ROM.'),
+v('Machine Crunch','mc','machine crunch abs form tutorial','Simple, guided, effective. Sit and crunch.')])
+]}],
+meals:{
+nepali:[
+ml('5:15 AM','Pre-Workout','Banana, Maha & Kalo Chiya','~250 kcal','4g','55g','4g',
+['1 banana, 1 tbsp honey, 5 almonds, 1 cup chiya'],
+['Eat banana + honey + almonds. Drink chiya. Go.'],
+'Winning combo. Simple, fast, effective.'),
+ml('7:30 AM','Post-Workout','Puri, Aloo Tarkari & Boiled Eggs','~610 kcal','26g','72g','24g',
+['3 small puris (whole wheat, deep fried until puffed)','Aloo-matar tarkari (potato + peas)','2 boiled eggs, warm milk'],
+['Roll small dough balls thin. Deep fry until puffed and golden.','Aloo: oil -&gt; cumin + asafoetida -&gt; potato + peas + turmeric + spices -&gt; water -&gt; cover 15 min.'],
+'Friday treat - fried, so not everyday. Perfect for heavy leg day when you need extra calories.'),
+ml('10:30 AM','Mid-Morning','Sattu Drink (Sweet) & Fruit','~330 kcal','22g','38g','8g',
+['40g sattu, 300ml water, 1 tsp honey, cardamom','1 banana'],
+['Mix sattu + water + honey + cardamom. Stir. Drink. Eat fruit.'],
+'Sweet sattu version - same protein, more palatable.'),
+ml('1:00 PM','Lunch','Dal Bhat, Buff Sukuti Bhuteko & Saag','~760 kcal','44g','80g','22g',
+['250g rice, dal, 100g buff sukuti (dried buffalo jerky) fried + tossed','Palungo saag, achar'],
+['SUKUTI: Tear into pieces. Deep fry 30 sec until crispy. Toss with onion, chilli, tomato, timur, lemon, coriander.'],
+'Sukuti = Nepal\'s original high-protein snack. ~50g protein per 100g dried. Sukuti sadeko = Kathmandu bar classic.'),
+ml('4:30 PM','Afternoon','Roti with Dahi & Honey','~240 kcal','10g','34g','8g',
+['1 roti, 150g dahi with 1 tsp honey, cinnamon'],
+['Tear roti into pieces. Dip in sweetened dahi.'],
+'Simple, calming. Dahi provides probiotics and casein.'),
+ml('7:30 PM','Dinner','Thukpa (Noodle Soup) with Chicken','~540 kcal','34g','56g','16g',
+['100g wheat noodles, 150g chicken, broth with garlic + ginger + soy','Bok choy, carrot, spring onion, coriander, chilli oil, lemon'],
+['Simmer broth 10 min. Cook noodles separately. Poach/sear chicken. Assemble bowl.'],
+'Nepal\'s comfort food. Tibetan-origin. Bone broth = collagen + minerals. Perfect Friday evening after tough legs.'),
+ml('9:30 PM','Before Bed','Haldi Dudh & Badam-Kismis','~210 kcal','10g','18g','11g',
+['Warm turmeric milk + pepper','5 almonds, 3 cashews, 10 raisins'],
+['Warm milk. Eat dry fruit mix. Sleep.'],
+'End the week strong with anti-inflammatory recovery nightcap.')
+],
+western:[
+ml('5:15 AM','Pre-Workout','Oat Bar & Coffee','~260 kcal','6g','42g','8g',
+['1 oat/granola bar, black coffee'],
+['Unwrap. Eat. Coffee. Go.'],
+'Fastest pre-workout. Keep bars on bedside table.'),
+ml('7:30 AM','Post-Workout','Steak & Eggs','~620 kcal','46g','32g','30g',
+['120g sirloin steak, 3 eggs any style, 2 slices toast, hot sauce'],
+['Season steak. Hot cast iron 3 min/side. Rest 3 min. Cook eggs. Toast.'],
+'Classic bodybuilder breakfast. Save for after heavy legs. You\'ve earned it.'),
+ml('10:30 AM','Mid-Morning','Cottage Cheese & Pineapple','~280 kcal','24g','28g','6g',
+['200g cottage cheese, 100g pineapple chunks, cinnamon'],
+['Cheese in bowl. Add pineapple. Cinnamon.'],
+'Pineapple contains bromelain - aids protein digestion. Refreshing and protein-rich.'),
+ml('1:00 PM','Lunch','BBQ Chicken Wrap & Sweet Potato Fries','~720 kcal','42g','75g','22g',
+['180g BBQ chicken, whole wheat wrap, lettuce, onion, cheese','Sweet potato fries: cut strips, oil, salt, paprika, bake 200 degC 25 min'],
+['Grill chicken with BBQ glaze. Assemble wrap. Serve with fries.'],
+'Crispy sweet potato fries: single layer on tray, don\'t overcrowd.'),
+ml('4:30 PM','Afternoon','Protein Shake & Rice Cakes','~280 kcal','26g','30g','4g',
+['1 scoop whey in water, 2 rice cakes with 1 tbsp PB'],
+['Shake protein. PB on rice cakes. Eat and drink.'],
+'Fastest, most efficient snack. Quick carbs + protein.'),
+ml('7:30 PM','Dinner','Shrimp Fried Rice','~580 kcal','36g','62g','18g',
+['150g shrimp, 200g day-old rice, 2 scrambled eggs','Peas, carrot, corn, soy sauce, sesame oil, oyster sauce, garlic'],
+['Hot wok. Sear shrimp 1 min/side. Remove. Scramble eggs. Remove. Garlic -&gt; veggies -&gt; rice (let it char!) -&gt; sauce -&gt; return shrimp + eggs.'],
+'Secret to great fried rice: day-old rice + screaming hot wok + don\'t stir too much. Restaurant quality.'),
+ml('9:30 PM','Before Bed','Casein Pudding','~190 kcal','26g','12g','4g',
+['1 scoop casein (chocolate), 100ml cold milk, mix thick'],
+['Add casein to bowl. Add milk gradually stirring until thick pudding consistency.'],
+'Bodybuilding\'s best secret. Chocolate casein + minimal liquid = brownie batter. Dessert + nighttime protein.')
+]
+}},
+
+// =============== SATURDAY - REST ===============
+{id:'sat',name:'Saturday',type:'Rest',focus:'Recovery',dur:'-',exCount:0,bodyParts:[],
+totals:{p:'130g',c:'280g',f:'70g',k:'~2,400 kcal'},
+meals:{
+nepali:[
+ml('8:00 AM','Breakfast','Vegetable Paratha & Dahi','~480 kcal','22g','58g','18g',
+['2 mixed vegetable paratha (whole wheat with grated carrot, beans, peas, onion)','150g dahi (curd) with roasted jeera and salt','1 boiled egg sliced','Mint chutney'],
+['Mix grated veggies with spices into atta dough.','Roll thin, cook on hot tawa with 1 tsp oil per paratha until golden.','Serve with dahi, sliced egg, and chutney.'],
+'Rest day breakfast - moderate carbs, decent protein. Easy to make in batches on Sunday morning.'),
+ml('11:00 AM','Mid-Morning','Sprouted Mung Salad with Egg','~280 kcal','22g','22g','11g',
+['1 cup sprouted mung beans (lightly steamed)','2 boiled eggs sliced','1/4 onion diced','1 small tomato diced','Cucumber, coriander, lemon, chaat masala, salt'],
+['Toss everything together. Eat fresh.'],
+'Sprouts are loaded with protein and digestive enzymes - perfect rest day snack to support recovery.'),
+ml('1:30 PM','Lunch','Dal Bhat (Smaller Portion) with Soya Curry','~620 kcal','35g','75g','15g',
+['180g rice (smaller than training day portion)','1 bowl masoor dal','120g soya chunks curry','Mixed vegetable tarkari','Dahi'],
+['Standard dal bhat preparation, just smaller portions.'],
+'Rest day = slightly less rice/carbs. Soya provides 25g+ plant protein. Same flavour, smarter portions.'),
+ml('5:00 PM','Snack','Steamed Chicken Momo (4 pieces)','~280 kcal','22g','30g','7g',
+['4 steamed chicken momo (lean preparation)','Jhol achar dipping sauce','Hot tea on the side'],
+['Buy from a clean momo pasal or batch-cook from frozen.','Steam, do not fry. Half a typical lunch portion.'],
+'Steamed momo as a snack works great on rest days. Lean protein, easy to digest, comforting.'),
+ml('8:00 PM','Dinner CHEAT MEAL','Whole Wheat Chicken Pizza','~580 kcal','42g','58g','18g',
+['Whole wheat thin crust pizza base (homemade or store-bought)','3 tbsp tomato puree + garlic + oregano','100g grilled chicken breast sliced','40g part-skim mozzarella','Onion, capsicum, cherry tomatoes, basil','Red chilli flakes'],
+['Preheat oven 230 deg C with tray inside.','Spread sauce on rolled-out base. Add cheese, chicken, vegetables.','Bake on hot tray 8-10 min until crust is golden and cheese melts.','Top with fresh basil. Slice and enjoy without guilt.'],
+'CHEAT MEAL of the week. Saturday dinner = guilt-free pizza night. Whole wheat + lean chicken + lots of veg = pizza that fits your goals. 580 kcal pizza beats any 1,500 kcal restaurant pizza.'),
+ml('10:00 PM','Before Bed','Greek Yogurt with Walnuts','~180 kcal','12g','12g','9g',
+['150g Greek yogurt or hung curd','5 walnut halves crushed','Pinch of cinnamon','1/2 tsp honey'],
+['Yogurt in bowl. Walnuts on top. Cinnamon. Honey. Eat. Sleep.'],
+'Casein from yogurt feeds muscles overnight. Walnuts add omega-3 for inflammation control on rest day.')
+],
+western:[
+ml('8:00 AM','Breakfast','Avocado Toast with Eggs','~520 kcal','28g','42g','24g',
+['2 slices whole wheat toast','1/2 avocado mashed','3 eggs (scrambled, fried, or poached)','Cherry tomatoes, salt, pepper, chilli flakes','1 cup black coffee'],
+['Toast bread. Mash avocado, season. Cook eggs.','Layer: toast, avocado, eggs, tomatoes.','Coffee on the side.'],
+'Slower-paced rest day breakfast. Healthy fats from avocado, quality protein from eggs. No rush.'),
+ml('11:00 AM','Mid-Morning','Cottage Cheese Bowl','~280 kcal','24g','22g','10g',
+['200g cottage cheese','Handful of berries','10 almonds','1 tsp honey','Cinnamon'],
+['Cheese in bowl. Top with berries, almonds, honey, cinnamon.'],
+'High protein, slow-digesting casein for muscle recovery during rest.'),
+ml('1:30 PM','Lunch','Mediterranean Chicken Bowl','~620 kcal','42g','58g','22g',
+['180g grilled chicken breast (smaller than training day)','100g cooked quinoa','Mixed greens, cucumber, cherry tomatoes, olives, feta','3 tbsp hummus','Lemon-tahini dressing'],
+['Grill chicken with Mediterranean herbs. Slice.','Build bowl: quinoa, greens, vegetables, chicken, hummus.','Drizzle dressing.'],
+'Rest day lunch - same protein but lighter carbs since you are not training.'),
+ml('5:00 PM','Snack','Sweet Corn Chicken Soup','~260 kcal','22g','28g','5g',
+['100g shredded chicken breast','1 cup corn kernels','3 cups chicken stock','1 egg, ginger, garlic, soy sauce, vinegar, sesame oil','Spring onion'],
+['Simmer stock with ginger, soy. Add corn, chicken, simmer 5 min.','Stir cornflour slurry to thicken.','Drizzle beaten egg slowly. Off heat - add vinegar, sesame oil, spring onion.'],
+'Light, warming snack. High protein, low calorie. Perfect rest day food.'),
+ml('8:00 PM','Dinner CHEAT MEAL','Whole Wheat Chicken Pizza','~580 kcal','42g','58g','18g',
+['Whole wheat thin crust pizza','Tomato sauce, mozzarella, grilled chicken','Vegetables: onion, capsicum, cherry tomatoes','Basil, chilli flakes'],
+['Preheat oven 230 deg C. Roll dough thin.','Top with sauce, cheese, chicken, vegetables. Bake 8-10 min.','Fresh basil to finish.'],
+'CHEAT MEAL. Saturday is when you let yourself enjoy pizza guilt-free. Homemade whole wheat with lean chicken keeps it from being a true diet-buster.'),
+ml('10:00 PM','Before Bed','Casein Pudding','~190 kcal','26g','12g','4g',
+['1 scoop chocolate casein','100ml cold milk','Mix to thick paste'],
+['Add casein to bowl. Add milk gradually while stirring until pudding-thick.'],
+'Slow-release protein for overnight muscle repair.')
+]}}
+];
+// FAVORITE FOODS RECIPE BANK
+// Healthy versions of: Momo, Chatpate, Tofu, Wraps, Pasta, Pizza, Corn, Soya chunks, Coffee, Chicken
+// Each recipe: r(category, name, time, cal, pro, carb, fat, ingredients, steps, tip)
+// category: 'breakfast' | 'lunch' | 'snack' | 'dinner' | 'preworkout'
+
+function r(cat,name,time,cal,pro,carb,fat,ing,steps,tip){return{cat,name,time,cal,pro,carb,fat,ing,steps,tip};}
+
+const RECIPE_BANK = [
+
+// ============ MOMO (Healthy Steamed Versions) ============
+r('lunch','Steamed Chicken Momo (Lean)','12:30 PM','~480 kcal','38g','52g','12g',
+['200g chicken breast minced (use a food processor or chop very fine)','1 cup finely chopped cabbage','1 small onion finely chopped','3 cloves garlic minced','1 inch ginger minced','2 tbsp fresh coriander chopped','1 tsp soy sauce','1/2 tsp salt','1/4 tsp black pepper','1/2 tsp sesame oil','12 momo wrappers (whole wheat if possible)','For dipping: blended tomato + garlic + chilli + timur (no oil)'],
+['FILLING: In a bowl, combine minced chicken, cabbage, onion, garlic, ginger, coriander, soy sauce, salt, pepper, and sesame oil. Mix thoroughly with your hands for 2-3 minutes - this develops the texture.','Refrigerate the filling for 15-20 minutes (helps it bind better).','Take a wrapper, place 1 tbsp filling in the centre. Pleat the edges and twist to seal at the top.','Set up a steamer with water boiling. Lightly oil the steamer rack to prevent sticking.','Steam momos in batches for 12-14 minutes until the wrapper is translucent and chicken is cooked through.','For dipping sauce: roast 2 tomatoes on a flame until charred. Blend with 1 garlic clove, 1 dried chilli, pinch of timur (Sichuan pepper), salt, fresh coriander, and 2 tbsp warm water. NO OIL needed.','Serve hot with the achar/dip.'],
+'STEAMED only - never fried (saves 200+ kcal per serving). Chicken breast keeps it lean compared to traditional buff momo. The cabbage adds volume and fiber. 6 momos = lunch portion, 4 momos = snack portion. Make a double batch and freeze raw - steam from frozen for 16 min when needed.'),
+
+r('snack','Tofu Veg Momo (Steamed)','4:30 PM','~340 kcal','22g','38g','11g',
+['150g firm tofu, crumbled','1/2 cup grated carrot','1/2 cup finely chopped cabbage','2 tbsp finely chopped spring onion','2 cloves garlic minced','1 tsp ginger minced','1 tbsp soy sauce','1/2 tsp salt','1/2 tsp white pepper','1 tsp sesame oil','10 momo wrappers'],
+['Press tofu in a clean cloth to remove excess water. Crumble into rice-sized pieces.','Mix tofu with all vegetables, garlic, ginger, soy sauce, salt, pepper, and sesame oil. Squeeze the mixture firmly - water will release.','Drain any excess water from the bowl.','Wrap and pleat as usual. Steam 10-12 minutes (vegetarian momos cook faster than meat).','Serve with the same achar dip from the chicken momo recipe.'],
+'Vegetarian protein from tofu (10g per 100g). Great option for variety. Press the tofu thoroughly - wet tofu makes soggy momos. The grated carrot adds natural sweetness so you do not need any sugar.'),
+
+r('lunch','Buff Mince Momo (Spinach)','1:00 PM','~520 kcal','42g','50g','15g',
+['200g lean buff (buffalo) mince - ask the masu pasal for the leanest cut','1 cup finely chopped fresh palungo (spinach)','1 small onion finely chopped','3 cloves garlic minced','1 inch ginger minced','2 tbsp coriander chopped','1 tsp soy sauce','1/2 tsp salt','1/2 tsp black pepper','1/2 tsp turmeric','12 wrappers'],
+['Squeeze chopped spinach in a cloth to remove water (this is critical - wet spinach = wet momos).','Mix buff mince with spinach, all aromatics, and seasonings. Knead for 2-3 minutes.','Refrigerate 20 min before wrapping.','Wrap and steam 14-15 minutes (buff takes longer than chicken to cook through).','Serve with dipping sauce.'],
+'Buff is lower fat than most red meats and packed with iron. Spinach adds iron and folate, plus locks in moisture. This is essentially a "loaded" momo - more protein per piece.'),
+
+// ============ CHATPATE (Healthy Versions) ============
+r('snack','Protein Chatpate Bowl','4:00 PM','~280 kcal','16g','38g','7g',
+['1/2 cup boiled chickpeas (chana)','1/4 cup boiled corn kernels','1/4 cup roasted bhuteko chana','1 small onion diced','1 small tomato diced','1/2 cucumber diced','2 tbsp coriander chopped','1 green chilli chopped','Juice of 1 lemon','1/2 tsp chaat masala','1/4 tsp roasted jeera powder','Pinch of salt','Pinch of red chilli powder','1 boiled egg sliced (optional - adds 6g protein)'],
+['In a large bowl, combine chickpeas, corn, roasted chana, all chopped vegetables, and coriander.','Squeeze lemon juice over everything. Add all spices. Toss thoroughly.','Top with sliced boiled egg if using.','Eat immediately - this gets soggy if you let it sit too long.'],
+'Replaces fried sev (the unhealthy element of street chatpate) with roasted chana for crunch. Still has all the tang and spice. Chickpeas + corn + egg = complete protein. The fiber keeps you full for hours.'),
+
+r('snack','Sprouted Mung Chatpate','3:30 PM','~250 kcal','18g','32g','5g',
+['1 cup sprouted mung beans (soak overnight, sprout 24 hrs in cloth)','1/2 cup boiled potato cubed','1 small onion diced','1 small tomato diced','1 green chilli','Coriander leaves','Juice of 1 lemon','1/2 tsp chaat masala','1/4 tsp jeera powder','Salt to taste','1 tbsp peanuts (raw or roasted)'],
+['Lightly steam sprouts for 2-3 minutes (or eat raw if you prefer crunch).','Combine with all other ingredients in a bowl.','Toss well. Eat within 10 minutes for best texture.'],
+'Sprouted mung is the perfect base - 24g protein per cup with very few calories. Way more nutritious than the typical chatpate base of fried noodles. The peanuts give the crunch you would normally get from sev.'),
+
+// ============ TOFU ============
+r('breakfast','Tofu Bhurji with Roti','8:00 AM','~480 kcal','30g','48g','18g',
+['200g firm tofu, crumbled','1 medium onion diced','1 medium tomato diced','1 green chilli chopped','1 tsp ginger-garlic paste','1/2 tsp turmeric','1 tsp jeera (cumin) powder','1/2 tsp coriander powder','1/4 tsp red chilli powder','1/2 tsp garam masala','Fresh coriander','1 tbsp mustard oil','Salt to taste','2 whole wheat rotis to serve'],
+['Press tofu in a cloth to remove water. Crumble into small pieces (mimicking scrambled eggs).','Heat oil in a pan. Add cumin seeds and let them splutter.','Add onion, saute 3-4 minutes until golden.','Add ginger-garlic paste, cook 1 min until fragrant.','Add tomato + all dry spices. Cook 3-4 minutes until tomatoes break down.','Add crumbled tofu. Mix gently to coat. Cook 4-5 minutes, stirring occasionally.','Finish with garam masala and coriander. Adjust salt.','Serve hot with rotis.'],
+'Vegan/vegetarian protein star - 20g protein per 100g of tofu. Tastes remarkably like egg bhurji when seasoned right. Great for days when you want a meat-free breakfast. The trick is squeezing all water from the tofu before crumbling.'),
+
+r('lunch','Crispy Sesame Tofu Bowl','1:00 PM','~580 kcal','32g','58g','22g',
+['200g firm tofu cut in 2cm cubes','1 tbsp cornflour (cornstarch)','Salt and pepper','1 tbsp vegetable oil','SAUCE: 2 tbsp soy sauce + 1 tbsp honey + 1 tbsp rice vinegar + 1 tsp sesame oil + 1 tsp grated ginger + 2 cloves garlic minced + 1 tsp cornflour + 3 tbsp water','1 tsp sesame seeds','150g cooked brown rice','1 cup mixed stir-fry vegetables (broccoli, bell pepper, snap peas)','Spring onion for garnish'],
+['Press tofu well. Toss cubes in cornflour, salt, and pepper.','Heat oil in a wide pan. Pan-fry tofu cubes 2-3 minutes per side until golden and crispy on all sides. Remove.','In the same pan, stir-fry vegetables 2-3 minutes - keep them crunchy.','Mix all sauce ingredients. Pour into pan, bring to simmer until thickened (1 min).','Return tofu to pan, toss to coat in sauce.','Serve over brown rice. Garnish with sesame seeds and spring onion.'],
+'The cornflour coating is what makes the tofu crispy - this is the secret restaurants use. The sauce is honey-balanced (not overly sweet) and adds maximum flavour with minimal calories. Way better than greasy takeaway tofu.'),
+
+r('dinner','Tofu Tikka Masala (Light)','7:30 PM','~520 kcal','28g','42g','22g',
+['200g firm tofu cubed','MARINADE: 3 tbsp Greek yogurt + 1 tsp ginger-garlic paste + 1/2 tsp turmeric + 1 tsp tikka masala powder + 1/2 tsp salt + 1/2 tsp red chilli powder + 1 tsp lemon juice','GRAVY: 1 onion pureed + 2 tomatoes pureed + 1 tsp ginger-garlic + 1/2 tsp turmeric + 1 tsp coriander powder + 1/2 tsp cumin + 1/2 tsp garam masala + 2 tbsp light cream + 1 tbsp ghee','1 roti or 100g cooked brown rice','Coriander to garnish'],
+['Marinate tofu cubes in yogurt + spices for at least 30 min (overnight is best).','Heat 1 tsp oil in pan. Pan-fry marinated tofu 2 min per side until golden. Remove.','GRAVY: Heat ghee. Add pureed onion, cook 6-8 min until golden.','Add ginger-garlic paste, cook 1 min.','Add tomato puree + spices. Cook 5-7 min until oil separates.','Add 1/4 cup water and tofu cubes. Simmer 8 min.','Stir in cream gently. Garnish with coriander.','Serve with roti or rice.'],
+'Restaurant tikka masala is loaded with butter, oil, and cream (often 700+ kcal per serving). This light version uses Greek yogurt marinade and just 2 tbsp of cream for the same flavour at half the calories. Tofu absorbs the marinade beautifully.'),
+
+// ============ WRAPS ============
+r('lunch','Chicken Tikka Wrap (Whole Wheat)','1:00 PM','~520 kcal','42g','45g','18g',
+['150g chicken breast cubed','MARINADE: 2 tbsp Greek yogurt + 1 tsp ginger-garlic paste + 1 tsp tikka masala + 1/2 tsp paprika + 1/2 tsp salt + lemon juice','1 large whole wheat tortilla/wrap','2 tbsp green chutney (mint + coriander + green chilli + lemon + salt blended)','Sliced onion, cucumber, tomato','Handful of lettuce','2 tbsp hung curd or Greek yogurt for drizzle'],
+['Marinate chicken in yogurt + spices for at least 30 min.','Heat a grill pan or tava. Cook chicken cubes 4-5 min per side until charred and cooked through. Set aside.','Warm the wrap on a dry pan 30 sec per side.','Spread green chutney on the wrap. Add lettuce, then chicken, then sliced veggies.','Drizzle with hung curd. Roll tightly.','Slice diagonally and serve.'],
+'Great alternative to dal bhat when you want something portable. Whole wheat wrap is much better than maida (white) wraps - more fiber, slower digestion. The tikka marinade adds maximum flavour with no fat. Bring it to work in foil.'),
+
+r('lunch','Tofu Hummus Wrap','1:00 PM','~480 kcal','22g','55g','18g',
+['100g firm tofu sliced and pan-grilled','1 large whole wheat wrap','3 tbsp hummus','Handful of baby spinach','1/2 cucumber sliced','1 tomato sliced','Handful of grated carrot','Pickled onions (optional)','Squeeze of lemon','Black pepper'],
+['Press tofu, slice into 1cm thick slabs. Pan-grill in 1 tsp oil with salt and pepper, 2-3 min per side.','Warm wrap. Spread hummus across the centre.','Layer spinach, tofu, cucumber, tomato, carrot.','Squeeze lemon, black pepper. Roll tightly.','Slice and serve.'],
+'A complete vegetarian meal in a wrap - protein from tofu and hummus, fiber from veggies, healthy fats from tahini. Hummus is far better than mayo for both flavour and nutrition.'),
+
+r('breakfast','Egg & Veggie Breakfast Wrap','7:30 AM','~440 kcal','28g','42g','18g',
+['3 eggs (or 4 egg whites + 1 whole egg for lower fat)','1 large whole wheat wrap','Handful of spinach chopped','1/4 onion diced','1/4 capsicum diced','1 tomato diced','30g feta or grated cheese','Salt and pepper','Hot sauce optional','1 tsp olive oil'],
+['Whisk eggs with salt and pepper.','Heat olive oil in non-stick pan. Add onion + capsicum, cook 2 min.','Add spinach, cook 30 sec until wilted.','Pour in eggs. Let bottom set 30 sec, then gently fold and scramble. Do not overcook - keep slightly soft.','Off heat, add tomato and cheese.','Warm the wrap. Add the egg mixture. Add hot sauce if you like. Roll tightly.','Slice and serve.'],
+'Perfect post-workout breakfast - eat within 45 min of training for best recovery. The wrap holds everything together for eating on the go. You can prep the veggies the night before.'),
+
+r('lunch','Soya Keema Wrap','1:00 PM','~500 kcal','28g','58g','15g',
+['1 cup dry soya granules (soya keema)','3 cups hot water for soaking','1 onion finely chopped','1 tomato finely chopped','1 tbsp ginger-garlic paste','1/2 tsp turmeric','1 tsp coriander powder','1/2 tsp cumin powder','1/2 tsp red chilli powder','1/2 tsp garam masala','1/2 cup green peas','1 large whole wheat wrap','Sliced onion, lemon, fresh coriander','1 tbsp oil','Salt'],
+['Soak soya granules in hot water for 10 min. Drain and squeeze out water firmly.','Heat oil in pan. Add onion, saute 4-5 min until golden.','Add ginger-garlic, cook 1 min.','Add tomato + all dry spices. Cook 3-4 min until tomatoes break down.','Add soya granules and peas. Mix well. Add 1/4 cup water. Cook 8-10 min until water evaporates and keema is well-coated.','Finish with garam masala and coriander.','Warm wrap, fill with keema, top with sliced onion and lemon. Roll.'],
+'Soya granules absorb flavours like a sponge - this tastes remarkably like meat keema with way less fat. Plus 50g of soya = 25g of plant protein. Make a big batch of the keema and use it in wraps, with rice, or in pasta through the week.'),
+
+// ============ PASTA (Healthy) ============
+r('lunch','Whole Wheat Chicken Pesto Pasta','1:00 PM','~620 kcal','42g','62g','22g',
+['80g whole wheat penne or fusilli','150g chicken breast diced','3 tbsp basil pesto (homemade if possible: blend 1 cup basil + 30g parmesan + 2 tbsp olive oil + 2 garlic + salt + pine nuts)','1 cup cherry tomatoes halved','Handful of baby spinach','1 tbsp olive oil','Salt and pepper','10g parmesan grated for topping','Lemon zest'],
+['Boil pasta in salted water until al dente (1 min less than packet time). Reserve 1/2 cup pasta water before draining.','Season chicken with salt and pepper. Heat olive oil in a large pan, sear chicken 4-5 min total until golden.','Add cherry tomatoes, cook 2 min until they start to burst.','Add drained pasta and pesto. Toss with a splash of pasta water to make a glossy sauce.','Add spinach, toss until wilted (30 sec).','Top with parmesan and lemon zest. Serve immediately.'],
+'Whole wheat pasta has 2x the fiber of regular pasta and a lower glycemic index - keeps you full longer. The pesto sauce is fat-but-healthy (olive oil, basil, parmesan) - way better than cream sauces. This is restaurant-quality food at home.'),
+
+r('lunch','High-Protein Pasta with Cottage Cheese Sauce','1:00 PM','~560 kcal','45g','60g','15g',
+['80g pasta (penne or rigatoni - high-protein pasta if available)','200g chicken breast diced','SAUCE: 200g cottage cheese + 30g parmesan + 1 garlic clove + pinch of salt + 1/4 cup pasta water + black pepper - blend until smooth','1 tsp olive oil','Handful of arugula or spinach','Cherry tomatoes halved','Red chilli flakes optional'],
+['Cook pasta in salted water. Reserve 1/2 cup pasta water before draining.','Sear chicken in olive oil with salt and pepper until cooked through, 4-5 min.','While cooking, blend cottage cheese, parmesan, garlic, salt, pepper, and pasta water until smooth and creamy.','In the chicken pan, add the cottage cheese sauce. Heat gently (do not boil or it splits).','Toss in cooked pasta. Add cherry tomatoes and arugula.','Top with chilli flakes and more parmesan. Serve.'],
+'Cottage cheese blended = creamy pasta sauce with 28g of protein per cup and just 200 kcal vs heavy cream which is 800+ kcal. This is the bodybuilders trick for high-protein pasta. You cannot taste cottage cheese - it just tastes creamy and rich.'),
+
+r('lunch','Tuna Pasta Salad','1:00 PM','~480 kcal','35g','50g','12g',
+['80g whole wheat pasta (cooked and cooled)','2 cans tuna in water (160g drained)','1/2 cup boiled corn kernels','1/2 cucumber diced','1 tomato diced','1/4 red onion diced','Handful of black olives sliced','DRESSING: 2 tbsp Greek yogurt + 1 tbsp olive oil + 1 tsp dijon mustard + lemon juice + salt + pepper + dried oregano','Fresh parsley'],
+['Cook pasta. Drain and rinse under cold water (this stops the cooking and prevents stickiness).','Drain tuna. Combine with all chopped vegetables in a large bowl.','Whisk dressing ingredients.','Toss pasta with tuna mixture and dressing. Add olives and parsley.','Refrigerate 15 min before eating - flavours develop. Eats well cold.'],
+'Cold pasta salad = perfect lunch box food. Make on Sunday for 2 days of lunches. Tuna canned in water is super lean - 25g protein for 100 kcal per can. Greek yogurt-based dressing replaces typical mayo (saves 200+ kcal).'),
+
+// ============ PIZZA (Healthy) ============
+r('dinner','Whole Wheat Chicken Pizza (Thin Crust)','7:00 PM','~580 kcal','42g','58g','18g',
+['BASE: 80g whole wheat flour + 1/4 tsp instant yeast + 1/4 tsp salt + 50ml warm water + 1 tsp olive oil (or use ready-made whole wheat pizza base or naan)','SAUCE: 3 tbsp tomato puree + 1 garlic minced + 1/2 tsp dried oregano + pinch of salt and chilli flakes','100g grilled chicken breast sliced','40g part-skim mozzarella','1/4 onion thinly sliced','1/4 capsicum sliced','5 cherry tomatoes halved','Handful of baby spinach','Fresh basil','Red chilli flakes'],
+['Mix flour + yeast + salt + water + oil. Knead 5 min into a smooth dough. Cover, rest 30 min in a warm spot. (Or skip this and use a ready-made base.)','Preheat oven to 230 deg C (highest setting) with a baking tray inside.','Roll dough thin (3-4 mm). Place on hot tray (or pizza stone if you have one).','Spread tomato sauce. Add cheese, chicken, vegetables.','Bake 8-10 min until crust is golden and cheese melts.','Top with fresh basil, chilli flakes, and a drizzle of olive oil. Slice and serve.'],
+'Pizza CAN be healthy - the trick is thin crust + lean protein + lots of veg + moderate cheese. Restaurant pizza often has 1500+ kcal per pizza. This homemade version is 600 kcal with 42g of protein. Way more satisfying because of the protein.'),
+
+r('lunch','Cottage Cheese Veggie Flatbread Pizza','12:30 PM','~440 kcal','28g','42g','18g',
+['1 large whole wheat tortilla or naan','3 tbsp tomato puree + dried herbs','60g cottage cheese (drain water if needed)','30g part-skim mozzarella','1/4 cup thinly sliced bell peppers','1/4 cup thinly sliced red onion','5 cherry tomatoes halved','Handful baby spinach','Fresh basil','Black pepper','1 tsp olive oil'],
+['Preheat oven to 220 deg C.','Place tortilla on a baking tray.','Spread tomato puree thinly. Sprinkle dried herbs.','Dot with cottage cheese. Top with mozzarella.','Add all vegetables.','Drizzle olive oil and black pepper.','Bake 8-10 min until edges are crispy and cheese melts.','Top with fresh basil and red chilli flakes.','Slice and serve immediately.'],
+'Cottage cheese is the secret weapon - it adds 14g of protein per pizza with very few calories. When baked it gets creamy and tangy like ricotta. Faster than making dough - 15 minutes from start to plate.'),
+
+r('snack','Tortilla Pizza (Quick)','5:00 PM','~360 kcal','22g','35g','13g',
+['1 whole wheat tortilla','2 tbsp tomato puree','30g shredded mozzarella','50g pre-cooked chicken or 1 boiled egg sliced','1/4 cup mixed vegetables (whatever you have)','Italian herbs','Chilli flakes'],
+['Heat a non-stick pan on medium heat (no oil needed).','Place tortilla in pan. Spread tomato puree on top.','Add cheese, chicken, veggies, and herbs.','Cover with a lid for 4-5 min until cheese melts and bottom is crispy.','Slide onto a plate. Slice into wedges.'],
+'Pizza in 5 minutes with no oven required. Perfect quick snack or post-workout protein hit. The pan method is faster than oven and gets the bottom super crispy.'),
+
+// ============ CORN ============
+r('snack','Sweet Corn Chicken Soup','5:00 PM','~280 kcal','24g','32g','5g',
+['100g chicken breast shredded','1 cup sweet corn kernels (boiled or frozen, thawed)','3 cups chicken stock','1 tbsp cornflour mixed in 3 tbsp water','1 egg lightly beaten','1 tsp ginger minced','1 tsp soy sauce','1 tsp white vinegar','Salt and white pepper','Spring onion to garnish','1 tsp sesame oil to finish'],
+['Bring stock to boil. Add ginger, soy sauce, salt, pepper.','Add corn kernels. Simmer 3 min.','Add shredded chicken. Cook 4-5 min until heated through.','Stir in cornflour slurry. Soup will thicken to desired consistency.','Slowly drizzle in beaten egg while stirring - creates beautiful egg ribbons.','Off heat, add vinegar and sesame oil.','Garnish with spring onion. Serve hot.'],
+'Restaurant chinese sweet corn soup tastes great but is loaded with MSG and oil. This homemade version has 24g of protein, real vegetables, and zero junk. Perfect light dinner or warm-you-up evening snack on cold days.'),
+
+r('snack','Roasted Corn Chaat','4:30 PM','~220 kcal','7g','38g','5g',
+['1 cup corn kernels (fresh or thawed frozen)','1/2 small onion finely chopped','1 small tomato finely chopped','1 tbsp coriander chopped','1 green chilli minced','1/2 tsp chaat masala','1/4 tsp roasted jeera powder','Squeeze of lemon','Pinch of red chilli powder','Pinch of salt','1 tsp olive oil or ghee'],
+['Heat oil in a pan. Add corn kernels. Pan-roast on high heat for 6-8 minutes, stirring occasionally, until some kernels char (this is the magic - real charred flavour).','Transfer to a bowl. While still warm, add all other ingredients. Toss well.','Eat immediately while warm.'],
+'Charred corn = sweet, smoky, addictive. This is a healthy alternative to greasy street chaat - same flavours, way less calories. Corn provides slow-release carbs perfect for afternoon energy without a sugar crash.'),
+
+r('lunch','Mexican Corn Bowl with Black Beans','1:00 PM','~580 kcal','32g','78g','15g',
+['150g cooked brown rice','1/2 cup black beans (canned, drained and rinsed)','1/2 cup corn kernels (boiled or charred)','100g grilled chicken breast diced (or 100g paneer for veg)','1/2 avocado diced','1/2 cup cherry tomatoes halved','1/4 cup chopped lettuce','2 tbsp Greek yogurt (acts as sour cream)','SALSA: 2 tbsp tomato chopped + 1 tbsp onion + 1 tbsp coriander + lime juice + salt + jalapeno if available','Squeeze of lime','Fresh coriander'],
+['Season chicken with salt + cumin + chilli powder. Grill 5 min per side. Slice.','Char corn in a hot dry pan for 3-4 min for that smoky flavour.','Make the salsa.','Build the bowl: rice base, then arrange beans, corn, chicken, avocado, tomatoes, lettuce in sections.','Top with salsa, Greek yogurt, lime squeeze, coriander.','Eat as you mix it all up.'],
+'A complete meal in one bowl - protein from chicken + beans, complex carbs from rice, healthy fats from avocado, fiber from veggies. Greek yogurt instead of sour cream saves 100+ kcal. This is meal-prep gold.'),
+
+// ============ SOYA CHUNKS ============
+r('lunch','Soya Chunks Curry with Rice','1:00 PM','~620 kcal','38g','75g','16g',
+['1 cup dry soya chunks (nutrela)','3 cups hot water','1/2 tsp salt for soaking','For the curry: 2 onions pureed + 2 tomatoes pureed + 1 tbsp ginger-garlic paste + 1/2 tsp turmeric + 1 tsp coriander powder + 1 tsp cumin powder + 1/2 tsp red chilli powder + 1/2 tsp garam masala','1 tbsp oil','1 bay leaf, 2 cardamom, 1 inch cinnamon (whole spices)','200g cooked rice','Coriander to garnish'],
+['Soak soya chunks in hot salted water for 15-20 minutes until they double in size and are soft.','Drain. Squeeze each chunk firmly to remove water (this is critical - wet chunks = watery curry).','Heat oil. Add whole spices, let them sizzle 30 sec.','Add pureed onion. Cook on medium 8-10 min until golden brown.','Add ginger-garlic, cook 1 min.','Add tomato puree + all dry spices. Cook 5-7 min until oil separates.','Add 1 cup water and squeezed soya chunks. Simmer covered 12-15 min until chunks have absorbed flavour.','Finish with garam masala and coriander.','Serve over rice.'],
+'Soya chunks (nutrela) is a Nepali/Indian staple that is often overlooked - 50g dry has 26g protein. This curry tastes remarkably like meat curry. Perfect alternative for non-veg days. The squeezing step is what separates great soya curry from soggy bad soya curry.'),
+
+r('lunch','Soya Keema Pulao','1:00 PM','~580 kcal','28g','82g','12g',
+['1 cup basmati rice','1 cup soya granules (soya keema)','1 onion sliced','2 tbsp ginger-garlic paste','1 tomato chopped','1/2 cup green peas','1/4 cup grated carrot','Whole spices: 1 bay leaf, 4 cloves, 4 cardamom, 1 cinnamon stick','1 tsp cumin','1 tsp coriander powder','1/2 tsp turmeric','1/2 tsp garam masala','1 tbsp oil + 1 tsp ghee','Coriander, mint, fried onion to garnish','Salt'],
+['Wash and soak rice for 20 min.','Soak soya granules in hot water 10 min. Squeeze dry.','Heat oil + ghee in a heavy pot. Add whole spices, sizzle 30 sec.','Add sliced onion, fry 5 min until golden.','Add ginger-garlic, cook 1 min.','Add tomato + dry spices. Cook 4-5 min until tomato breaks down.','Add soya granules and peas. Cook 5 min.','Add drained rice + grated carrot. Toss gently for 1 min.','Add 1.75 cups water + salt. Bring to boil, cover, reduce heat, cook 12 min.','Off heat, rest 5 min covered.','Fluff with fork. Garnish with coriander, mint, and fried onion. Serve with raita.'],
+'A pulao that combines fluffy basmati with high-protein soya keema. This makes a complete meal - rice + protein + veggies. Way better than plain rice or biryani. Perfect for batch cooking - tastes even better the next day.'),
+
+r('snack','Soya Manchurian (Baked, Healthy)','5:30 PM','~340 kcal','22g','38g','9g',
+['1 cup soya chunks (soaked, squeezed dry)','BATTER: 2 tbsp cornflour + 2 tbsp chickpea flour (besan) + 1/2 tsp salt + 1/2 tsp pepper + water to make thick coating batter','Spray of oil for baking','SAUCE: 1 onion diced + 1 capsicum diced + 4 cloves garlic minced + 1 tsp ginger minced + 2 tbsp soy sauce + 1 tbsp vinegar + 1 tbsp tomato ketchup + 1 tsp green chilli sauce + 1 tsp sugar + 1 cup water + 1 tbsp cornflour slurry','Spring onion green to garnish','1 tsp oil for sauce'],
+['Soak and squeeze soya chunks. Coat in batter.','BAKE method: Preheat oven 220 deg C. Place chunks on a lined tray. Spray with oil. Bake 18-20 min, flipping halfway, until crispy. (vs traditional deep-frying which adds 200+ kcal)','SAUCE: Heat oil. Add garlic + ginger, sizzle 30 sec.','Add onion + capsicum, stir-fry on high 2-3 min - keep crunchy.','Add soy sauce, vinegar, ketchup, chilli sauce, sugar, water. Bring to simmer.','Stir in cornflour slurry. Sauce thickens immediately.','Add baked soya chunks. Toss to coat.','Garnish with spring onion. Serve hot.'],
+'Indo-Chinese street food made HEALTHY - baked instead of deep-fried, loaded with vegetables. Tastes 95% as good as the restaurant version with half the calories. Great party food or evening snack.'),
+
+// ============ COFFEE ============
+r('preworkout','Pre-Workout Black Coffee + Banana','5:30 AM','~120 kcal','2g','28g','0g',
+['1 cup strong black coffee (espresso, French press, or strong filter)','1 ripe banana','1 tsp honey (optional)','Pinch of cinnamon (optional)'],
+['Brew coffee strong - either espresso shot, French press for 4 min, or 2x strength filter.','Eat banana. Drink coffee.','That is it.'],
+'The cleanest pre-workout fuel possible. Caffeine peaks in 30-45 min - drink 30-45 min before training. Banana provides quick carbs (28g). Combined with caffeine, this combo has been shown to boost performance 5-10 percent. Way cheaper and cleaner than commercial pre-workouts.'),
+
+r('snack','Protein Coffee Smoothie (Iced)','10:30 AM','~280 kcal','28g','25g','7g',
+['1 cup cold strong coffee or espresso (chilled)','1 scoop chocolate or vanilla whey protein','1 frozen banana','1 tsp cocoa powder (optional, intensifies chocolate)','1/2 cup ice','100ml milk or almond milk','1 tsp honey if needed'],
+['Brew coffee strong, refrigerate or shake with ice to cool quickly.','Add everything to blender.','Blend on high 30-45 sec until thick and smooth.','Pour in glass. Sprinkle cocoa on top.'],
+'A protein shake that tastes like a frappuccino but with 28g of muscle-building protein and 1/3 the calories of a Starbucks frap. The frozen banana makes it ice-cream thick. Perfect mid-morning when you need both caffeine and protein.'),
+
+r('preworkout','Bulletproof-Style Coffee with Ghee','5:45 AM','~180 kcal','1g','1g','20g',
+['1 cup strong black coffee, hot','1 tsp ghee (clarified butter)','1 tsp MCT oil or coconut oil (optional - boosts effect)','Pinch of cinnamon'],
+['Brew coffee strong.','Add ghee + oil to a tall mug.','Pour coffee in. Use a blender or milk frother for 20 seconds - this emulsifies the fats and creates a creamy frothy top.','Sprinkle cinnamon. Drink.'],
+'For days when you train fasted (low-carb morning) or want pure energy without a sugar crash. The fat keeps you satiated 4+ hours. Caffeine + saturated fat from ghee = sustained mental and physical energy. Skip if you have heart conditions.'),
+
+// ============ ADDITIONAL CHICKEN ============
+r('lunch','Chicken Sekuwa Bowl with Quinoa','1:00 PM','~580 kcal','45g','58g','15g',
+['200g chicken breast or thigh cubed','MARINADE: 2 tbsp Greek yogurt + 1 tbsp ginger-garlic paste + 1 tsp turmeric + 1 tsp cumin powder + 1 tsp coriander powder + 1/2 tsp red chilli powder + 1 tsp mustard oil + salt + 1/2 tsp timur (Sichuan pepper)','100g cooked quinoa','1/2 cup boiled corn','1/4 cucumber diced','1/2 tomato diced','1/4 red onion diced','Lemon wedges','Coriander and mint chutney'],
+['Marinate chicken in yogurt + spices for at least 1 hour (overnight is ideal).','Skewer chicken (or just cook in a hot pan).','Grill on a hot tava or barbecue 5-6 min per side until charred and cooked through.','In a bowl: quinoa base, then arrange chicken sekuwa, corn, cucumber, tomato, onion.','Drizzle mint chutney. Lemon wedges on the side.','Eat hot.'],
+'Sekuwa = Nepalese BBQ. The yogurt marinade makes the chicken super tender and the timur adds that signature Nepalese tingle. Quinoa instead of rice = 8g of protein in the carb base too. This is Nepalese fusion at its best.'),
+
+r('dinner','Honey Garlic Chicken with Brown Rice','7:30 PM','~620 kcal','42g','68g','15g',
+['200g chicken breast cubed','1 tbsp cornflour for coating','SAUCE: 4 cloves garlic minced + 2 tbsp honey + 2 tbsp soy sauce + 1 tbsp rice vinegar + 1/2 tsp ginger + 1/2 tsp red chilli flakes + 2 tbsp water + 1 tsp cornflour slurry','150g cooked brown rice','1 cup steamed broccoli','1 tsp sesame seeds','Spring onion to garnish','1 tbsp oil'],
+['Toss chicken in cornflour, salt, and pepper.','Heat oil in pan on medium-high. Sear chicken cubes 3-4 min per side until golden. Remove.','Same pan: add garlic, sizzle 30 sec.','Add honey + soy + vinegar + ginger + chilli flakes. Bring to simmer.','Add cornflour slurry. Sauce thickens immediately.','Return chicken. Toss to coat in glossy sauce.','Serve over brown rice with broccoli.','Garnish with sesame seeds and spring onion.'],
+'Restaurant-quality Asian chicken in 15 minutes. The cornflour coating gets the chicken perfectly crispy. Honey + soy + garlic is a classic combination that works every time. Brown rice + broccoli round out the meal.'),
+
+r('dinner','Chicken Tinola (Light Soup)','7:00 PM','~440 kcal','38g','35g','12g',
+['250g chicken thighs (skinless, bone-in pieces work best)','1 onion sliced','3 cloves garlic minced','1 inch ginger sliced','4 cups water or chicken stock','1 medium chayote or unripe papaya cubed','1 cup spinach or moringa leaves','2 tbsp fish sauce','Black pepper, salt','1 small green chilli (optional)','Coriander to finish'],
+['Heat 1 tsp oil in a deep pot. Saute onion, garlic, and ginger 2-3 minutes until fragrant.','Add chicken pieces. Cook 5 min, stirring, until lightly browned.','Add water/stock, fish sauce, salt, pepper. Bring to boil, then reduce to simmer.','Cover and simmer 20-25 min until chicken is tender.','Add chayote/papaya. Cook 8-10 min until tender.','Add spinach and chilli. Cook 2 min.','Off heat. Garnish with coriander.','Serve hot in bowls.'],
+'A Filipino-inspired light chicken soup - super hydrating, easy on the stomach, perfect dinner when you want something warming but not heavy. The ginger is anti-inflammatory and helps recovery. Great when you have a cold or are feeling under the weather.'),
+
+r('lunch','Grilled Chicken Salad with Avocado','12:30 PM','~520 kcal','40g','22g','30g',
+['180g chicken breast','MARINADE: 1 tsp paprika + 1 tsp garlic powder + 1/2 tsp dried oregano + 1/2 tsp salt + black pepper + 1 tbsp lemon juice + 1 tsp olive oil','Mixed greens (2-3 cups: lettuce, rocket, spinach)','1/2 avocado sliced','1/2 cup cherry tomatoes halved','1/4 cucumber sliced','1/4 red onion thinly sliced','30g feta crumbled (optional)','DRESSING: 1 tbsp olive oil + 1 tbsp lemon juice + 1 tsp dijon mustard + 1 tsp honey + salt + pepper','Pumpkin seeds for crunch'],
+['Pat chicken dry. Coat in marinade. Rest 15 min minimum.','Grill or pan-cook on medium-high 5-6 min per side until juices run clear.','Rest 3 min, then slice diagonally.','In a bowl: greens base, then arrange tomatoes, cucumber, onion, avocado.','Top with sliced chicken and feta.','Drizzle dressing. Sprinkle pumpkin seeds.','Toss gently and eat immediately.'],
+'A salad that actually fills you up - 40g of protein from the chicken, healthy fats from avocado, and crunch from seeds. Salads are usually unsatisfying because they lack protein - this one has more protein than most main courses.')
+];
+
+// Total recipe count check
+console.log("RECIPE_BANK loaded with " + RECIPE_BANK.length + " recipes");
+/* FitSystem v4 - Application Engine
+   - Event delegation (no inline onclicks)
+   - Browse + filter on workouts and nutrition tabs
+   - Today vs Browse toggle
+*/
+
+const YT = (q) => `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+const TP_NAMES = {bb:'Barbell',db:'Dumbbell',mc:'Machine',cb:'Cable',bw:'Bodyweight',bd:'Band'};
+const PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+
+const ICONS = {
+  home: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>',
+  dumbbell: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 8v8m12-8v8M3 10v4m18-4v4M9 12h6"/></svg>',
+  food: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 11l1-9h2l1 9m-4 0v10m4-10v10M14 2v20m0-20s4 1 4 6v3h-4m0 0v11"/></svg>',
+  user: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>',
+  search: '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>'
+};
+
+const DAY_NAMES_SHORT = {sun:'SUN',mon:'MON',tue:'TUE',wed:'WED',thu:'THU',fri:'FRI',sat:'SAT'};
+const DAY_NAMES_FULL = {sun:'Sunday',mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday'};
+
+const state = {
+  currentTab: 'home',
+  workoutMode: 'today', // 'today' or 'browse'
+  workoutDay: null,
+  workoutFilter: 'all', // 'all' or body part name
+  workoutSearch: '',
+  nutritionMode: 'today',
+  nutritionDay: null,
+  nutritionDiet: 'nepali',
+  nutritionFilter: 'all', // 'all','breakfast','lunch','snack','dinner','preworkout'
+  nutritionSearch: ''
+};
+
+function getTodayId(){
+  return ['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()];
+}
+
+function getTrainingDayId(){
+  // Today's training day, or next training day if today is rest
+  const todayId = getTodayId();
+  const today = DAYS.find(d => d.id === todayId);
+  if (today && today.type !== 'Rest') return todayId;
+  
+  const idx = DAYS.findIndex(d => d.id === todayId);
+  for (let i = 1; i <= 7; i++) {
+    const next = DAYS[(idx + i) % DAYS.length];
+    if (next.type !== 'Rest') return next.id;
+  }
+  return DAYS[0].id;
+}
+
+function getGreeting(){
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning,';
+  if (h < 17) return 'Good afternoon,';
+  return 'Good evening,';
+}
+
+function getWeightProgress(){
+  if (!PROFILE.targetWeight) return 0;
+  if (PROFILE.targetWeight > PROFILE.weight) {
+    const range = PROFILE.targetWeight - PROFILE.startWeight;
+    const progress = PROFILE.weight - PROFILE.startWeight;
+    return Math.max(0, Math.min(100, (progress/range)*100));
+  }
+  const range = PROFILE.startWeight - PROFILE.targetWeight;
+  const progress = PROFILE.startWeight - PROFILE.weight;
+  return Math.max(0, Math.min(100, (progress/range)*100));
+}
+
+// Categorize meal by time
+function getMealCategory(time){
+  const hour = parseInt(time.split(':')[0]);
+  const isAM = time.toLowerCase().includes('am');
+  const h24 = isAM ? (hour === 12 ? 0 : hour) : (hour === 12 ? 12 : hour + 12);
+  if (h24 < 11) return 'breakfast';
+  if (h24 < 15) return 'lunch';
+  if (h24 < 18) return 'snack';
+  return 'dinner';
+}
+
+// Get all body parts across all days (deduplicated)
+function getAllBodyParts(){
+  const set = new Set();
+  DAYS.forEach(d => {
+    if (d.bodyParts) d.bodyParts.forEach(bp => set.add(bp.name));
+  });
+  return Array.from(set);
+}
+
+// ===== INIT =====
+
+// Recipe Bank distribution - which day/diet each recipe belongs to
+// Format: [recipe_index_in_RECIPE_BANK, day_id, diet, meal_label]
+const DISTRIBUTIONS = [
+  // === Sunday (Push A for Ajeeb / rest for Nafisha) ===
+  [24, 'sun', 'nepali', 'Pre-Workout'],     // Bulletproof Coffee
+  [0, 'sun', 'nepali', 'Lunch'],            // Steamed Chicken Momo
+  [12, 'sun', 'western', 'Lunch'],          // Whole Wheat Chicken Pesto Pasta
+  [25, 'sun', 'western', 'Mid-Morning'],    // Protein Coffee Smoothie
+  
+  // === Monday ===
+  [5, 'mon', 'nepali', 'Breakfast'],        // Tofu Bhurji with Roti  
+  [21, 'mon', 'nepali', 'Lunch'],           // Soya Chunks Curry
+  [10, 'mon', 'western', 'Breakfast'],      // Egg Veggie Wrap
+  [27, 'mon', 'western', 'Dinner'],         // Honey Garlic Chicken
+  
+  // === Tuesday ===
+  [2, 'tue', 'nepali', 'Lunch'],            // Buff Mince Momo
+  [23, 'tue', 'nepali', 'Pre-Workout'],     // Pre-Workout Black Coffee
+  [20, 'tue', 'western', 'Lunch'],          // Mexican Corn Bowl
+  [17, 'tue', 'western', 'Snack'],          // Tortilla Pizza
+  
+  // === Wednesday ===
+  [22, 'wed', 'nepali', 'Lunch'],           // Soya Keema Pulao
+  [4, 'wed', 'nepali', 'Snack'],            // Sprouted Mung Chatpate
+  [13, 'wed', 'western', 'Lunch'],          // High-Protein Pasta with Cottage Cheese
+  [18, 'wed', 'western', 'Snack'],          // Sweet Corn Chicken Soup
+  
+  // === Thursday ===
+  [26, 'thu', 'nepali', 'Lunch'],           // Chicken Sekuwa Quinoa Bowl
+  [19, 'thu', 'nepali', 'Snack'],           // Roasted Corn Chaat
+  [14, 'thu', 'western', 'Lunch'],          // Tuna Pasta Salad
+  [6, 'thu', 'western', 'Lunch'],           // Crispy Sesame Tofu Bowl
+  
+  // === Friday ===
+  [3, 'fri', 'nepali', 'Snack'],            // Protein Chatpate Bowl
+  [7, 'fri', 'nepali', 'Dinner'],           // Tofu Tikka Masala
+  [9, 'fri', 'western', 'Lunch'],           // Tofu Hummus Wrap
+  [30, 'fri', 'western', 'Lunch'],          // Grilled Chicken Salad with Avocado
+  
+  // === Saturday (rest for Ajeeb / rest for Nafisha) ===
+  [1, 'sat', 'nepali', 'Snack'],            // Tofu Veg Momo
+  [11, 'sat', 'nepali', 'Lunch'],           // Soya Keema Wrap
+  [16, 'sat', 'western', 'Lunch'],          // Cottage Cheese Veggie Flatbread Pizza
+  [29, 'sat', 'western', 'Dinner'],         // Chicken Tinola
+  [8, 'sat', 'western', 'Lunch'],           // Chicken Tikka Wrap
+  [28, 'sat', 'nepali', 'Pre-Workout'],     // Pre-Workout Black Coffee + Banana
+  [15, 'sat', 'western', 'Snack'],          // Whole Wheat Chicken Pizza
+];
+
+function distributeRecipes(){
+  if (typeof RECIPE_BANK === 'undefined') return;
+  DISTRIBUTIONS.forEach(([idx, dayId, diet, label]) => {
+    const r = RECIPE_BANK[idx];
+    if (!r) return;
+    const day = DAYS.find(d => d.id === dayId);
+    if (!day || !day.meals) return;
+    if (!day.meals[diet]) day.meals[diet] = [];
+    // Only add if not already present (avoid duplicates on re-init)
+    const alreadyPresent = day.meals[diet].some(m => m.name === r.name);
+    if (alreadyPresent) return;
+    day.meals[diet].push({
+      time: r.time, label: label, name: r.name,
+      cal: r.cal, pro: r.pro, carb: r.carb, fat: r.fat,
+      ing: r.ing, steps: r.steps, tip: r.tip
+    });
+  });
+}
+
+function init(){
+  // Distribute recipe bank into day meals
+  distributeRecipes();
+  
+  state.workoutDay = getTrainingDayId();
+  state.nutritionDay = getTrainingDayId();
+  
+  renderTabBar();
+  renderHomeView();
+  renderWorkoutsView();
+  renderNutritionView();
+  renderProfileView();
+  attachEvents();
+  
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  }
+}
+
+// ===== TAB BAR =====
+function renderTabBar(){
+  document.getElementById('tabbar').innerHTML = `
+    <button class="tab active" data-tab="home">${ICONS.home}<span class="tab-label">Home</span></button>
+    <button class="tab" data-tab="workouts">${ICONS.dumbbell}<span class="tab-label">Workouts</span></button>
+    <button class="tab" data-tab="nutrition">${ICONS.food}<span class="tab-label">Nutrition</span></button>
+    <button class="tab" data-tab="profile">${ICONS.user}<span class="tab-label">Profile</span></button>
+  `;
+}
+
+function switchTab(name){
+  state.currentTab = name;
+  // When entering Workouts or Nutrition tab in Today mode, refresh to today
+  if (name === 'workouts' && state.workoutMode === 'today') {
+    state.workoutDay = getTrainingDayId();
+    renderWorkoutContent && renderWorkoutContent();
+  }
+  if (name === 'nutrition' && state.nutritionMode === 'today') {
+    state.nutritionDay = getTrainingDayId();
+    renderNutritionContent && renderNutritionContent();
+  }
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-'+name));
+  window.scrollTo({top:0});
+}
+
+// ===== HOME =====
+function renderHomeView(){
+  const todayId = getTodayId();
+  const today = DAYS.find(d => d.id === todayId);
+  const isRest = today.type === 'Rest';
+  const trainingDayId = getTrainingDayId();
+  const trainingDay = DAYS.find(d => d.id === trainingDayId);
+  const totalEx = trainingDay ? trainingDay.bodyParts.reduce((s,bp) => s + bp.exercises.length, 0) : 0;
+  
+  const weekHTML = DAYS.map(d => {
+    const isToday = d.id === todayId;
+    const isRestDay = d.type === 'Rest';
+    return `<div class="day-pill ${isToday?'today':''} ${isRestDay?'rest':''} ${PROFILE.theme==='female'?'female':''}" data-action="goto-day" data-day="${d.id}">
+      <div class="dp-name">${DAY_NAMES_SHORT[d.id]}</div>
+      <div class="dp-num">${isRestDay?'-':d.exCount||'-'}</div>
+      <div class="dp-dot"></div>
+    </div>`;
+  }).join('');
+  
+  const todayCardHTML = isRest ? `
+    <div class="today-card ${PROFILE.theme==='female'?'female':''}" data-action="goto-rest">
+      <div class="today-card-bg"></div>
+      <div class="today-label">REST DAY</div>
+      <div class="today-title">Recover &amp; Refuel</div>
+      <div class="today-meta">
+        <span>Active rest</span><span>&middot;</span><span>Light activity</span>
+      </div>
+      <button class="today-cta">View recovery tips &rsaquo;</button>
+    </div>` : `
+    <div class="today-card ${PROFILE.theme==='female'?'female':''}" data-action="goto-today-workout">
+      <div class="today-card-bg"></div>
+      <div class="today-label">TODAY'S WORKOUT</div>
+      <div class="today-title">${trainingDay.type}</div>
+      <div class="today-meta">
+        <span>${totalEx} exercises</span><span>&middot;</span><span>${trainingDay.dur}</span><span>&middot;</span><span>${trainingDay.focus}</span>
+      </div>
+      <button class="today-cta">Start workout &rsaquo;</button>
+    </div>`;
+  
+  document.getElementById('view-home').innerHTML = `
+    <div class="hero">
+      <div class="hero-greeting">${getGreeting()}</div>
+      <div class="hero-name">${PROFILE.name}<em>.</em></div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">${PROFILE.targetWeight ? 'Weight Progress' : 'Current Weight'}</div>
+        <div class="stat-value">${PROFILE.weight}<span class="stat-unit">kg</span>${PROFILE.targetWeight ? `<span style="font-size:11px;color:#666;margin-left:8px;font-weight:500">&rarr; ${PROFILE.targetWeight}kg</span>`:''}</div>
+        ${PROFILE.targetWeight ? `<div class="stat-progress"><div class="stat-progress-fill" style="width:${getWeightProgress()}%"></div></div>`:''}
+      </div>
+      <div class="stat">
+        <div class="stat-label">Daily Calories</div>
+        <div class="stat-value">${PROFILE.calories}<span class="stat-unit">kcal</span></div>
+        <div style="font-size:11px;color:#666;margin-top:6px;font-weight:500">${PROFILE.protein}g protein</div>
+      </div>
+    </div>
+    <div class="section">${todayCardHTML}</div>
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">This Week</div>
+        <a class="section-action" data-action="goto-browse-workouts">All workouts &rsaquo;</a>
+      </div>
+      <div class="week-grid">${weekHTML}</div>
+    </div>
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Today's Meals</div>
+        <a class="section-action" data-action="goto-browse-meals">Browse all &rsaquo;</a>
+      </div>
+      <div class="quick-meals" id="home-meals"></div>
+    </div>
+  `;
+  
+  // Render quick meals preview on home
+  renderHomeMeals();
+}
+
+function renderHomeMeals(){
+  const day = DAYS.find(d => d.id === getTrainingDayId());
+  const meals = (day.meals && day.meals[state.nutritionDiet]) || [];
+  if (meals.length === 0) {
+    document.getElementById('home-meals').innerHTML = `<div class="empty-state-mini">Rest day - eat at maintenance</div>`;
+    return;
+  }
+  // Show first 3 meals
+  const html = meals.slice(0, 3).map((m, i) => `
+    <div class="meal-card-mini" data-action="open-meal" data-day="${day.id}" data-diet="${state.nutritionDiet}" data-idx="${i}">
+      <div class="meal-mini-time">${m.time}</div>
+      <div class="meal-mini-info">
+        <div class="meal-mini-name">${m.name}</div>
+        <div class="meal-mini-macros">${m.cal} &middot; P:${m.pro}</div>
+      </div>
+      <div class="meal-mini-arrow">&rsaquo;</div>
+    </div>
+  `).join('');
+  document.getElementById('home-meals').innerHTML = html;
+}
+
+// ===== WORKOUTS =====
+function renderWorkoutsView(){
+  document.getElementById('view-workouts').innerHTML = `
+    <div class="topbar">
+      <div class="topbar-spacer"></div>
+      <div class="topbar-title">Workouts</div>
+      <div class="topbar-spacer"></div>
+    </div>
+    <div class="mode-toggle">
+      <button class="mode-tab active" data-action="set-workout-mode" data-mode="today">Today</button>
+      <button class="mode-tab" data-action="set-workout-mode" data-mode="browse">Browse</button>
+    </div>
+    <div id="workout-content"></div>
+  `;
+  renderWorkoutContent();
+}
+
+function renderWorkoutContent(){
+  const container = document.getElementById('workout-content');
+  
+  if (state.workoutMode === 'today') {
+    renderTodayWorkout(container);
+  } else {
+    renderBrowseWorkouts(container);
+  }
+}
+
+function renderTodayWorkout(container){
+  const day = DAYS.find(d => d.id === state.workoutDay);
+  
+  if (day.type === 'Rest') {
+    container.innerHTML = renderRestView();
+    return;
+  }
+  
+  let exNum = 0;
+  const html = `
+    <div style="padding:20px 20px 8px">
+      <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">${day.focus} &middot; ${DAY_NAMES_FULL[day.id]}</div>
+      <div style="font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px">${day.type}</div>
+      <div style="font-size:13px;color:#888;display:flex;gap:12px">
+        <span>${day.bodyParts.reduce((s,bp) => s + bp.exercises.length, 0)} exercises</span>
+        <span>&middot;</span>
+        <span>${day.dur}</span>
+      </div>
+    </div>
+    ${day.bodyParts.map(bp => {
+      const exHTML = bp.exercises.map((ex, exIdx) => {
+        exNum++;
+        const bpIdx = day.bodyParts.indexOf(bp);
+        return `
+          <div class="exercise-card" data-action="open-exercise" data-day="${day.id}" data-bp="${bpIdx}" data-ex="${exIdx}">
+            <div class="exercise-num">${exNum}</div>
+            <div class="exercise-info">
+              <div class="exercise-name">${ex.name}</div>
+              <div class="exercise-meta">
+                <span>${ex.sets}</span>
+                <span>&middot;</span>
+                <span>${ex.rest}</span>
+                <span>&middot;</span>
+                <span>${ex.vars.length} variations</span>
+              </div>
+            </div>
+            <div class="exercise-arrow">&rsaquo;</div>
+          </div>`;
+      }).join('');
+      return `
+        <div class="body-group">
+          <div class="body-group-head">
+            <div class="body-group-icon" style="--bp-color:${bp.color}"></div>
+            <div class="body-group-name">${bp.name}</div>
+            <div class="body-group-count">${bp.exercises.length} exercises</div>
+          </div>
+          <div class="exercise-list">${exHTML}</div>
+        </div>`;
+    }).join('')}
+  `;
+  container.innerHTML = html;
+}
+
+function renderBrowseWorkouts(container){
+  // Build day chips - include 'all' option
+  const dayOptions = ['all', ...DAYS.map(d => d.id)];
+  const dayChips = dayOptions.map(id => {
+    const isActive = id === state.workoutDay;
+    const label = id === 'all' ? 'All days' : DAY_NAMES_SHORT[id];
+    return `<button class="chip ${isActive?'active':''}" data-action="set-workout-day" data-day="${id}">${label}</button>`;
+  }).join('');
+  
+  // Get all body parts across all days for this profile
+  const allBodyParts = getAllBodyParts();
+  const filterChips = ['all', ...allBodyParts].map(bp => {
+    const isActive = bp === state.workoutFilter;
+    return `<button class="chip ${isActive?'active':''}" data-action="set-workout-filter" data-filter="${bp}">
+      ${bp === 'all' ? 'All' : bp}
+    </button>`;
+  }).join('');
+  
+  container.innerHTML = `
+    <div class="search-bar">
+      ${ICONS.search}
+      <input type="search" id="workout-search" placeholder="Search exercises..." value="${state.workoutSearch}" autocomplete="off">
+    </div>
+    <div class="filter-section">
+      <div class="filter-label">Day</div>
+      <div class="chips-scroll">${dayChips}</div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-label">Body Part</div>
+      <div class="chips-scroll">${filterChips}</div>
+    </div>
+    <div id="browse-workouts-results"></div>
+  `;
+  
+  // Attach search input listener
+  const searchInput = document.getElementById('workout-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.workoutSearch = e.target.value;
+      renderBrowseWorkoutsResults();
+    });
+  }
+  
+  renderBrowseWorkoutsResults();
+}
+
+function renderBrowseWorkoutsResults(){
+  const results = document.getElementById('browse-workouts-results');
+  if (!results) return;
+  
+  // Collect all exercises matching filters
+  const matches = [];
+  DAYS.forEach(day => {
+    if (!day.bodyParts) return;
+    if (state.workoutDay !== 'all' && day.id !== state.workoutDay) return;
+    
+    day.bodyParts.forEach((bp, bpIdx) => {
+      if (state.workoutFilter !== 'all' && bp.name !== state.workoutFilter) return;
+      
+      bp.exercises.forEach((ex, exIdx) => {
+        if (state.workoutSearch) {
+          const q = state.workoutSearch.toLowerCase();
+          const inName = ex.name.toLowerCase().includes(q);
+          const inTarget = ex.target.toLowerCase().includes(q);
+          const inVars = ex.vars.some(v => v.n.toLowerCase().includes(q));
+          if (!inName && !inTarget && !inVars) return;
+        }
+        matches.push({day, bp, bpIdx, ex, exIdx});
+      });
+    });
+  });
+  
+  if (matches.length === 0) {
+    results.innerHTML = `<div class="empty-state"><h3>No exercises found</h3><p>Try adjusting your filters or search.</p></div>`;
+    return;
+  }
+  
+  const showingAllDays = state.workoutDay === 'all';
+  
+  let html = `<div style="padding:8px 20px 4px;font-size:12px;color:#666;font-weight:500">${matches.length} exercise${matches.length===1?'':'s'} found${showingAllDays ? ' across all days' : ''}</div>`;
+  
+  if (showingAllDays) {
+    // Group by day, then body part within day
+    const byDay = {};
+    const dayOrder = [];
+    matches.forEach(m => {
+      if (!byDay[m.day.id]) { byDay[m.day.id] = {}; dayOrder.push(m.day.id); }
+      if (!byDay[m.day.id][m.bp.name]) byDay[m.day.id][m.bp.name] = { bp: m.bp, items: [] };
+      byDay[m.day.id][m.bp.name].items.push(m);
+    });
+    
+    dayOrder.forEach(dayId => {
+      const day = DAYS.find(d => d.id === dayId);
+      const dayLabel = day && day.type === 'Rest' ? `${DAY_NAMES_FULL[dayId]} (Rest Day)` : `${DAY_NAMES_FULL[dayId]} - ${day ? day.type : ''}`;
+      html += `<div class="day-section-head">${dayLabel}</div>`;
+      
+      const bpGroups = byDay[dayId];
+      Object.values(bpGroups).forEach(g => {
+        html += `
+          <div class="body-group">
+            <div class="body-group-head">
+              <div class="body-group-icon" style="--bp-color:${g.bp.color}"></div>
+              <div class="body-group-name">${g.bp.name}</div>
+              <div class="body-group-count">${g.items.length} exercise${g.items.length===1?'':'s'}</div>
+            </div>
+            <div class="exercise-list">
+              ${g.items.map((m, i) => `
+                <div class="exercise-card" data-action="open-exercise" data-day="${m.day.id}" data-bp="${m.bpIdx}" data-ex="${m.exIdx}">
+                  <div class="exercise-num">${i + 1}</div>
+                  <div class="exercise-info">
+                    <div class="exercise-name">${m.ex.name}</div>
+                    <div class="exercise-meta">
+                      <span>${m.ex.sets}</span>
+                      <span>&middot;</span>
+                      <span>${m.ex.rest}</span>
+                      <span>&middot;</span>
+                      <span>${m.ex.vars.length} variations</span>
+                    </div>
+                  </div>
+                  <div class="exercise-arrow">&rsaquo;</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>`;
+      });
+    });
+  } else {
+    // Single day - group by body part
+    const grouped = {};
+    matches.forEach(m => {
+      if (!grouped[m.bp.name]) grouped[m.bp.name] = {bp: m.bp, items: []};
+      grouped[m.bp.name].items.push(m);
+    });
+    
+    Object.values(grouped).forEach(g => {
+      html += `
+        <div class="body-group">
+          <div class="body-group-head">
+            <div class="body-group-icon" style="--bp-color:${g.bp.color}"></div>
+            <div class="body-group-name">${g.bp.name}</div>
+            <div class="body-group-count">${g.items.length} exercise${g.items.length===1?'':'s'}</div>
+          </div>
+          <div class="exercise-list">
+            ${g.items.map((m, i) => `
+              <div class="exercise-card" data-action="open-exercise" data-day="${m.day.id}" data-bp="${m.bpIdx}" data-ex="${m.exIdx}">
+                <div class="exercise-num">${i + 1}</div>
+                <div class="exercise-info">
+                  <div class="exercise-name">${m.ex.name}</div>
+                  <div class="exercise-meta">
+                    <span>${m.ex.sets}</span>
+                    <span>&middot;</span>
+                    <span>${m.ex.rest}</span>
+                    <span>&middot;</span>
+                    <span>${m.ex.vars.length} variations</span>
+                  </div>
+                </div>
+                <div class="exercise-arrow">&rsaquo;</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+    });
+  }
+  
+  results.innerHTML = html;
+}
+
+// ===== EXERCISE MODAL =====
+function openExerciseModal(dayId, bpIdx, exIdx){
+  const day = DAYS.find(d => d.id === dayId);
+  if (!day || !day.bodyParts) return;
+  const bp = day.bodyParts[bpIdx];
+  if (!bp) return;
+  const ex = bp.exercises[exIdx];
+  if (!ex) return;
+  
+  const variationsHTML = ex.vars.map((v, vi) => `
+    <div class="variation" data-action="toggle-variation" data-vi="${vi}">
+      <div class="variation-head">
+        <span class="variation-name">${v.n}</span>
+        <span class="variation-tag ${v.tp}">${TP_NAMES[v.tp]}</span>
+        <span class="variation-arrow">&#9662;</span>
+      </div>
+      <div class="variation-body">
+        <div class="variation-tip">${v.tip}</div>
+        <a class="yt-link" href="${v.yt}" target="_blank" rel="noopener">${PLAY_ICON} Watch Form Video</a>
+      </div>
+    </div>
+  `).join('');
+  
+  showModal(`
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <button class="modal-close" data-action="close-modal">&times;</button>
+      <div class="modal-title">${ex.name}</div>
+      <div class="modal-subtitle">${bp.name} &middot; ${DAY_NAMES_FULL[day.id]}</div>
+    </div>
+    <div class="modal-body">
+      <div class="detail-stats">
+        <div class="detail-stat"><div class="detail-stat-label">Sets</div><div class="detail-stat-value">${ex.sets}</div></div>
+        <div class="detail-stat"><div class="detail-stat-label">Rest</div><div class="detail-stat-value">${ex.rest}</div></div>
+        <div class="detail-stat"><div class="detail-stat-label">Vars</div><div class="detail-stat-value">${ex.vars.length}</div></div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">Target</div>
+        <div class="detail-form">${ex.target}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">Form &amp; Execution</div>
+        <div class="detail-form">${ex.form}</div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">${ex.vars.length} Variations</div>
+        <div class="variations">${variationsHTML}</div>
+      </div>
+    </div>
+  `);
+}
+
+// ===== NUTRITION =====
+function renderNutritionView(){
+  document.getElementById('view-nutrition').innerHTML = `
+    <div class="topbar">
+      <div class="topbar-spacer"></div>
+      <div class="topbar-title">Nutrition</div>
+      <div class="topbar-spacer"></div>
+    </div>
+    <div class="mode-toggle">
+      <button class="mode-tab active" data-action="set-nutrition-mode" data-mode="today">Today</button>
+      <button class="mode-tab" data-action="set-nutrition-mode" data-mode="browse">Browse</button>
+    </div>
+    <div id="nutrition-content"></div>
+  `;
+  renderNutritionContent();
+}
+
+function renderNutritionContent(){
+  const container = document.getElementById('nutrition-content');
+  if (state.nutritionMode === 'today') {
+    renderTodayNutrition(container);
+  } else {
+    renderBrowseNutrition(container);
+  }
+}
+
+function renderTodayNutrition(container){
+  // Validate state.nutritionDay - if 'all' or invalid (from browse mode), reset to today
+  let day = DAYS.find(d => d.id === state.nutritionDay);
+  if (!day) {
+    state.nutritionDay = getTrainingDayId();
+    day = DAYS.find(d => d.id === state.nutritionDay);
+  }
+  const meals = (day.meals && day.meals[state.nutritionDiet]) || [];
+  
+  const dietToggle = `
+    <div class="diet-toggle">
+      <button class="diet-tab ${state.nutritionDiet==='nepali'?'active':''}" data-action="set-diet" data-diet="nepali">Nepali</button>
+      <button class="diet-tab ${state.nutritionDiet==='western'?'active':''}" data-action="set-diet" data-diet="western">Western</button>
+    </div>`;
+  
+  const totals = day.totals || {p:PROFILE.protein+'g',c:PROFILE.carbs+'g',f:PROFILE.fat+'g',k:'~'+PROFILE.calories+' kcal'};
+  
+  const macrosCard = `
+    <div class="macros-card">
+      <div class="macros-head">
+        <div class="macros-title">${day.type === 'Rest' ? 'Rest Day Targets' : 'Daily Targets'}</div>
+        <div class="macros-cal">${totals.k}</div>
+      </div>
+      <div class="macros-grid">
+        <div class="macro protein"><div class="macro-value">${totals.p}</div><div class="macro-label">Protein</div></div>
+        <div class="macro carbs"><div class="macro-value">${totals.c}</div><div class="macro-label">Carbs</div></div>
+        <div class="macro fat"><div class="macro-value">${totals.f}</div><div class="macro-label">Fat</div></div>
+      </div>
+    </div>`;
+  
+  if (meals.length === 0) {
+    container.innerHTML = `
+      <div style="padding:20px 20px 0">
+        <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Today - ${DAY_NAMES_FULL[day.id]}</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:16px">${day.type}</div>
+      </div>
+      ${macrosCard}
+      <div class="empty-state"><h3>No meals yet</h3><p>Rest day nutrition is being prepared.</p></div>
+    `;
+    return;
+  }
+  
+  // Group meals by label (slot). Multiple meals at same slot = alternatives
+  const groups = {};
+  const order = [];
+  meals.forEach((m, i) => {
+    const slot = m.label.replace(' CHEAT MEAL', '').trim();
+    if (!groups[slot]) { groups[slot] = []; order.push(slot); }
+    groups[slot].push({meal: m, idx: i});
+  });
+  
+  // Sort slots by time of first meal in each
+  order.sort((a, b) => {
+    const ta = groups[a][0].meal.time;
+    const tb = groups[b][0].meal.time;
+    return parseTimeStr(ta) - parseTimeStr(tb);
+  });
+  
+  const slotsHTML = order.map(slot => {
+    const items = groups[slot];
+    const isMultiple = items.length > 1;
+    const firstTime = items[0].meal.time;
+    return `
+      <div class="meal-slot">
+        <div class="meal-slot-head">
+          <div class="meal-slot-time">${firstTime}</div>
+          <div class="meal-slot-name">${slot}</div>
+          ${isMultiple ? `<div class="meal-slot-count">${items.length} options</div>` : ''}
+        </div>
+        <div class="meal-slot-options">
+          ${items.map(it => renderMealCard(day.id, state.nutritionDiet, it.idx, it.meal)).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = `
+    <div style="padding:20px 20px 0">
+      <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">${DAY_NAMES_FULL[day.id]} - ${day.type}</div>
+      <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:16px">${day.type === 'Rest' ? 'Rest Day Meals' : "Today's Meals"}</div>
+    </div>
+    ${macrosCard}
+    ${dietToggle}
+    <div class="meal-slots">${slotsHTML}</div>
+  `;
+}
+
+function parseTimeStr(t){
+  // Convert '5:15 AM' to comparable number
+  const parts = t.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if (!parts) return 0;
+  let h = parseInt(parts[1]);
+  const m = parseInt(parts[2]);
+  const isPM = parts[3].toUpperCase() === 'PM';
+  if (h === 12) h = 0;
+  if (isPM) h += 12;
+  return h * 60 + m;
+}
+
+function renderMealCard(dayId, diet, idx, m){
+  const isCheat = m.label && m.label.includes('CHEAT MEAL');
+  return `
+    <div class="meal-card${isCheat ? ' cheat' : ''}" data-action="open-meal" data-day="${dayId}" data-diet="${diet}" data-idx="${idx}">
+      ${isCheat ? '<div class="cheat-badge">CHEAT</div>' : ''}
+      <div class="meal-info" style="flex:1">
+        <div class="meal-name">${m.name}</div>
+        <div class="meal-macros">
+          <span>${m.cal}</span>
+          <span>&middot;</span>
+          <span>P:${m.pro}</span>
+          <span>&middot;</span>
+          <span>C:${m.carb}</span>
+          <span>&middot;</span>
+          <span>F:${m.fat}</span>
+        </div>
+      </div>
+      <div class="meal-arrow">&rsaquo;</div>
+    </div>`;
+}
+
+function renderBrowseNutrition(container){
+  const dayChips = ['all', ...DAYS.map(d => d.id)].map(id => {
+    const isActive = id === state.nutritionDay;
+    const label = id === 'all' ? 'All days' : DAY_NAMES_SHORT[id];
+    return `<button class="chip ${isActive?'active':''}" data-action="set-nutrition-day" data-day="${id}">${label}</button>`;
+  }).join('');
+  
+  const cats = ['all','breakfast','lunch','snack','dinner','preworkout'];
+  const catLabels = {all:'All',breakfast:'Breakfast',lunch:'Lunch',snack:'Snacks',dinner:'Dinner',preworkout:'Pre-Workout'};
+  const catChips = cats.map(c => {
+    const isActive = c === state.nutritionFilter;
+    return `<button class="chip ${isActive?'active':''}" data-action="set-nutrition-filter" data-filter="${c}">${catLabels[c]}</button>`;
+  }).join('');
+  
+  container.innerHTML = `
+    <div class="search-bar">
+      ${ICONS.search}
+      <input type="search" id="meal-search" placeholder="Search meals or ingredients..." value="${state.nutritionSearch}" autocomplete="off">
+    </div>
+    <div class="diet-toggle">
+      <button class="diet-tab ${state.nutritionDiet==='nepali'?'active':''}" data-action="set-diet" data-diet="nepali">Nepali</button>
+      <button class="diet-tab ${state.nutritionDiet==='western'?'active':''}" data-action="set-diet" data-diet="western">Western</button>
+    </div>
+    <div class="filter-section">
+      <div class="filter-label">Day</div>
+      <div class="chips-scroll">${dayChips}</div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-label">Meal Type</div>
+      <div class="chips-scroll">${catChips}</div>
+    </div>
+    <div id="browse-meals-results"></div>
+  `;
+  
+  const searchInput = document.getElementById('meal-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.nutritionSearch = e.target.value;
+      renderBrowseMealsResults();
+    });
+  }
+  
+  renderBrowseMealsResults();
+}
+
+function renderBrowseMealsResults(){
+  const results = document.getElementById('browse-meals-results');
+  if (!results) return;
+  
+  const matches = [];
+  DAYS.forEach(day => {
+    if (!day.meals) return;
+    if (state.nutritionDay !== 'all' && day.id !== state.nutritionDay) return;
+    const meals = day.meals[state.nutritionDiet] || [];
+    meals.forEach((m, idx) => {
+      if (state.nutritionFilter !== 'all') {
+        if (getMealCategory(m.time) !== state.nutritionFilter) return;
+      }
+      if (state.nutritionSearch) {
+        const q = state.nutritionSearch.toLowerCase();
+        const inName = m.name.toLowerCase().includes(q);
+        const inIng = m.ing.some(i => i.toLowerCase().includes(q));
+        if (!inName && !inIng) return;
+      }
+      matches.push({day, meal: m, idx});
+    });
+  });
+  
+  if (matches.length === 0) {
+    results.innerHTML = `<div class="empty-state"><h3>No meals found</h3><p>Try changing filters or your search.</p></div>`;
+    return;
+  }
+  
+  // Group by day, then by slot within each day
+  const byDay = {};
+  const dayOrder = [];
+  matches.forEach(m => {
+    if (!byDay[m.day.id]) { byDay[m.day.id] = []; dayOrder.push(m.day.id); }
+    byDay[m.day.id].push(m);
+  });
+  
+  let html = `<div style="padding:8px 20px 4px;font-size:12px;color:#666;font-weight:500">${matches.length} meal${matches.length===1?'':'s'} found across ${dayOrder.length} day${dayOrder.length===1?'':'s'}</div>`;
+  
+  dayOrder.forEach(dayId => {
+    const dayMatches = byDay[dayId];
+    const dayName = DAY_NAMES_FULL[dayId];
+    const day = DAYS.find(d => d.id === dayId);
+    const dayLabel = day && day.type === 'Rest' ? `${dayName} (Rest Day)` : `${dayName} - ${day ? day.type : ''}`;
+    
+    // Group day's matches by slot
+    const slots = {};
+    const slotOrder = [];
+    dayMatches.forEach(m => {
+      const slot = m.meal.label.replace(' CHEAT MEAL', '').trim();
+      if (!slots[slot]) { slots[slot] = []; slotOrder.push(slot); }
+      slots[slot].push(m);
+    });
+    
+    // Sort slots by time
+    slotOrder.sort((a, b) => parseTimeStr(slots[a][0].meal.time) - parseTimeStr(slots[b][0].meal.time));
+    
+    html += `<div class="day-section-head">${dayLabel}</div>`;
+    html += `<div class="meal-slots">`;
+    
+    slotOrder.forEach(slot => {
+      const items = slots[slot];
+      const isMultiple = items.length > 1;
+      const firstTime = items[0].meal.time;
+      html += `
+        <div class="meal-slot">
+          <div class="meal-slot-head">
+            <div class="meal-slot-time">${firstTime}</div>
+            <div class="meal-slot-name">${slot}</div>
+            ${isMultiple ? `<div class="meal-slot-count">${items.length} option${items.length===1?'':'s'}</div>` : ''}
+          </div>
+          <div class="meal-slot-options">
+            ${items.map(it => renderMealCard(it.day.id, state.nutritionDiet, it.idx, it.meal)).join('')}
+          </div>
+        </div>`;
+    });
+    
+    html += `</div>`;
+  });
+  
+  results.innerHTML = html;
+}
+
+// ===== MEAL MODAL =====
+function openMealModal(dayId, diet, idx){
+  const day = DAYS.find(d => d.id === dayId);
+  if (!day || !day.meals) return;
+  const m = day.meals[diet][idx];
+  if (!m) return;
+  
+  showModal(`
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <button class="modal-close" data-action="close-modal">&times;</button>
+      <div class="modal-title">${m.name}</div>
+      <div class="modal-subtitle">${m.time} &middot; ${m.label}</div>
+    </div>
+    <div class="modal-body">
+      <div class="detail-stats">
+        <div class="detail-stat"><div class="detail-stat-label">Calories</div><div class="detail-stat-value">${m.cal.replace('~','').replace('kcal','').trim()}</div></div>
+        <div class="detail-stat"><div class="detail-stat-label">Protein</div><div class="detail-stat-value">${m.pro}</div></div>
+        <div class="detail-stat"><div class="detail-stat-label">Carbs</div><div class="detail-stat-value">${m.carb}</div></div>
+      </div>
+      <div class="recipe-section">
+        <div class="recipe-section-title">Ingredients</div>
+        <ul class="recipe-ingredients">
+          ${m.ing.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="recipe-section">
+        <div class="recipe-section-title">Instructions</div>
+        <ol class="recipe-steps">
+          ${m.steps.map(s => `<li>${s}</li>`).join('')}
+        </ol>
+      </div>
+      <div class="recipe-tip"><strong>Pro Tip:</strong> ${m.tip}</div>
+      <a class="yt-link" href="${YT(m.name + ' recipe')}" target="_blank" rel="noopener" style="margin-top:16px">${PLAY_ICON} Watch Recipe Video</a>
+    </div>
+  `);
+}
+
+
+function openRecipeModal(recipeIdx){
+  const r = RECIPE_BANK[recipeIdx];
+  if (!r) return;
+  
+  showModal(`
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <button class="modal-close" data-action="close-modal">&times;</button>
+      <div class="modal-title">${r.name}</div>
+      <div class="modal-subtitle">${r.time} - ${r.cat.charAt(0).toUpperCase() + r.cat.slice(1)} - Recipe Bank</div>
+    </div>
+    <div class="modal-body">
+      <div class="detail-stats">
+        <div class="detail-stat"><div class="detail-stat-label">Calories</div><div class="detail-stat-value">${r.cal.replace('~','').replace('kcal','').trim()}</div></div>
+        <div class="detail-stat"><div class="detail-stat-label">Protein</div><div class="detail-stat-value">${r.pro}</div></div>
+        <div class="detail-stat"><div class="detail-stat-label">Carbs</div><div class="detail-stat-value">${r.carb}</div></div>
+      </div>
+      <div class="recipe-section">
+        <div class="recipe-section-title">Ingredients</div>
+        <ul class="recipe-ingredients">
+          ${r.ing.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="recipe-section">
+        <div class="recipe-section-title">Instructions</div>
+        <ol class="recipe-steps">
+          ${r.steps.map(s => `<li>${s}</li>`).join('')}
+        </ol>
+      </div>
+      <div class="recipe-tip"><strong>Pro Tip:</strong> ${r.tip}</div>
+      <a class="yt-link" href="${YT(r.name + ' recipe')}" target="_blank" rel="noopener" style="margin-top:16px">${PLAY_ICON} Watch Recipe Video</a>
+    </div>
+  `);
+}
+
+// ===== PROFILE =====
+function renderProfileView(){
+  document.getElementById('view-profile').innerHTML = `
+    <div class="topbar"><div class="topbar-spacer"></div><div class="topbar-title">Profile</div><div class="topbar-spacer"></div></div>
+    <div style="padding:32px 20px 16px;text-align:center">
+      <div style="width:96px;height:96px;border-radius:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:42px;font-weight:800;color:#fff;box-shadow:0 12px 40px rgba(0,0,0,0.3);letter-spacing:-2px">${PROFILE.initial}</div>
+      <div style="font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px">${PROFILE.name}</div>
+      <div style="font-size:13px;color:#888">${PROFILE.tagline}</div>
+    </div>
+    <div style="padding:0 20px;margin-top:24px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px">
+        <div class="stat"><div class="stat-label">Weight</div><div class="stat-value">${PROFILE.weight}<span class="stat-unit">kg</span></div></div>
+        <div class="stat"><div class="stat-label">Height</div><div class="stat-value">${PROFILE.height}<span class="stat-unit">cm</span></div></div>
+        ${PROFILE.targetWeight?`<div class="stat"><div class="stat-label">Target</div><div class="stat-value">${PROFILE.targetWeight}<span class="stat-unit">kg</span></div></div>`:''}
+        <div class="stat"><div class="stat-label">Goal</div><div class="stat-value" style="font-size:14px;line-height:1.4">${PROFILE.goal}</div></div>
+      </div>
+      <div class="section-head"><div class="section-title">Daily Macros</div></div>
+      <div class="macros-card">
+        <div class="macros-head">
+          <div class="macros-title">Total Calories</div>
+          <div class="macros-cal">${PROFILE.calories} kcal</div>
+        </div>
+        <div class="macros-grid">
+          <div class="macro protein"><div class="macro-value">${PROFILE.protein}g</div><div class="macro-label">Protein</div></div>
+          <div class="macro carbs"><div class="macro-value">${PROFILE.carbs}g</div><div class="macro-label">Carbs</div></div>
+          <div class="macro fat"><div class="macro-value">${PROFILE.fat}g</div><div class="macro-label">Fat</div></div>
+        </div>
+      </div>
+      <div style="margin-top:24px">
+        <a href="index.html" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;background:rgba(20,20,24,0.7);border:1px solid rgba(255,255,255,0.06);border-radius:14px;color:#888;text-decoration:none;font-size:14px;font-weight:600">
+          &larr; Switch Profile
+        </a>
+      </div>
+      <div style="margin-top:24px;padding:16px;background:rgba(20,20,24,0.5);border:1px solid rgba(255,255,255,0.04);border-radius:12px;font-size:11px;color:#666;line-height:1.6;text-align:center">
+        FITSYSTEM v4.0 &middot; ${PROFILE.totalExercises} exercises &middot; ${PROFILE.totalMeals} meals
+      </div>
+    </div>
+  `;
+}
+
+// ===== REST VIEW =====
+function renderRestView(){
+  return `
+    <div class="rest-view">
+      <div class="rest-icon">&#127770;</div>
+      <div class="rest-title">Rest Day</div>
+      <p class="rest-subtitle">Muscles grow while you rest. Today is when your body repairs and comes back stronger.</p>
+      <ul class="rest-checklist">
+        <li>Sleep 8&ndash;9 hours</li>
+        <li>Light walk 20&ndash;30 min</li>
+        <li>Stretching or yoga 15&ndash;20 min</li>
+        <li>Foam rolling sore muscles</li>
+        <li>Eat at maintenance, keep protein high</li>
+        <li>Drink 3+ litres water</li>
+        <li>Take weekly progress photo</li>
+        <li>Meal prep for the week ahead</li>
+      </ul>
+    </div>`;
+}
+
+// ===== MODAL =====
+function showModal(html){
+  const modal = document.getElementById('modal');
+  modal.querySelector('.modal-sheet').innerHTML = html;
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ===== EVENT DELEGATION =====
+function attachEvents(){
+  document.addEventListener('click', (e) => {
+    // Tab switcher
+    const tab = e.target.closest('.tab[data-tab]');
+    if (tab) { switchTab(tab.dataset.tab); return; }
+    
+    // Close modal on backdrop click
+    if (e.target.id === 'modal') { closeModal(); return; }
+    
+    // Action elements (data-action)
+    const action = e.target.closest('[data-action]');
+    if (!action) return;
+    
+    const a = action.dataset.action;
+    
+    if (a === 'close-modal') { closeModal(); return; }
+    
+    if (a === 'goto-day') {
+      const day = DAYS.find(d => d.id === action.dataset.day);
+      if (day && day.type !== 'Rest') {
+        state.workoutMode = 'today';
+        state.workoutDay = action.dataset.day;
+        switchTab('workouts');
+        renderWorkoutsView();
+      }
+      return;
+    }
+    
+    if (a === 'goto-today-workout') {
+      state.workoutMode = 'today';
+      state.workoutDay = getTrainingDayId();
+      switchTab('workouts');
+      renderWorkoutsView();
+      return;
+    }
+    
+    if (a === 'goto-rest') {
+      state.workoutMode = 'today';
+      state.workoutDay = getTodayId();
+      switchTab('workouts');
+      renderWorkoutsView();
+      return;
+    }
+    
+    if (a === 'goto-browse-workouts') {
+      state.workoutMode = 'browse';
+      switchTab('workouts');
+      renderWorkoutsView();
+      return;
+    }
+    
+    if (a === 'goto-browse-meals') {
+      state.nutritionMode = 'browse';
+      switchTab('nutrition');
+      renderNutritionView();
+      return;
+    }
+    
+    if (a === 'set-workout-mode') {
+      state.workoutMode = action.dataset.mode;
+      // Today mode ALWAYS shows today's plan, never a browse-filtered day
+      if (state.workoutMode === 'today') {
+        state.workoutDay = getTrainingDayId();
+      }
+      document.querySelectorAll('#view-workouts .mode-tab').forEach(t => 
+        t.classList.toggle('active', t.dataset.mode === state.workoutMode));
+      renderWorkoutContent();
+      return;
+    }
+    
+    if (a === 'set-workout-day') {
+      state.workoutDay = action.dataset.day;
+      renderBrowseWorkouts(document.getElementById('workout-content'));
+      return;
+    }
+    
+    if (a === 'set-workout-filter') {
+      state.workoutFilter = action.dataset.filter;
+      renderBrowseWorkouts(document.getElementById('workout-content'));
+      return;
+    }
+    
+    if (a === 'open-exercise') {
+      const dayId = action.dataset.day;
+      const bpIdx = parseInt(action.dataset.bp);
+      const exIdx = parseInt(action.dataset.ex);
+      openExerciseModal(dayId, bpIdx, exIdx);
+      return;
+    }
+    
+    if (a === 'toggle-variation') {
+      action.classList.toggle('open');
+      return;
+    }
+    
+    if (a === 'set-nutrition-mode') {
+      state.nutritionMode = action.dataset.mode;
+      // Today mode ALWAYS shows today's plan, never a browse-filtered day
+      if (state.nutritionMode === 'today') {
+        state.nutritionDay = getTrainingDayId();
+      }
+      document.querySelectorAll('#view-nutrition .mode-tab').forEach(t => 
+        t.classList.toggle('active', t.dataset.mode === state.nutritionMode));
+      renderNutritionContent();
+      return;
+    }
+    
+    if (a === 'set-nutrition-day') {
+      state.nutritionDay = action.dataset.day;
+      renderBrowseNutrition(document.getElementById('nutrition-content'));
+      return;
+    }
+    
+    if (a === 'set-nutrition-filter') {
+      state.nutritionFilter = action.dataset.filter;
+      renderBrowseNutrition(document.getElementById('nutrition-content'));
+      return;
+    }
+    
+    if (a === 'open-recipe') {
+      const idx = parseInt(action.dataset.idx);
+      openRecipeModal(idx);
+      return;
+    }
+    
+    if (a === 'set-diet') {
+      state.nutritionDiet = action.dataset.diet;
+      renderNutritionContent();
+      renderHomeMeals();
+      return;
+    }
+    
+    if (a === 'open-meal') {
+      const dayId = action.dataset.day;
+      const diet = action.dataset.diet;
+      const idx = parseInt(action.dataset.idx);
+      openMealModal(dayId, diet, idx);
+      return;
+    }
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+</script>
+</body>
+</html>
