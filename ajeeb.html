@@ -15,6 +15,7 @@
 <style>
 :root { --accent: #ff3b30; --accent2: #ff6b5b; }
 :root { --accent: #e865a0; --accent2: #f59bc4; }
+:root { --accent: #e865a0; --accent2: #f59bc4; }
 :root {
   --accent: #e865a0;
   --accent2: #f59bc4;
@@ -1917,15 +1918,6 @@ function renderTabBar(){
 
 function switchTab(name){
   state.currentTab = name;
-  // When entering Workouts or Nutrition tab in Today mode, refresh to today
-  if (name === 'workouts' && state.workoutMode === 'today') {
-    state.workoutDay = getTrainingDayId();
-    renderWorkoutContent && renderWorkoutContent();
-  }
-  if (name === 'nutrition' && state.nutritionMode === 'today') {
-    state.nutritionDay = getTrainingDayId();
-    renderNutritionContent && renderNutritionContent();
-  }
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
   document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-'+name));
   window.scrollTo({top:0});
@@ -2768,11 +2760,15 @@ function attachEvents(){
     
     if (a === 'goto-day') {
       const day = DAYS.find(d => d.id === action.dataset.day);
-      if (day && day.type !== 'Rest') {
+      if (day) {
         state.workoutMode = 'today';
         state.workoutDay = action.dataset.day;
+        // Also sync nutrition view to that day so nutrition tab shows the same day
+        state.nutritionMode = 'today';
+        state.nutritionDay = action.dataset.day;
         switchTab('workouts');
         renderWorkoutsView();
+        renderNutritionView();
       }
       return;
     }
