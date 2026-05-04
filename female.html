@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+
+
+<title>Nafisha's Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0b15;--s:#161222;--s2:#1e1830;--bd:#2d2640;--t:#ede8f5;--t2:#9088a8;--a:#e865a0;--a2:#f59bc4}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--t);font-family:'Nunito Sans',sans-serif;min-height:100vh;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);-webkit-font-smoothing:antialiased}
+.ct{max-width:900px;margin:0 auto;padding:0 16px 100px;position:relative}
+.hero{padding:60px 0 24px;text-align:center;border-bottom:1px solid var(--bd)}
+.hero-l{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--a);text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,8vw,60px);line-height:1;color:#fff;font-weight:800}
+.hero h1 em{font-style:italic;color:var(--a)}
+.hero-s{display:flex;justify-content:center;gap:24px;margin-top:16px;flex-wrap:wrap}
+.hs{text-align:center}.hs .v{font-family:'Playfair Display',serif;font-size:22px;color:#fff}.hs .l{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+.dn{display:flex;gap:3px;padding:8px 4px calc(8px + env(safe-area-inset-bottom));position:fixed;bottom:0;left:0;right:0;background:var(--s);z-index:100;border-top:1px solid var(--bd);box-shadow:0 -4px 20px rgba(0,0,0,.5)}
+.db{flex:1;padding:8px 2px;border:1px solid var(--bd);border-radius:8px;background:var(--s2);color:var(--t2);font-family:'Nunito Sans',sans-serif;font-size:10px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;text-transform:uppercase;touch-action:manipulation}
+.db.act{background:var(--a);border-color:var(--a);color:#fff}
+.db .dn-n{display:block;font-size:12px}.db .dn-t{display:block;font-size:8px;margin-top:1px;opacity:.7}
+.st{display:flex;gap:0;margin-top:12px;border-bottom:2px solid var(--bd);position:sticky;top:0;background:var(--bg);z-index:50;padding-top:8px}
+.stb{padding:12px 20px;background:none;border:none;color:var(--t2);font-family:'Nunito Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;text-transform:uppercase;letter-spacing:1px;touch-action:manipulation}
+.stb.act{color:var(--a);border-bottom-color:var(--a)}
+.dc{display:none;animation:fi .3s ease}.dc.vis{display:block}
+.sc{display:none}.sc.vis{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.ov{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:16px}
+.oc{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center}
+.oc .ov-v{font-family:'Playfair Display',serif;font-size:18px;color:#fff}.oc .ov-l{font-size:9px;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.bg{margin-top:24px}
+.bh{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
+.bd-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.bt{font-family:'Playfair Display',serif;font-size:20px;color:#fff}
+.ec{background:var(--s);border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.eh{padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.en{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;margin-right:10px}
+.ei{flex:1}.ei-n{font-weight:700;font-size:13px;color:#fff}.ei-m{font-size:11px;color:var(--t2);margin-top:2px}
+.ea{font-size:16px;color:var(--t2);transition:transform .2s}.ec.open .ea{transform:rotate(180deg)}
+.eb{display:none;padding:0 14px 14px;border-top:1px solid var(--bd)}.ec.open .eb{display:block}
+.cue{background:var(--s2);padding:10px 12px;border-radius:8px;margin:10px 0;font-size:12px;line-height:1.7;border-left:3px solid var(--a)}.cue b{color:var(--a)}
+.vt{font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px}
+.vg{display:flex;flex-direction:column;gap:5px}
+.vi{background:var(--s2);border-radius:8px;overflow:hidden}
+.vi-h{padding:8px 10px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.vi-n{flex:1;font-weight:600;font-size:12px;color:#fff}
+.vi-t{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;margin-right:8px}
+.vi-a{font-size:12px;color:var(--t2);transition:transform .2s}.vi.open .vi-a{transform:rotate(180deg)}
+.vi-b{display:none;padding:0 10px 10px;font-size:12px;line-height:1.7;color:var(--t2)}.vi.open .vi-b{display:block}
+.tp-bb{background:#f5a05c20;color:#f5a05c}.tp-db{background:#7eb8f720;color:#7eb8f7}.tp-mc{background:#5cd6a020;color:#5cd6a0}.tp-cb{background:#f5d36e20;color:#f5d36e}.tp-bw{background:#b388f520;color:#b388f5}.tp-bd{background:#e865a020;color:#e865a0}
+.yb{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:#ff0000;color:#fff;border-radius:6px;text-decoration:none;font-size:11px;font-weight:700;margin-top:6px;touch-action:manipulation}.yb svg{width:12px;height:12px}
+.mc{background:var(--s);border:1px solid var(--bd);border-radius:10px;margin-top:10px;overflow:hidden}
+.mh{padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.mt-label{font-size:10px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:1px}
+.mn{font-weight:700;font-size:14px;color:#fff;margin-top:2px}
+.ml{font-size:11px;color:var(--t2);margin-top:2px}
+.ma{font-size:16px;color:var(--t2);transition:transform .2s}.mc.open .ma{transform:rotate(180deg)}
+.mb{display:none;padding:0 14px 14px;border-top:1px solid var(--bd)}.mc.open .mb{display:block}
+.il{list-style:none;padding:0;margin:10px 0}.il li{padding:5px 0;font-size:12px;border-bottom:1px solid var(--bd)}.il li:last-child{border-bottom:none}
+.sl{padding-left:18px;margin:10px 0}.sl li{padding:4px 0;font-size:12px;line-height:1.7}
+.tb{background:#e865a010;border-left:3px solid var(--a);padding:10px 12px;border-radius:0 8px 8px 0;margin-top:10px;font-size:11px;line-height:1.6;color:var(--t2)}.tb b{color:var(--a)}
+.rh{text-align:center;padding:50px 20px}
+.rh h2{font-family:'Playfair Display',serif;font-size:40px;color:#fff}
+.rh p{color:var(--t2);font-size:13px;margin-top:8px;max-width:500px;margin-inline:auto;line-height:1.7}
+.rl{margin-top:20px;text-align:left;max-width:400px;margin-inline:auto;list-style:none;padding:0}
+.rl li{padding:7px 0;font-size:13px;color:var(--t);border-bottom:1px solid var(--bd)}
+.ft{text-align:center;padding:28px 0;margin-top:32px;border-top:1px solid var(--bd);font-size:10px;color:var(--t2)}
+.dtg{display:flex;gap:8px;margin-bottom:14px}
+.dtb{flex:1;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--s);color:var(--t2);font-family:'Nunito Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:1px;touch-action:manipulation}
+.dtb.act{background:var(--a);color:#fff}
+@media(max-width:600px){.db .dn-t{display:none}.db{font-size:9px}.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+<a href="index.html" style="position:fixed;top:calc(env(safe-area-inset-top) + 12px);left:12px;z-index:200;background:rgba(22,18,34,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid #2d2640;color:#fff;text-decoration:none;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;font-family:'Nunito Sans',sans-serif;display:inline-flex;align-items:center;gap:6px">&lsaquo; Back</a>
+<div class="ct">
+<div class="hero"><div class="hero-l">Nafisha's Journey</div><h1>Sculpt &amp; <em>Shine</em></h1>
+<div class="hero-s"><div class="hs"><div class="v">61 kg</div><div class="l">Current</div></div><div class="hs"><div class="v">1,700</div><div class="l">Daily Kcal</div></div><div class="hs"><div class="v">105G</div><div class="l">Protein</div></div><div class="hs"><div class="v">Evening</div><div class="l">Gym Time</div></div></div></div>
+<div class="dn" id="dayNav"></div>
+<div id="app"></div>
+<div class="ft">Target: 1,700 kcal/day · 105g protein · 185g carbs · 55g fat · Evening training · Rest: Sat &amp; Sun</div>
+</div>
+<script>
+const COLORS={glute:'#e865a0',quad:'#b388f5',hamstring:'#f59bc4',calf:'#9c7cf5',back:'#7eb8f7',chest:'#f5a05c',shoulder:'#f5d36e',bicep:'#5cd6a0',tricep:'#64d4d4',core:'#e865a0',reardelt:'#7eb8f7',cardio:'#e865a0'};
+const Y=(q)=>`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+function ex(name,sets,rest,target,form,vars){return{name,sets,rest,target,form,vars};}
+function v(n,tp,q,tip){return{n,tp,yt:Y(q),tip};}
+function ml(time,label,name,cal,pro,carb,fat,ing,steps,tip){return{time,label,name,cal,pro,carb,fat,ing,steps,tip};}
+
+const DAYS=[
+// ========= MONDAY - UPPER A (STRENGTH) =========
+{id:'mon',name:'Monday',type:'Upper A',focus:'Strength',dur:'~50 min',exCount:6,
+totals:{p:'105g',c:'185g',f:'55g',k:'~1,700 kcal'},
+bodyParts:[
+{name:'Back',color:COLORS.back,exercises:[
+ex('Lat Pulldown','3 x 10','2 min','Lats, upper back - builds V-taper and posture',
+'Lean back slightly 15 degrees. Pull bar to upper chest. Squeeze shoulder blades together. Let bar come ALL the way up for full stretch. Pull with your elbows, not your hands.',
+[v('Wide-Grip Lat Pulldown','cb','lat pulldown for women form tutorial','Wider grip = more lat width. Creates that beautiful V-shaped back that makes your waist look smaller.'),
+v('Close-Grip Lat Pulldown','cb','close grip lat pulldown women form','V-handle to sternum. More lower lat. Can use more weight.'),
+v('Assisted Pull-Up Machine','mc','assisted pull up machine women beginner form','Counterweight helps you. Gradually reduce assistance until unassisted.'),
+v('Single-Arm Lat Pulldown','cb','single arm lat pulldown women form','D-handle, one arm. Best for mind-muscle connection with each lat.'),
+v('Resistance Band Pulldown','bd','resistance band lat pulldown home workout women','Loop band over pull-up bar. Pull down. Great for home workouts.'),
+v('Machine Pulldown','mc','machine lat pulldown women form tutorial','Plate-loaded, guided path. Focus purely on squeezing lats.')]),
+ex('Seated Cable Row','3 x 12','90 sec','Mid-back, rhomboids - posture builder',
+'Sit tall. Pull to navel. Let shoulders come forward for full stretch on the return. Squeeze back hard. Don\'t lean back excessively - the back muscles do the work, not momentum.',
+[v('Seated Cable Row (V-handle)','cb','seated cable row women form tutorial','Standard. Pull to belly button. Squeeze back.'),
+v('Chest-Supported DB Row','db','chest supported dumbbell row women form','Chest on incline bench eliminates cheating. Pure back work.'),
+v('Machine Seated Row','mc','machine seated row women form tutorial','Guided path. Great for beginners.'),
+v('Single-Arm DB Row','db','single arm dumbbell row women beginner form','One knee on bench. Row to hip. Safest row variation.'),
+v('Resistance Band Row','bd','resistance band seated row women form','Loop band around feet. Pull to stomach. Great at home.'),
+v('Inverted Row (Bodyweight)','bw','inverted row bodyweight women beginner progression','Hang under a bar, pull chest to bar. Adjustable difficulty by changing body angle.')])
+]},
+{name:'Shoulders',color:COLORS.shoulder,exercises:[
+ex('Dumbbell Shoulder Press','3 x 10','2 min','Front & side delts - shoulder definition',
+'Seated, bench at 85 degrees. Start DBs at ear level, palms forward. Press up to just short of lockout. Don\'t arch back. Controlled descent. Building shoulder caps creates the illusion of a smaller waist.',
+[v('Seated DB Shoulder Press','db','seated dumbbell shoulder press women form tutorial','Standard for shoulder development. Each arm independent.'),
+v('Machine Shoulder Press','mc','machine shoulder press women form tutorial','Guided path. No balance needed. Safe to push hard.'),
+v('Arnold Press','db','arnold press women form tutorial','Rotate palms as you press. Hits all three delt heads.'),
+v('Barbell Overhead Press','bb','barbell overhead press women form tutorial','Standing or seated. Builds serious strength. Start with just the bar.'),
+v('Smith Machine Press','mc','smith machine shoulder press women form','Fixed path, safe for learning and failure.'),
+v('Landmine Press','bb','landmine press women shoulder form tutorial','Shoulder-friendly angle. Great if regular pressing hurts.')]),
+ex('Lateral Raise','3 x 15','60 sec','Side delts - creates shoulder roundness',
+'Light weight. Lead with elbows to shoulder height. Creates that beautiful shoulder cap that gives your upper body shape and makes your waist look smaller.',
+[v('Dumbbell Lateral Raise','db','dumbbell lateral raise women form side delt','Classic. Thumbs slightly down, elbows lead. Light weight, perfect form.'),
+v('Cable Lateral Raise','cb','cable lateral raise women form tutorial','Constant tension - superior to DBs for side delt activation.'),
+v('Machine Lateral Raise','mc','machine lateral raise women form tutorial','Pads on elbows. Perfect path. Great for beginners.'),
+v('Resistance Band Lateral Raise','bd','resistance band lateral raise women home','Step on band, raise to sides. Perfect for home workouts.'),
+v('Leaning DB Lateral Raise','db','leaning dumbbell lateral raise women form','Hold pole, lean away. Increases bottom-range tension.'),
+v('Plate Front-to-Lateral','bw','plate front lateral raise women form','Hold plate, front raise then sweep to sides. Full delt coverage.')])
+]},
+{name:'Arms',color:COLORS.bicep,exercises:[
+ex('Bicep Curl','3 x 12','60 sec','Biceps - arm tone',
+'Pin elbows to sides. No swinging. Squeeze at top, 2-sec negative. Toned arms come from controlled reps, not heavy swinging.',
+[v('Dumbbell Alternating Curl','db','dumbbell bicep curl women beginner form','One arm at a time. Easy to control. Start with 2-4 kg.'),
+v('EZ-Bar Curl','bb','ez bar curl women bicep form tutorial','Angled grip is wrist-friendly. Both arms together.'),
+v('Cable Curl','cb','cable curl women bicep form tutorial','Constant tension throughout. Great pump.'),
+v('Machine Preacher Curl','mc','machine preacher curl women form','Arms on pad, no cheating. Pure isolation.'),
+v('Hammer Curl','db','hammer curl women arm toning form','Palms face each other. Builds forearm and arm width.'),
+v('Resistance Band Curl','bd','resistance band bicep curl women home','Stand on band. Curl up. Perfect at home.')]),
+ex('Tricep Pushdown','3 x 12','60 sec','Triceps - back-of-arm toning',
+'Elbows pinned to sides. Push down, squeeze at bottom. 2-sec return. This is what tones the back of your arms - the "jiggle zone."',
+[v('Cable Rope Pushdown','cb','cable rope pushdown women tricep toned arms','Split rope at bottom, squeeze. Most versatile variation.'),
+v('Cable V-Bar Pushdown','cb','v bar tricep pushdown women form','Handles most weight. Elbows pinned.'),
+v('Overhead DB Tricep Extension','db','overhead dumbbell tricep extension women form','One DB, both hands behind head. Full stretch of long head.'),
+v('Machine Tricep Extension','mc','machine tricep extension women form','Sit, push. No balance needed. Push to failure safely.'),
+v('Dumbbell Kickback','db','dumbbell tricep kickback women toned arms form','Hinge forward, extend DB backward. Light weight, quality squeeze.'),
+v('Bench Dips','bw','bench dips women tricep toning form','Hands on bench behind, lower body by bending elbows. Bodyweight.')])
+]}],
+meals:{
+nepali:[
+ml('12:00 PM','Lunch','Dal Bhat, Paneer Tarkari & Saag','~500 kcal','28g','58g','16g',
+['200g cooked rice (slightly less than full portion)','1 bowl masoor dal with light tempering','100g paneer tarkari with capsicum and onion','1 bowl seasonal saag (palungo/spinach)','1 tbsp achar'],
+['DAL: Same method - boil masoor with turmeric, temper with ghee + cumin + garlic.','PANEER: Cube 100g paneer -> saute with onion, capsicum, tomato, turmeric, cumin, salt.','SAAG: Oil + garlic -> greens + salt -> cover 5 min -> mash lightly.','Plate: SMALLER rice portion (3/4 of normal) - dal and protein are the stars.'],
+'For fat loss, reduce rice by 25%. Fill the gap with more dal and protein. Veg swap: 2-egg bhurji or rajma curry.'),
+ml('3:30 PM','Afternoon Snack','Dahi, Fruit & Almonds','~200 kcal','10g','22g','8g',
+['150g dahi (curd)','1 small apple or seasonal fruit','10 almonds (15g)'],
+['Scoop dahi. Slice fruit on top. Add almonds.'],
+'Bridge between lunch and pre-workout. Light but sustaining. Portable.'),
+ml('5:00 PM','Pre-Workout','Banana & Roti with PB','~250 kcal','8g','36g','9g',
+['1 banana','1 small roti with 1 tbsp peanut butter','Green tea or black coffee optional'],
+['Spread PB on roti. Eat with banana. 60-90 min before gym.'],
+'Don\'t skip - training on empty stomach won\'t help fat loss, just makes you weaker.'),
+ml('7:30 PM','Post-Workout Dinner','Rice, Fish Curry & Saag','~500 kcal','30g','52g','16g',
+['150g cooked rice or 2 small rotis','120g fish curry (macha) - tilapia or rohu','1 bowl palungo saag','Small bowl light dal'],
+['FISH CURRY: Rub fish with turmeric + salt. Lightly fry 1 min/side. Make gravy: onion -> ginger-garlic -> spices -> tomato -> water -> add fish -> simmer 10 min.','Saag + dal: standard methods.'],
+'Post-workout = most important meal. Muscles need protein + carbs to recover. Don\'t skip even if tired.'),
+ml('9:00 PM','Before Bed','Haldi Dudh & Almonds','~150 kcal','8g','12g','7g',
+['200ml low-fat milk','1/2 tsp turmeric, pinch black pepper','5 soaked almonds'],
+['Warm milk. Add turmeric + pepper. Eat almonds. Bed within 15 min.'],
+'Casein feeds muscles overnight. Turmeric aids recovery. Lighter portion for fat loss.')
+],
+western:[
+ml('12:00 PM','Lunch','Grilled Chicken Salad Bowl','~500 kcal','38g','35g','20g',
+['150g grilled chicken breast (or 200g tofu)','Large mixed salad: greens, cucumber, tomato, carrot, capsicum','100g cooked quinoa or brown rice','1 tbsp olive oil + lemon dressing','30g chickpeas'],
+['Season chicken: salt, pepper, paprika. Grill 5-6 min/side. Slice.','Prep salad. Toss with olive oil + lemon. Add quinoa and chickpeas. Top with chicken.'],
+'More salad, less grain. The protein and fats keep you full. Chickpeas add fiber.'),
+ml('3:30 PM','Afternoon Snack','Greek Yogurt & Berries','~200 kcal','18g','16g','6g',
+['150g Greek yogurt (low-fat)','Handful berries or 1 banana','10 almonds'],
+['Yogurt in bowl. Add berries and almonds.'],
+'High protein, low calorie. Perfect afternoon bridge.'),
+ml('5:00 PM','Pre-Workout','Banana & Toast with PB','~250 kcal','8g','34g','10g',
+['1 banana','1 slice whole wheat toast','1 tbsp peanut butter','Black coffee or green tea optional'],
+['PB on toast. Eat with banana. 60-90 min before gym.'],
+'Simple carbs + fat for sustained energy. Coffee enhances fat burning during exercise.'),
+ml('7:30 PM','Post-Workout Dinner','Baked Fish, Sweet Potato & Broccoli','~500 kcal','32g','42g','18g',
+['120g baked fish (tilapia/salmon) or 150g tofu','150g sweet potato, roasted','1 cup steamed broccoli','1 tbsp olive oil','Lemon squeeze'],
+['Preheat oven 200 degreesC. Cube sweet potato, toss oil + salt, roast 15 min.','Season fish. Add to tray with broccoli after 15 min. Roast 12 min more.'],
+'One-tray meal. Minimal cleanup. Fish = lean protein, sweet potato = complex carbs.'),
+ml('9:00 PM','Before Bed','Cottage Cheese & Walnuts','~150 kcal','15g','5g','8g',
+['100g cottage cheese (low-fat)','10g walnuts (~3-4 halves)'],
+['Cheese in bowl. Add walnuts. Eat. Sleep.'],
+'Slow-digesting casein feeds muscles overnight. Walnuts = omega-3.')
+]
+}},
+
+// ========= TUESDAY - LOWER A (GLUTE + QUAD) =========
+{id:'tue',name:'Tuesday',type:'Lower A',focus:'Glute+Quad',dur:'~55 min',exCount:6,
+totals:{p:'105g',c:'185g',f:'55g',k:'~1,700 kcal'},
+bodyParts:[
+{name:'Glutes',color:COLORS.glute,exercises:[
+ex('Hip Thrust','4 x 10','2 min','Glute max - THE #1 glute builder',
+'Upper back on bench, feet flat, hip-width apart. Drive through heels, squeeze glutes HARD at top for 2 seconds. Chin tucked - don\'t hyperextend lower back. The top position should feel like a full glute cramp.',
+[v('Barbell Hip Thrust','bb','barbell hip thrust women glute form tutorial','The gold standard. Use a bar pad. Start with just the bar and progress.'),
+v('Dumbbell Hip Thrust','db','dumbbell hip thrust women form tutorial','DB on hips. Easier to set up than barbell. Perfect for beginners.'),
+v('Smith Machine Hip Thrust','mc','smith machine hip thrust women form','Fixed path. Easier to load heavy without bar rolling.'),
+v('Hip Thrust Machine','mc','hip thrust machine women glute form tutorial','If your gym has one - easiest setup, just sit and thrust.'),
+v('Glute Bridge (Floor)','bw','glute bridge bodyweight women form tutorial','Lie flat, bridge up. No bench needed. Start here if hip thrusts feel awkward.'),
+v('Single-Leg Hip Thrust','bw','single leg hip thrust women glute form','One leg. Doubles the difficulty. Fixes left-right imbalances.')]),
+ex('Cable Kickback / Glute Isolation','3 x 15/leg','60 sec','Glute max, glute med - isolation',
+'Slight forward lean, kick straight back. Squeeze at top. Don\'t arch lower back - all movement from the glute. Light weight, feel every rep.',
+[v('Cable Glute Kickback','cb','cable glute kickback women form tutorial','Low cable, ankle strap. Lean forward slightly. Squeeze at top.'),
+v('Machine Glute Kickback','mc','machine glute kickback women form tutorial','Guided path. Just push back and squeeze.'),
+v('Donkey Kick (Bodyweight)','bw','donkey kick women glute bodyweight form','On all fours, kick one heel toward ceiling. Squeeze glute.'),
+v('Resistance Band Kickback','bd','resistance band glute kickback women form','Band around ankles. Kick back against resistance.'),
+v('Smith Machine Kickback','mc','smith machine glute kickback women form','Unique: set bar low, push back with one foot.'),
+v('Fire Hydrants','bw','fire hydrants women glute med form tutorial','On all fours, raise knee to side. Targets glute medius - the side glute for hip shape.')])
+]},
+{name:'Quadriceps',color:COLORS.quad,exercises:[
+ex('Goblet Squat','3 x 12','2 min','Quads, glutes - best beginner squat',
+'Hold DB at chest. Sit DEEP between your legs - go to parallel or below. Chest up, knees track over toes. The front load forces perfect posture. This is the safest, most effective squat for beginners.',
+[v('Goblet Squat (Dumbbell)','db','goblet squat women beginner form tutorial','THE squat to learn first. Front load = automatic good form. Start with 5-8 kg.'),
+v('Barbell Back Squat','bb','barbell back squat women form tutorial','Once goblet is mastered. Bar on traps, go to parallel. The queen of lower body exercises.'),
+v('Smith Machine Squat','mc','smith machine squat women form tutorial','Fixed path = no balance worry. Feet slightly forward.'),
+v('Leg Press Machine','mc','leg press women form tutorial quad glute','Feet shoulder-width, mid-platform. Full depth. Don\'t lock knees.'),
+v('Hack Squat Machine','mc','hack squat machine women quad form','Back on pad. Best quad isolation machine.'),
+v('Bodyweight Squat (High Rep)','bw','bodyweight squat women form tutorial','No equipment. 20-30 reps. Great for warming up or home workouts.')]),
+ex('Leg Extension','3 x 15','60 sec','Quads isolation - thigh definition',
+'Sit back fully. Extend to full lockout, pause 1 sec. 3-sec negative. Pure quad isolation - defines the front of your thighs.',
+[v('Leg Extension Machine','mc','leg extension women quad form tutorial','Standard. Full extension, pause, slow negative.'),
+v('Single-Leg Extension','mc','single leg extension women form','One leg. Fix imbalances. Half the weight.'),
+v('Sissy Squat','bw','sissy squat women quad isolation form','Hold something, lean back, bend at knees. Intense quad isolation.'),
+v('DB Leg Extension (Seated)','db','dumbbell leg extension seated women form','Bench edge, DB between feet. Extend.'),
+v('Wall Sit (Timed Hold)','bw','wall sit women quad burn form','Back against wall, thighs parallel. Hold 30-60 sec. Pure burn.'),
+v('Reverse Nordic Curl','bw','reverse nordic curl women quad form','Kneeling, lean back. Zero equipment. Very challenging.')])
+]},
+{name:'Hamstrings + Calves',color:COLORS.hamstring,exercises:[
+ex('Romanian Deadlift','3 x 10','2 min','Hamstrings, glutes - essential for backside sculpting',
+'Soft knees, push hips BACK. Feel hamstring stretch. DBs slide close to legs. Squeeze glutes to stand. Back stays flat. This shapes the back of your legs like no other exercise.',
+[v('Dumbbell RDL','db','dumbbell romanian deadlift women form tutorial','Hold DBs, hinge at hips. Feel the stretch. Best beginner RDL variation.'),
+v('Barbell RDL','bb','barbell romanian deadlift women form tutorial','More weight potential. Shoulder-width overhand grip.'),
+v('Single-Leg DB RDL','db','single leg dumbbell rdl women balance form','One leg. Incredible for balance and targeting each leg individually.'),
+v('Smith Machine RDL','mc','smith machine rdl women form tutorial','Guided path. Focus on the stretch without worrying about balance.'),
+v('Cable Pull-Through','cb','cable pull through women glute hamstring form','Face away from low cable. Constant tension throughout.'),
+v('Kettlebell Swing','db','kettlebell swing women form tutorial','Explosive hip hinge. Cardio + hamstring work combined.')]),
+ex('Standing Calf Raise','3 x 20','60 sec','Gastrocnemius - calf definition',
+'Full stretch at bottom, full squeeze at top. High reps needed for calves. Slow and controlled.',
+[v('Standing Calf Raise Machine','mc','standing calf raise women form tutorial','Shoulders under pads. Full ROM.'),
+v('Smith Machine Calf Raise','mc','smith machine calf raise women form','Step block under bar path.'),
+v('Seated Calf Raise','mc','seated calf raise women form tutorial','Targets soleus. Pad on knees.'),
+v('DB Calf Raise (On Step)','db','dumbbell calf raise step women form','DB in hand, one foot on step edge.'),
+v('Leg Press Calf Raise','mc','leg press calf raise women form','Balls of feet on platform bottom.'),
+v('Bodyweight Single-Leg Calf','bw','single leg calf raise bodyweight women','Wall for balance. Full ROM each leg.')])
+]}],
+meals:{
+nepali:[
+ml('12:00 PM','Lunch','Dal Bhat, Egg Bhurji & Bodi Tarkari','~500 kcal','26g','60g','14g',
+['200g rice, masoor dal, 2-egg bhurji (scrambled with onion, tomato, chilli)','Bodi (long beans) tarkari, achar'],
+['Standard dal method. Scramble 2 eggs with onion, tomato, turmeric, chilli. Bodi: oil -> cumin -> beans + turmeric -> water -> cover 10 min.'],
+'Eggs are the cheapest quality protein. 2 eggs + dal = 22g protein for this meal.'),
+ml('3:30 PM','Afternoon','Sattu Drink & Apple','~200 kcal','16g','18g','6g',
+['30g sattu in 250ml cold water with salt + lemon','1 small apple'],
+['Mix sattu + water + salt + lemon. Stir and drink. Eat apple.'],
+'Lighter sattu portion for fat loss. Still packs 12-15g protein.'),
+ml('5:00 PM','Pre-Workout','Dates & Almonds with Green Tea','~240 kcal','5g','42g','8g',
+['3 dates, 6 almonds, 1 cup green tea'],
+['Eat dates and almonds. Sip green tea.'],
+'Dates = fast energy. Almonds = sustained fuel. Green tea boosts metabolism.'),
+ml('7:30 PM','Post-Workout','Rice, Chicken Curry & Saag','~500 kcal','32g','50g','16g',
+['150g rice, 120g chicken curry (lighter portion), palungo saag, light dal'],
+['Standard chicken curry and saag methods from the male plan - same recipes, slightly smaller portions.'],
+'Same quality meals, slightly smaller portions = calorie deficit without feeling deprived.'),
+ml('9:00 PM','Before Bed','Warm Milk & Soaked Almonds','~150 kcal','8g','10g','7g',
+['200ml low-fat milk + turmeric + pepper','5 almonds'],
+['Warm milk, add turmeric + pepper. Eat almonds. Sleep.'],
+'Lighter bedtime snack for fat loss goals.')
+],
+western:[
+ml('12:00 PM','Lunch','Turkey & Avocado Wrap with Side Salad','~500 kcal','35g','38g','20g',
+['120g sliced turkey breast, 1 whole wheat wrap','1/4 avocado, lettuce, tomato, mustard','Side salad with olive oil + lemon dressing'],
+['Layer turkey, avocado, lettuce, tomato on wrap. Roll. Salad on side.'],
+'High protein, moderate carbs. Avocado provides satisfying healthy fats.'),
+ml('3:30 PM','Afternoon','Apple & Almond Butter','~200 kcal','4g','22g','12g',
+['1 apple sliced','1.5 tbsp almond butter'],
+['Slice apple. Dip in almond butter.'],
+'Simple, satisfying, portable.'),
+ml('5:00 PM','Pre-Workout','Banana & Small Protein Shake','~240 kcal','16g','34g','3g',
+['1 banana','1/2 scoop whey in 150ml water'],
+['Shake whey + water. Eat banana.'],
+'Light fuel. Half-scoop provides amino acids without heaviness.'),
+ml('7:30 PM','Post-Workout','Grilled Salmon Salad with Quinoa','~500 kcal','34g','38g','20g',
+['120g grilled salmon','Large mixed salad','80g cooked quinoa','1 tbsp olive oil dressing, lemon'],
+['Season salmon. Grill/bake 12 min. Assemble salad bowl with quinoa.'],
+'Omega-3 from salmon supports fat metabolism and reduces inflammation.'),
+ml('9:00 PM','Before Bed','Cottage Cheese & Berries','~150 kcal','14g','10g','5g',
+['100g low-fat cottage cheese','Small handful berries'],
+['Cheese + berries. Eat. Sleep.'],
+'Light, protein-rich bedtime snack.')
+]
+}},
+
+// ========= WEDNESDAY - CARDIO + CORE =========
+{id:'wed',name:'Wednesday',type:'Cardio+Core',focus:'Fat Burn',dur:'~45 min',exCount:6,
+totals:{p:'105g',c:'185g',f:'55g',k:'~1,700 kcal'},
+bodyParts:[
+{name:'Cardio (25 min)',color:COLORS.cardio,exercises:[
+ex('Cardio Session - Pick One','25 min','-','Fat burning zone - heart rate 130-150 BPM',
+'Pick ONE option and do it for 25 minutes at moderate intensity. You should be able to talk in short sentences but not hold a full conversation. This is the fat-burning sweet spot.',
+[v('Incline Treadmill Walk','mc','incline treadmill walk women fat burn 12 3 30','Set incline 10-12%, speed 5.5-6.5 kph. The "12-3-30" method is hugely popular and effective. Burns more calories than flat walking with zero joint impact.'),
+v('StairMaster / Stair Climber','mc','stairmaster women fat burn workout tutorial','The ultimate glute + cardio combo. Moderate pace. Don\'t lean on the handles - stand upright for maximum calorie burn.'),
+v('Elliptical Trainer','mc','elliptical trainer women fat burn form tutorial','Low impact, full body. Keep resistance moderate. Push and pull the handles.'),
+v('Stationary Bike','mc','stationary bike women moderate cardio fat burn','Moderate pace. Great for people with knee issues. Adjust seat height so legs nearly extend fully.'),
+v('Jump Rope (Intervals)','bw','jump rope intervals women fat burn workout','30 sec jumping / 15 sec rest. Repeat for 25 min. Incredible calorie burner. Start with shorter intervals if needed.'),
+v('Rowing Machine','mc','rowing machine women cardio technique form','Pull with legs first, then back, then arms. Reverse on the return. Full body cardio. 25 min at moderate pace.')])
+]},
+{name:'Core Circuit (3 rounds)',color:COLORS.core,exercises:[
+ex('Plank Hold','3 x 30-45 sec','30 sec','Entire core - deep stabilizers',
+'Elbows under shoulders. Body in straight line from head to heels. Don\'t sag hips or pike up. Squeeze glutes, brace abs like someone will poke your stomach. Breathe normally.',
+[v('Forearm Plank','bw','forearm plank women proper form tutorial','The standard. 30-45 sec. If easy, try 60 sec or add weight on back.'),
+v('High Plank (Straight Arms)','bw','high plank straight arms women form','On hands instead of elbows. Slightly easier but works differently.'),
+v('Side Plank','bw','side plank women obliques form tutorial','On one elbow, stack feet. 30 sec each side. Targets obliques.'),
+v('Plank with Shoulder Tap','bw','plank shoulder tap women core stability form','High plank, tap opposite shoulder alternating. Fights rotation.'),
+v('Plank Up-Down','bw','plank up down women core workout form','Forearm to high plank and back. Arms + core combo.'),
+v('Stability Ball Plank','bw','stability ball plank women core form','Forearms on ball. The instability makes your core work much harder.')]),
+ex('Bicycle Crunch','3 x 20 (10/side)','30 sec','Obliques, rectus abdominis - waist definition',
+'Hands behind head - don\'t pull your neck. Rotate torso: elbow to opposite knee. Extend the other leg fully. Slow and controlled. This is the top-ranked ab exercise in EMG studies.',
+[v('Bicycle Crunch','bw','bicycle crunch women abs form tutorial','Slow and controlled. Don\'t just touch knee - rotate your entire torso.'),
+v('Russian Twist (with DB)','db','russian twist dumbbell women obliques form','Sit, lean back 45 degrees, feet up. Rotate side to side with DB.'),
+v('Cable Woodchop','cb','cable woodchop women obliques core form','High to low or low to high rotation. Great for functional core strength.'),
+v('Mountain Climbers','bw','mountain climbers women core cardio form','High plank, drive knees to chest alternating. Core + cardio combo.'),
+v('Dead Bug','bw','dead bug women core stability form tutorial','On back, opposite arm + leg extend. The best anti-extension exercise.'),
+v('Pallof Press (Cable)','cb','pallof press cable women anti rotation core form','Stand sideways to cable, press hands forward. Resist rotation. Functional core strength.')]),
+ex('Leg Raise','3 x 12','30 sec','Lower abs',
+'Lie flat, hands under lower back for support. Raise legs to 90 degrees, lower slowly without touching floor. Slower = harder = better.',
+[v('Lying Leg Raise','bw','lying leg raise women lower abs form tutorial','Flat on back. Raise legs, lower slowly. Don\'t let feet touch floor.'),
+v('Hanging Knee Raise','bw','hanging knee raise women abs form tutorial','Hang from bar, bring knees to chest. More advanced.'),
+v('Captain\'s Chair Leg Raise','mc','captain chair leg raise women abs form','Forearms on pads. Raise knees. Easier than hanging.'),
+v('Reverse Crunch','bw','reverse crunch women lower abs form tutorial','Curl pelvis UP off the floor. Lower abs focus.'),
+v('Flutter Kicks','bw','flutter kicks women lower abs form tutorial','Legs 6 inches off floor, alternate small kicks. 20 reps.'),
+v('Ab Wheel Rollout (Kneeling)','bw','ab wheel rollout kneeling women core form','Roll out from knees. Most challenging core exercise.')]),
+ex('Glute Bridge March','3 x 10/leg','30 sec','Core stability + glute activation',
+'Bridge up, then lift one knee to 90 degrees keeping hips PERFECTLY LEVEL. Alternate. Your hips should NOT drop or twist - that\'s the core challenge.',
+[v('Glute Bridge March','bw','glute bridge march women core glute form','Standard. Bridge up, march one knee at a time. Hips stay level.'),
+v('Dead Bug','bw','dead bug women core form tutorial','On back, opposite arm + leg extend. Anti-extension focus.'),
+v('Bird Dog','bw','bird dog women core stability form tutorial','All fours, extend opposite arm + leg. Hold 2 sec. Balance + core.'),
+v('Pallof Press','cb','pallof press cable women core anti rotation','Stand sideways to cable. Press forward. Resist rotation.'),
+v('Stability Ball Transfer','bw','stability ball transfer crunch women form','Pass ball from hands to feet in a V-up motion. Full core.'),
+v('Bear Crawl Hold','bw','bear crawl hold women core form tutorial','All fours, knees 1 inch off floor. Hold 30 sec. Deceptively brutal.')]),
+ex('Cable Crunch','3 x 15','30 sec','Rectus abdominis (six-pack muscle)',
+'Kneel facing cable, rope behind head. Crunch DOWN - ribcage to pelvis. Don\'t just bend at hips. The crunch is short and focused.',
+[v('Cable Crunch (Kneeling)','cb','cable crunch kneeling women abs form tutorial','Standard. Rope behind head, crunch down. Feel abs contract.'),
+v('Machine Crunch','mc','machine crunch women abs form tutorial','Sit, crunch forward against resistance. Simple and effective.'),
+v('Weighted Decline Crunch','bw','decline weighted crunch women abs form','Hold plate/DB to chest. Decline bench increases ROM.'),
+v('V-Up','bw','v up women abs exercise form tutorial','Lie flat, simultaneously raise upper body and legs to meet. Challenging.'),
+v('Toe Touch Crunch','bw','toe touch crunch women abs form','Legs straight up, reach hands to toes. Short range, big contraction.'),
+v('Swiss Ball Crunch','bw','swiss ball crunch women abs form tutorial','Back on ball, crunch up. The ball allows a greater stretch.')])
+]}],
+meals:{
+nepali:[
+ml('12:00 PM','Lunch','Dal Bhat, Mushroom Bhuteko & Cucumber Raita','~480 kcal','22g','60g','14g',
+['200g rice, mung dal','Mushroom (chyau) bhuteko with onion, garlic, soy sauce','Cucumber raita: dahi + cucumber + cumin + mint'],
+['Mushroom: hot oil -> garlic -> mushrooms (don\'t stir 2 min) -> soy sauce -> salt -> coriander.','Raita: grate cucumber, squeeze water, mix with dahi + spices.'],
+'Lighter lunch for cardio day. Mushrooms provide umami satisfaction with very few calories.'),
+ml('3:30 PM','Afternoon','Roasted Chana & Banana','~190 kcal','8g','30g','4g',
+['40g bhuteko chana with salt + lemon + chaat masala','1 banana'],
+['Toss chana with seasonings. Eat with banana.'],
+'Light, portable, crunchy. Perfect afternoon fuel.'),
+ml('5:00 PM','Pre-Workout','Banana with Honey','~200 kcal','2g','50g','1g',
+['1 banana','1 tbsp honey','Water - drink 500ml'],
+['Eat banana with honey. Drink plenty of water. Cardio day needs hydration.'],
+'Pure quick energy for cardio. Lighter than strength day pre-workout.'),
+ml('7:30 PM','Post-Workout','Roti, Egg Curry & Saag','~500 kcal','28g','48g','20g',
+['2 rotis, 3-egg curry (halved eggs in spiced gravy), palungo saag, dahi'],
+['Standard egg curry and saag methods.'],
+'Protein-rich recovery meal. Eggs are perfect post-cardio - quick to digest.'),
+ml('9:00 PM','Before Bed','Warm Milk & Walnuts','~160 kcal','8g','12g','8g',
+['200ml warm milk + turmeric','4 walnut halves'],
+['Warm milk. Add turmeric. Eat walnuts. Sleep.'],
+'Walnuts = omega-3 which supports fat metabolism overnight.')
+],
+western:[
+ml('12:00 PM','Lunch','Chicken Caesar Salad (No Croutons)','~480 kcal','36g','18g','28g',
+['150g grilled chicken, romaine lettuce, 15g parmesan','Light Caesar dressing: Greek yogurt + lemon + garlic + anchovy paste + parmesan','Optional: 1 boiled egg sliced'],
+['Grill chicken. Chop romaine. Toss with dressing and parmesan. Top with egg.'],
+'High protein, low carb for a cardio day. The yogurt-based dressing saves ~100 cal vs regular Caesar.'),
+ml('3:30 PM','Afternoon','Protein Bar','~200 kcal','20g','18g','8g',
+['1 protein bar (Quest, Grenade, or similar)'],
+['Unwrap. Eat.'],
+'Zero prep. Keep at desk for busy days.'),
+ml('5:00 PM','Pre-Workout','Apple & Small Coffee','~180 kcal','1g','42g','1g',
+['1 apple','1 cup black coffee or green tea'],
+['Eat apple. Drink coffee.'],
+'Light fuel for cardio. Coffee boosts fat oxidation during exercise.'),
+ml('7:30 PM','Post-Workout','Chicken Stir-Fry with Vegetables','~500 kcal','34g','42g','18g',
+['150g chicken breast sliced, 100g brown rice','Stir-fry veg: broccoli, snap peas, capsicum, mushroom','Sauce: soy sauce + garlic + ginger + sesame oil'],
+['Hot wok. Sear chicken 2-3 min. Remove. Same pan: vegetables 2 min. Return chicken + sauce. Toss.'],
+'Light but satisfying. The vegetables add volume without many calories.'),
+ml('9:00 PM','Before Bed','Herbal Tea & Almonds','~120 kcal','4g','5g','9g',
+['1 cup chamomile or peppermint tea','8 almonds'],
+['Brew tea. Eat almonds.'],
+'No dairy on cardio days if you prefer lighter evenings. Chamomile promotes sleep.')
+]
+}},
+
+// ========= THURSDAY - UPPER B (TONING) =========
+{id:'thu',name:'Thursday',type:'Upper B',focus:'Toning',dur:'~50 min',exCount:6,
+totals:{p:'105g',c:'185g',f:'55g',k:'~1,700 kcal'},
+bodyParts:[
+{name:'Back',color:COLORS.back,exercises:[
+ex('Single-Arm Dumbbell Row','3 x 12/arm','90 sec','Lats, rhomboids - back definition',
+'One knee on bench, flat back. Pull DB to hip, squeeze shoulder blade. Beginner-friendly, builds great back definition, and the supported position protects your lower back.',
+[v('Single-Arm DB Row','db','single arm dumbbell row women form tutorial','Knee on bench. Row to hip. Safest row. Excellent for beginners.'),
+v('Chest-Supported DB Row','db','chest supported dumbbell row women form','Chest on incline bench. Zero cheating. If you can\'t feel your back, use this.'),
+v('Single-Arm Cable Row','cb','single arm cable row women form tutorial','Standing, pull from low cable. Constant tension.'),
+v('Machine Row','mc','machine row women form tutorial','Guided path. Focus on squeezing back.'),
+v('T-Bar Row','bb','t bar row women form tutorial','Straddle bar. Heavy back builder.'),
+v('Resistance Band Row','bd','resistance band row women home workout','Band around feet. Pull to stomach. Home-friendly.')]),
+ex('Face Pull / Reverse Fly','3 x 15','60 sec','Rear delts, posture - #1 posture exercise',
+'Pull to face level, externally rotate at end. Prevents rounded shoulders. The most important exercise for posture and shoulder health.',
+[v('Cable Face Pull (Rope)','cb','cable face pull women posture form tutorial','High cable, rope. Pull to forehead. Externally rotate. Do this every upper body day.'),
+v('DB Reverse Fly','db','dumbbell reverse fly women rear delt form','Hinge forward, light DBs. Raise to sides. Squeeze back.'),
+v('Reverse Pec Deck','mc','reverse pec deck women rear delt form tutorial','Sit facing pad. Guided arc. Pure rear delt isolation.'),
+v('Band Pull-Apart','bd','band pull apart women posture form tutorial','Band at arm\'s length. Pull apart to chest. 20-30 reps.'),
+v('Cable Reverse Fly','cb','cable reverse fly women rear delt form','Cross cables. Pull outward.'),
+v('Prone Y-Raise','db','prone Y raise women posture form tutorial','Face-down on incline bench. Light DBs in Y-shape. Lower traps + rear delts.')])
+]},
+{name:'Chest',color:COLORS.chest,exercises:[
+ex('Dumbbell Chest Press','3 x 12','90 sec','Chest, front delts - upper body definition',
+'Lie flat on bench, press DBs up in slight arc. Training chest improves upper body strength and posture - it creates definition, not bulk. Women don\'t have enough testosterone to get bulky from pressing.',
+[v('DB Flat Chest Press','db','dumbbell chest press women form tutorial','Deep stretch at bottom. Press in arc. Squeeze chest.'),
+v('Machine Chest Press','mc','machine chest press women form tutorial','Sit, press forward. No balance needed.'),
+v('Incline DB Press','db','incline dumbbell press women form tutorial','30 degrees incline. Targets upper chest for overall shape.'),
+v('Cable Chest Fly','cb','cable chest fly women form tutorial','Cables at chest height. Bring hands together. Constant tension.'),
+v('Pec Deck Machine','mc','pec deck machine women chest fly form','Guided fly path. Focus on squeezing.'),
+v('Push-Ups (Knee or Full)','bw','push ups women form tutorial beginner progression','Start on knees. Progress to full. Builds pressing strength with zero equipment.')])
+]},
+{name:'Shoulders',color:COLORS.shoulder,exercises:[
+ex('Front + Lateral Raise Superset','3 x 10 each','60 sec','Front + side delts - shoulder sculpting',
+'10 front raises immediately followed by 10 lateral raises = one superset. Light weight. The burn is the signal it\'s working. Creates beautiful shoulder roundness.',
+[v('DB Front + Lateral Superset','db','front raise lateral raise superset women dumbbell','Standard. Light DBs. Don\'t rest between the two exercises.'),
+v('Cable Front + Lateral Raise','cb','cable front raise lateral raise women form','Cable provides constant tension on both movements.'),
+v('Plate Front Raise','bw','plate front raise women form tutorial','Hold plate by edges. Raise to shoulder height.'),
+v('Resistance Band Lateral','bd','resistance band lateral raise women home','Stand on band, raise to sides.'),
+v('Machine Lateral Raise','mc','machine lateral raise women high rep form','Sit, pads on arms. Raise. Perfect form guaranteed.'),
+v('Lu Raises','db','lu raises dumbbell women front lateral combo','Front to side in one rep. Maximum efficiency.')])
+]},
+{name:'Arms',color:COLORS.bicep,exercises:[
+ex('Hammer Curl','3 x 12','60 sec','Brachialis, forearms - arm shape',
+'Palms face each other throughout. Builds arm width and forearm tone. Don\'t rotate.',
+[v('DB Hammer Curl','db','hammer curl women arm toning form','Standard. Palms in. Alternating or both.'),
+v('Cable Rope Curl','cb','cable rope hammer curl women form','Low cable, rope. Constant tension.'),
+v('Cross-Body Hammer Curl','db','cross body hammer curl women form','Curl across body to opposite shoulder.'),
+v('Concentration Curl','db','concentration curl women bicep form','Seated, elbow on inner thigh. Pure isolation.'),
+v('Machine Curl','mc','machine bicep curl women form tutorial','Guided path. No balance needed.'),
+v('Resistance Band Curl','bd','resistance band curl women home workout','Stand on band. Curl. Great at home.')]),
+ex('Overhead Tricep Extension','3 x 12','60 sec','Long head tricep - the "jiggle zone" fix',
+'One DB, both hands behind head. Lower, extend up. Keep elbows by ears. Best exercise for toning the back of your arms.',
+[v('Overhead DB Extension','db','overhead dumbbell tricep extension women form','One heavy DB, both hands. Full stretch behind head.'),
+v('Overhead Cable Extension','cb','overhead cable rope tricep extension women form','Face away from low cable. Constant tension. Best variation.'),
+v('DB Skull Crusher','db','dumbbell skull crusher women tricep form','Lie flat, lower DBs to forehead. Extend up.'),
+v('Cable Pushdown (Rope)','cb','cable rope pushdown women tricep form','Elbows pinned. Split rope at bottom. Squeeze.'),
+v('Machine Tricep Extension','mc','machine tricep extension women form','Sit, push. No setup needed.'),
+v('Diamond Push-Up','bw','diamond push ups women tricep form tutorial','Hands together under chest. Push up. Targets triceps heavily.')])
+]}],
+meals:{
+nepali:[
+ml('12:00 PM','Lunch','Dal Bhat, Aloo-Bodi Tarkari & Dahi','~490 kcal','20g','65g','14g',
+['200g rice, dal, aloo + bodi (potato + long beans) tarkari, 100g dahi, achar'],
+['Aloo-bodi: oil -> cumin + methi -> potato + beans + turmeric + salt -> water -> cover 15 min.'],
+'Vegetarian day. Dal + dahi provide protein without meat. Lighter and cleaner.'),
+ml('3:30 PM','Afternoon','Chiura, Achar & Boiled Egg','~210 kcal','10g','28g','6g',
+['50g chiura, 1 tbsp achar, 1 boiled egg'],
+['Moisten chiura. Add achar. Eat with egg.'],
+'Classic Nepali snack combo. Portable and satisfying.'),
+ml('5:00 PM','Pre-Workout','Banana & Honey with Tea','~220 kcal','2g','52g','1g',
+['1 banana, 1 tbsp honey, 1 cup green tea'],
+['Banana + honey. Sip tea. Hydrate.'],
+'Quick energy. Simple sugars go straight to muscles.'),
+ml('7:30 PM','Post-Workout','Roti, Chicken Sekuwa & Raita','~510 kcal','34g','42g','18g',
+['2 rotis, 150g chicken sekuwa (grilled, yogurt-marinated)','Cucumber raita, fresh salad'],
+['Marinate chicken in yogurt + spices min 30 min. Grill/broil 4-5 min/side.'],
+'Grilled = lean. Yogurt marinade adds protein and tenderness.'),
+ml('9:00 PM','Before Bed','Warm Milk & Cashews','~160 kcal','8g','12g','8g',
+['200ml warm milk + turmeric','6 cashews'],
+['Warm milk. Eat cashews. Sleep.'],
+'Cashews = zinc which supports hormone balance.')
+],
+western:[
+ml('12:00 PM','Lunch','Poke Bowl (Tofu or Salmon)','~500 kcal','30g','50g','18g',
+['120g tofu (or salmon) cubed, 150g sushi rice, edamame, avocado','Cucumber, carrot, seaweed, soy sauce, sesame seeds'],
+['Cook rice. Cube tofu/salmon. Arrange all toppings in bowl.'],
+'Beautiful, nutritious, balanced. The edamame adds plant protein.'),
+ml('3:30 PM','Afternoon','Celery, Carrot & Hummus','~180 kcal','6g','16g','10g',
+['Celery + carrot sticks','3 tbsp hummus'],
+['Cut veggies. Dip in hummus.'],
+'Crunchy, low calorie, satisfying. Hummus adds healthy fats.'),
+ml('5:00 PM','Pre-Workout','Rice Cake & PB','~220 kcal','5g','28g','10g',
+['2 rice cakes, 1 tbsp peanut butter'],
+['Spread PB on rice cakes. Eat.'],
+'Fast carbs + fat. Quick, no cooking.'),
+ml('7:30 PM','Post-Workout','Lemon Herb Chicken & Roasted Veg','~500 kcal','36g','38g','18g',
+['150g chicken breast, lemon + herbs + garlic marinade','Roasted: sweet potato, zucchini, capsicum','1 tbsp olive oil, mixed salad'],
+['Marinate chicken 15+ min. Grill/bake. Roast veggies at 200 degreesC.'],
+'One-tray meal. Minimal effort, maximum nutrition.'),
+ml('9:00 PM','Before Bed','Chamomile Tea & Dark Chocolate','~100 kcal','1g','10g','6g',
+['1 cup chamomile tea','2 squares (10g) dark chocolate 70%+'],
+['Brew tea. Enjoy chocolate slowly.'],
+'Feels indulgent but 10g dark chocolate is only ~50 cal. Magnesium aids sleep.')
+]
+}},
+
+// ========= FRIDAY - LOWER B (HAMSTRING + GLUTE) =========
+{id:'fri',name:'Friday',type:'Lower B',focus:'Ham+Glute',dur:'~55 min',exCount:6,
+totals:{p:'105g',c:'185g',f:'55g',k:'~1,700 kcal'},
+bodyParts:[
+{name:'Glutes',color:COLORS.glute,exercises:[
+ex('Bulgarian Split Squat','3 x 10/leg','2 min','Glutes, quads - single-leg sculpting',
+'Rear foot on bench, laces down. Drop straight DOWN. Front shin nearly vertical. Lean torso slightly forward for more glute activation. Challenging but incredibly effective for shaping legs and glutes.',
+[v('DB Bulgarian Split Squat','db','bulgarian split squat women glute form tutorial','Hold DBs at sides. Start bodyweight until balance is solid.'),
+v('Smith Machine Split Squat','mc','smith machine bulgarian split squat women form','Fixed path removes balance challenge. Focus on loading legs.'),
+v('Bodyweight Split Squat','bw','bodyweight bulgarian split squat women beginner','No weight. Learn the balance and movement pattern first.'),
+v('DB Reverse Lunges','db','dumbbell reverse lunge women glute form','Step backward. Less knee stress, more glute than forward lunges.'),
+v('Barbell Split Squat','bb','barbell bulgarian split squat women form','Bar on back. Advanced - master DB version first.'),
+v('Walking Lunges','db','dumbbell walking lunges women glute form','Alternating steps forward. Great for overall leg development.')]),
+ex('Hip Thrust (High Rep)','3 x 15','90 sec','Glute max - high rep pump',
+'Lighter weight than Monday, higher reps. Focus on the SQUEEZE - 2 second hold at top of every rep. Feel the burn. The pump is the goal today.',
+[v('Barbell Hip Thrust (Lighter)','bb','barbell hip thrust high rep women form','Same form as Monday but lighter, 15 reps, squeeze every rep.'),
+v('DB Hip Thrust','db','dumbbell hip thrust women high rep form','DB on hips. Focus on squeeze, not weight.'),
+v('Machine Hip Thrust','mc','hip thrust machine women high rep form','If available. Easy setup for high reps.'),
+v('Band Hip Thrust','bd','resistance band hip thrust women glute form','Band across hips adds resistance at the top where glutes are strongest.'),
+v('Single-Leg Glute Bridge','bw','single leg glute bridge women form tutorial','One leg. Bodyweight. Doubles the difficulty.'),
+v('Frog Pump','bw','frog pump women glute activation form tutorial','Soles of feet together, knees out. Bridge up. Intense glute activation.')])
+]},
+{name:'Hamstrings',color:COLORS.hamstring,exercises:[
+ex('Stiff-Leg Deadlift','3 x 12','2 min','Hamstrings - deep stretch, back-of-thigh sculpting',
+'Straighter legs than RDL. Hinge deep, feel intense hamstring stretch. Lighter weight, focus on the stretch-squeeze connection.',
+[v('DB Stiff-Leg Deadlift','db','dumbbell stiff leg deadlift women hamstring form','DBs beside legs. Straighter legs, deeper stretch.'),
+v('Barbell Stiff-Leg DL','bb','barbell stiff leg deadlift women form','More weight potential. Same deep hinge.'),
+v('Single-Leg DB Deadlift','db','single leg dumbbell deadlift women balance form','One leg. Balance + stretch + isolation.'),
+v('Cable Pull-Through','cb','cable pull through women hamstring glute form','Face away from cable. Constant tension on hams and glutes.'),
+v('Smith Machine SLDL','mc','smith machine stiff leg deadlift women form','Guided path. Focus entirely on the hamstring stretch.'),
+v('Kettlebell Swing','db','kettlebell swing women glute hamstring form','Explosive hinge. Cardio + posterior chain in one.')]),
+ex('Lying Leg Curl','3 x 12','90 sec','Hamstrings isolation - leg sculpting',
+'Face down, curl heels to glutes. Don\'t lift hips. Squeeze hard at top. 3-sec negative. Isolates and sculpts the back of your thighs.',
+[v('Lying Leg Curl Machine','mc','lying leg curl women hamstring form tutorial','Standard. Point toes to isolate hamstrings more.'),
+v('Seated Leg Curl','mc','seated leg curl women hamstring form','Stretched position = more muscle activation.'),
+v('Swiss Ball Hamstring Curl','bw','swiss ball hamstring curl women form','Heels on ball, bridge, curl. Home-friendly.'),
+v('Slider Leg Curl','bw','slider leg curl women hamstring home form','Heels on sliders/towel. Lie back, bridge, slide heels in.'),
+v('Resistance Band Leg Curl','bd','resistance band leg curl women form','Loop band. Curl against resistance.'),
+v('DB Leg Curl (Prone)','db','dumbbell leg curl prone bench women form','Face down, DB between feet. Curl.')])
+]},
+{name:'Quads + Calves',color:COLORS.quad,exercises:[
+ex('Leg Press (Narrow Stance)','3 x 12','90 sec','Quads - front-of-thigh definition',
+'Feet close together, lower on platform for quad emphasis. Full range. Don\'t let lower back round.',
+[v('Leg Press (Narrow)','mc','leg press narrow stance women quad form','Feet close, low on platform. Full depth for quad emphasis.'),
+v('Hack Squat','mc','hack squat machine women quad form','Back on pad. Best quad developer.'),
+v('Goblet Squat (Heels Elevated)','db','goblet squat heels elevated women quad form','Place heels on a plate. This shifts even more load to quads.'),
+v('Leg Extension','mc','leg extension women quad isolation form','Pure quad burn. 15 reps, slow negatives.'),
+v('Step-Ups (DB)','db','dumbbell step ups women quad glute form','Step onto bench holding DBs. Alternating legs.'),
+v('Sissy Squat','bw','sissy squat women quad form tutorial','Lean back, bend at knees only. Intense. Zero equipment.')]),
+ex('Seated Calf Raise','3 x 20','60 sec','Soleus - different from Monday\'s standing raises',
+'Pad on knees. Full stretch, full squeeze. High reps. Different muscle than Monday\'s standing version.',
+[v('Seated Calf Raise Machine','mc','seated calf raise women form tutorial','Targets soleus. Different from standing which hits gastrocnemius.'),
+v('Smith Machine Seated Calf','mc','smith machine seated calf raise form','Bar on knees, block under feet.'),
+v('DB on Knees Calf Raise','db','dumbbell seated calf raise women form','Bench, DB on each knee. Heels on block.'),
+v('Standing Calf Raise','mc','standing calf raise women form tutorial','Different from seated - targets outer calf.'),
+v('Leg Press Calf Raise','mc','leg press calf raise women form','Balls of feet on platform bottom. Heavy option.'),
+v('Single-Leg Calf Raise','bw','single leg calf raise women bodyweight form','Wall for balance. Full ROM each leg. Add DB for progression.')])
+]}],
+meals:{
+nepali:[
+ml('12:00 PM','Lunch','Dal Bhat, Macha Fry & Tarkari','~510 kcal','30g','56g','16g',
+['200g rice, dal, 120g pan-fried fish with turmeric + chilli','Seasonal mixed vegetable tarkari, achar'],
+['Fish: marinate turmeric + salt + lemon 10 min. Shallow fry 2 min/side until crispy.','Tarkari: seasonal vegetables with cumin, turmeric.'],
+'Fish is the leanest protein - perfect for fat loss. Crispy exterior is satisfying.'),
+ml('3:30 PM','Afternoon','Dahi with Honey & Fruit','~200 kcal','8g','28g','6g',
+['150g dahi with 1 tsp honey','1 small banana or seasonal fruit'],
+['Dahi + honey in bowl. Fruit on side.'],
+'Probiotics from dahi + quick energy from fruit + honey.'),
+ml('5:00 PM','Pre-Workout','Roti with PB','~230 kcal','7g','26g','11g',
+['1 small roti, 1 tbsp peanut butter'],
+['PB on roti. Eat 60-90 min before gym.'],
+'Complex carbs + fat for sustained energy.'),
+ml('7:30 PM','Post-Workout','Khichdi (Rice-Lentil Porridge) with Tarkari','~480 kcal','24g','62g','12g',
+['Khichdi: 1 cup rice + 1/2 cup mung dal cooked together with turmeric, cumin, ghee','Mixed vegetable tarkari, dahi, papad'],
+['KHICHDI: Wash rice + dal together. Cook in pressure cooker with 3 cups water + turmeric + salt (3 whistles). Add tempering of ghee + cumin + garlic.','Light, easy to digest. Perfect post-workout comfort food.'],
+'Nepal/India\'s ultimate comfort food. Protein-rich from the dal, easy on digestion.'),
+ml('9:00 PM','Before Bed','Warm Milk & Almonds','~150 kcal','8g','10g','7g',
+['200ml warm milk + turmeric + pepper, 5 almonds'],
+['Standard turmeric milk routine.'],
+'Consistent bedtime routine helps sleep quality.')
+],
+western:[
+ml('12:00 PM','Lunch','Quinoa Buddha Bowl','~500 kcal','28g','52g','18g',
+['150g cooked quinoa, 100g chickpeas, roasted sweet potato','Avocado, spinach, cherry tomatoes, tahini dressing'],
+['Cook quinoa. Roast sweet potato. Assemble with all toppings.'],
+'Plant-based protein from quinoa + chickpeas. Tahini adds healthy fats.'),
+ml('3:30 PM','Afternoon','String Cheese & Grapes','~180 kcal','8g','16g','8g',
+['2 string cheese sticks','Small bunch of grapes (~80g)'],
+['Peel cheese. Eat with grapes.'],
+'Sweet + savoury combo. Portable, no prep.'),
+ml('5:00 PM','Pre-Workout','Banana & Coffee','~180 kcal','2g','36g','1g',
+['1 banana, 1 cup black coffee or green tea'],
+['Eat banana. Drink coffee.'],
+'Caffeine enhances both strength and fat burning.'),
+ml('7:30 PM','Post-Workout','Turkey Meatballs with Zucchini Noodles','~480 kcal','36g','28g','22g',
+['150g turkey mince formed into balls (season: garlic, onion, Italian herbs, salt, pepper, egg)','2 medium zucchini spiralized, 100g marinara sauce','Optional: 10g parmesan'],
+['MEATBALLS: Mix mince + seasonings + egg. Roll into balls. Bake 200 degreesC 15 min or pan-fry.','Spiralize zucchini. Saute 2 min in a pan. Top with meatballs + sauce + parmesan.'],
+'Zucchini noodles instead of pasta = massive calorie savings. You won\'t miss the pasta.'),
+ml('9:00 PM','Before Bed','Protein Yogurt','~140 kcal','14g','10g','4g',
+['120g Greek yogurt, few berries, 1 tsp honey'],
+['Yogurt + berries + honey.'],
+'Light, casein-rich, feels like dessert.')
+]
+}},
+
+// ========= SATURDAY - REST =========
+{id:'sat',name:'Saturday',type:'Rest',focus:'Recovery',dur:'-',exCount:0,bodyParts:[],meals:{nepali:[],western:[]}},
+
+// ========= SUNDAY - REST =========
+{id:'sun',name:'Sunday',type:'Rest',focus:'Recovery',dur:'-',exCount:0,bodyParts:[],meals:{nepali:[],western:[]}}
+];
+
+const YT=(q)=>`https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+const SV=`<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+const TP={bb:'Barbell',db:'Dumbbell',mc:'Machine',cb:'Cable',bw:'Bodyweight',bd:'Band'};
+
+function renderApp(){
+  const nav=document.getElementById('dayNav');
+  nav.innerHTML=DAYS.map(d=>`<button class="db${d.id===DAYS[0].id?' act':''}" data-day="${d.id}"><span class="dn-n">${d.name.slice(0,3)}</span><span class="dn-t">${d.type}</span></button>`).join('');
+
+  const app=document.getElementById('app');
+  let h='';
+  DAYS.forEach((d,di)=>{
+    h+=`<div class="dc${di===0?' vis':''}" id="day-${d.id}">`;
+    if(d.type==='Rest'){
+      h+=`<div class="rh"><h2>REST & RECOVER</h2><p>Muscles grow while you rest. Today is when your body repairs and comes back stronger.</p><ul class="rl"><li>&#10003; Sleep 8-9 hours</li><li>&#10003; Light walk 20-30 min</li><li>&#10003; Stretching or yoga 15-20 min</li><li>&#10003; Foam rolling sore muscles</li><li>&#10003; Eat at maintenance - reduce carbs 25%, keep protein same</li><li>&#10003; Drink 3+ litres water</li><li>&#10003; Weekly progress photo (front, side, back - same lighting)</li><li>&#10003; Meal prep for the week ahead</li><li>&#10003; Review workout log - did you progress?</li></ul></div>`;
+    } else {
+      h+=`<div class="st"><button class="stb act" data-section="workout" data-parent="${d.id}">Workout</button><button class="stb" data-section="meals" data-parent="${d.id}">Meals & Recipes</button></div>`;
+      h+=`<div class="sc vis" id="${d.id}-workout">`;
+      h+=`<div class="ov"><div class="oc"><div class="ov-v">${d.type.toUpperCase()}</div><div class="ov-l">Session</div></div><div class="oc"><div class="ov-v">${d.focus.toUpperCase()}</div><div class="ov-l">Focus</div></div><div class="oc"><div class="ov-v">${d.exCount}</div><div class="ov-l">Exercises</div></div><div class="oc"><div class="ov-v">${d.dur}</div><div class="ov-l">Duration</div></div></div>`;
+
+      let exNum=0;
+      d.bodyParts.forEach(bp=>{
+        h+=`<div class="bg"><div class="bh"><div class="bd-dot" style="background:${bp.color}"></div><div class="bt">${bp.name}</div></div>`;
+        bp.exercises.forEach(ex=>{
+          exNum++;
+          h+=`<div class="ec"><div class="eh" role="button" tabindex="0"><div style="display:flex;align-items:center"><div class="en" style="background:${bp.color}">${exNum}</div><div class="ei"><div class="ei-n">${ex.name}</div><div class="ei-m">${ex.sets} - Rest ${ex.rest} - ${ex.target}</div></div></div><span class="ea">&#9662;</span></div>`;
+          h+=`<div class="eb"><div class="cue"><b>Form & Execution:</b> ${ex.form}</div>`;
+          h+=`<div class="vt">6 Variations - Each with Video Guide</div><div class="vg">`;
+          ex.vars.forEach(v=>{
+            h+=`<div class="vi"><div class="vi-h" role="button" tabindex="0"><span class="vi-n">${v.n}</span><span class="vi-t tp-${v.tp}">${TP[v.tp]}</span><span class="vi-a">&#9662;</span></div>`;
+            h+=`<div class="vi-b"><p style="margin-bottom:8px">${v.tip}</p><a class="yb" href="${v.yt}" target="_blank" rel="noopener">${SV} Watch Form Video</a></div></div>`;
+          });
+          h+=`</div></div></div>`;
+        });
+        h+=`</div>`;
+      });
+      h+=`</div>`;
+
+      h+=`<div class="sc" id="${d.id}-meals"><div style="margin-top:16px">`;
+      h+=`<div class="dtg"><button class="dtb act" data-diet="nepali" data-day="${d.id}">Nepali Diet</button><button class="dtb" data-diet="western" data-day="${d.id}">Western Diet</button></div>`;
+
+      ['nepali','western'].forEach(dt=>{
+        (d.meals[dt]||[]).forEach(m=>{
+          h+=`<div class="mc diet-${dt}-${d.id}"${dt==='western'?' style="display:none"':''}>`;
+          h+=`<div class="mh" role="button" tabindex="0"><div><div class="mt-label">${m.time} - ${m.label}</div><div class="mn">${m.name}</div><div class="ml">${m.cal} - P:${m.pro} C:${m.carb} F:${m.fat}</div></div><span class="ma">&#9662;</span></div>`;
+          h+=`<div class="mb"><div class="vt">Ingredients</div><ul class="il">${m.ing.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+          h+=`<div class="vt">Step-by-Step Instructions</div><ol class="sl">${m.steps.map(s=>`<li>${s}</li>`).join('')}</ol>`;
+          h+=`<div class="tb"><b>Pro Tip: </b>${m.tip}</div>`;
+          h+=`<a class="yb" href="${YT(m.name+' recipe')}" target="_blank" style="margin-top:8px">${SV} Watch Recipe Video</a>`;
+          h+=`</div></div>`;
+        });
+      });
+
+      const totals=d.totals||{p:'105g',c:'185g',f:'55g',k:'~1,700 kcal'};
+      h+=`<div style="margin-top:16px;padding:14px;background:var(--s);border:1px solid var(--bd);border-radius:10px"><div style="font-family:Playfair Display,serif;font-size:16px;color:#fff;margin-bottom:8px">Daily Totals</div><div style="display:flex;gap:8px;flex-wrap:wrap"><span style="padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#ff3b3020;color:#ff6b5b">Protein ${totals.p}</span><span style="padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#5ac8fa20;color:#5ac8fa">Carbs ${totals.c}</span><span style="padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#ffd60a20;color:#ffd60a">Fat ${totals.f}</span><span style="padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#34c75920;color:#34c759">${totals.k}</span></div></div>`;
+      h+=`</div></div>`;
+    }
+    h+=`</div>`;
+  });
+  app.innerHTML=h;
+}
+
+renderApp();
+
+document.addEventListener('click',function(e){
+  const db=e.target.closest('.db');
+  if(db){document.querySelectorAll('.db').forEach(b=>b.classList.remove('act'));db.classList.add('act');document.querySelectorAll('.dc').forEach(d=>d.classList.remove('vis'));document.getElementById('day-'+db.dataset.day).classList.add('vis');window.scrollTo(0,0);return;}
+  const stb=e.target.closest('.stb');
+  if(stb){const p=stb.dataset.parent;stb.parentElement.querySelectorAll('.stb').forEach(t=>t.classList.remove('act'));stb.classList.add('act');document.getElementById('day-'+p).querySelectorAll('.sc').forEach(s=>s.classList.remove('vis'));document.getElementById(p+'-'+stb.dataset.section).classList.add('vis');return;}
+  const eh=e.target.closest('.eh');if(eh){eh.closest('.ec').classList.toggle('open');return;}
+  const vih=e.target.closest('.vi-h');if(vih){vih.closest('.vi').classList.toggle('open');return;}
+  const mh=e.target.closest('.mh');if(mh){mh.closest('.mc').classList.toggle('open');return;}
+  const dtb=e.target.closest('.dtb');
+  if(dtb){const dt=dtb.dataset.diet,day=dtb.dataset.day;dtb.parentElement.querySelectorAll('.dtb').forEach(b=>{b.classList.remove('act');b.style.background='var(--s)';b.style.color='var(--t2)';});dtb.classList.add('act');dtb.style.background='var(--a)';dtb.style.color='#fff';document.querySelectorAll('.diet-nepali-'+day).forEach(c=>c.style.display=dt==='nepali'?'block':'none');document.querySelectorAll('.diet-western-'+day).forEach(c=>c.style.display=dt==='western'?'block':'none');}
+});
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+
+</script>
+</body>
+</html>

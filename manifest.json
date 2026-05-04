@@ -1,13 +1,13 @@
 {
-  "name": "Fitness Transformation System",
+  "name": "FitSystem Transform",
   "short_name": "FitSystem",
-  "description": "Complete 6-day workout + diet plan — 65kg to 70kg",
+  "description": "Complete fitness transformation system with workouts and meal plans",
   "start_url": "./index.html",
-  "scope": ".",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#0a0a0f",
   "theme_color": "#0a0a0f",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",
